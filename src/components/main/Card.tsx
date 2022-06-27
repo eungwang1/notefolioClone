@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { hoverStyle01 } from "../../styles/theme";
 interface CardProps {
   coverImage?: string[];
   profileImage?: string;
@@ -38,7 +39,7 @@ const Card: React.FC<CardProps> = ({ coverImage, profileImage, username, categor
 export default Card;
 
 const CardContainer = styled.div`
-  width: 260.5px;
+  width: 95%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -106,7 +107,7 @@ const CardContainer = styled.div`
     font-weight: 700;
     line-height: 19px;
     align-items: center;
-    color: #2c3030;
+    color: ${(props) => props.theme.palette.DarkGray01};
   }
   .card-user-category {
     font-stretch: normal;
@@ -136,6 +137,7 @@ const CardContainer = styled.div`
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
-    color: #2c3030;
+    color: ${(props) => props.theme.palette.DarkGray01};
+    ${hoverStyle01}
   }
 `;

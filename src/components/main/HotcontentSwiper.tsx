@@ -4,9 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { faker } from "@faker-js/faker";
 import { Navigation } from "swiper";
 import styled from "styled-components";
+import { hoverStyle01, media } from "../../styles/theme";
 const HotcontentSwiper = () => {
-  const coverImage = [faker.image.fashion(), faker.image.animals()];
-  const profileImage = faker.image.avatar();
+  const CardList = Array.from({ length: 8 }, (v, i) => ({
+    coverImage: [faker.image.fashion(), faker.image.animals()],
+    profileImage: faker.image.avatar(),
+    username: faker.lorem.word(),
+    category: faker.lorem.words(2),
+  }));
   return (
     <HotcontentSwiperContainer>
       <Swiper
@@ -20,62 +25,17 @@ const HotcontentSwiper = () => {
         className="mySwiper"
       >
         <div className="swiper-title">HOT 크리에이터🔥</div>
-        <SwiperSlide>
-          <Card
-            username="반로라"
-            category="디지털 아트"
-            coverImage={coverImage}
-            profileImage={profileImage}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card
-            username="반로라"
-            category="디지털 아트"
-            coverImage={coverImage}
-            profileImage={profileImage}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card
-            username="반로라"
-            category="디지털 아트"
-            coverImage={coverImage}
-            profileImage={profileImage}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card
-            username="반로라"
-            category="디지털 아트"
-            coverImage={coverImage}
-            profileImage={profileImage}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card
-            username="반로라"
-            category="디지털 아트"
-            coverImage={coverImage}
-            profileImage={profileImage}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card
-            username="반로라"
-            category="디지털 아트"
-            coverImage={coverImage}
-            profileImage={profileImage}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card
-            username="반로라"
-            category="디지털 아트"
-            coverImage={coverImage}
-            profileImage={profileImage}
-          />
-        </SwiperSlide>
+        {CardList.map((card, idx) => (
+          <SwiperSlide key={idx}>
+            <Card
+              username={card.username}
+              category={card.category}
+              coverImage={card.coverImage}
+              profileImage={card.profileImage}
+            />
+          </SwiperSlide>
+        ))}
+
         <div className="swiper-prev-btn">
           <span className="material-symbols-outlined">arrow_back_ios</span>
         </div>
@@ -92,6 +52,9 @@ export default HotcontentSwiper;
 const HotcontentSwiperContainer = styled.div`
   padding: 24px;
   width: 80%;
+  ${media.custom(1340)} {
+    width: 100%;
+  }
   .swiper {
     padding-top: 30px;
     position: relative;
@@ -101,28 +64,25 @@ const HotcontentSwiperContainer = styled.div`
     letter-spacing: -0.4px;
     font-weight: 700;
     line-height: 19px;
-    color: #161c1c;
+    color: ${(props) => props.theme.palette.Black01};
     position: absolute;
     top: 0px;
   }
   .swiper-next-btn {
-    position: absolute;
     right: 20px;
-    top: 0px;
-    cursor: pointer;
-    z-index: 999;
-    span {
-      font-size: 20px;
-    }
   }
   .swiper-prev-btn {
-    position: absolute;
     right: 40px;
+  }
+  .swiper-next-btn,
+  .swiper-prev-btn {
+    position: absolute;
     top: 0px;
     cursor: pointer;
     z-index: 999;
     span {
       font-size: 20px;
     }
+    ${hoverStyle01}
   }
 `;

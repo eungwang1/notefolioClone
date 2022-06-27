@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { faker } from "@faker-js/faker";
-import { url } from "inspector";
 import { media } from "../../styles/theme";
 const Notefolio = () => {
   const items = Array.from({ length: 30 }, (v, i) => ({
@@ -61,7 +60,6 @@ const NotefolioContainer = styled.div`
   width: 100vw;
   .notefolio-works-wrapper {
     width: 100%;
-    justify-content: center;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -71,19 +69,19 @@ const NotefolioContainer = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
-    width: calc(100vw / 6 + 8px);
+    width: calc(20% - 24px);
     margin: 0 12px 48px 10px;
     ${media.custom(1340)} {
-      width: calc(100vw / 5 + 19px);
+      width: calc(25% - 24px);
     }
     ${media.tb} {
-      width: calc(100vw / 4 + 33px);
+      width: calc(33.3% - 24px);
     }
     ${media.lm} {
-      width: calc(100vw / 3 + 33px);
+      width: calc(50% - 24px);
     }
     ${media.sm} {
-      width: calc(100vw / 2 + 18px);
+      width: calc(100% - 24px);
     }
   }
   .notefolio-work-item-block {

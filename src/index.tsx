@@ -4,6 +4,7 @@ import "./index.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "rc-dropdown/assets/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 

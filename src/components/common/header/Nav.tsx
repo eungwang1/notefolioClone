@@ -65,6 +65,7 @@ const NavContainer = styled.nav`
   top: 0;
   border-bottom: 1px solid ${(props) => props.theme.palette.Gray01};
   .nav-left-logo {
+    margin-left: 10px;
     margin-right: 24px;
   }
   .nav-left-menu-container {
@@ -125,7 +126,7 @@ const NavContainer = styled.nav`
     display: flex;
     align-items: center;
     height: 56px;
-    width: 37%;
+    width: 42%;
     justify-content: flex-end;
     position: relative;
     ${media.tb} {
@@ -135,7 +136,7 @@ const NavContainer = styled.nav`
   .nav-auth-btn-group {
     display: flex;
     align-items: center;
-    color: #2c3030;
+    color: ${(props) => props.theme.palette.DarkGray01};
     font-weight: 400;
   }
   .nav-auth-btn-login {
