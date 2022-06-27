@@ -2,6 +2,7 @@ import "styled-components";
 declare module "styled-components" {
   export interface DefaultTheme {
     palette: {
+      Black01: string;
       DarkGray01: string;
       White: string;
       Gray01: string;
@@ -16,6 +17,9 @@ declare module "styled-components" {
       Blue01: string;
       Blue02: string;
       Blue03: string;
+      SkyBlue01: string;
+      SkyBlue02: string;
+      Mint01: string;
     };
   }
 }

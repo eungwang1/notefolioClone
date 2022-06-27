@@ -1,9 +1,10 @@
-import { DefaultTheme } from "styled-components";
+import { css, DefaultTheme } from "styled-components";
 const palette = {
+  Black01: "#161c1c",
   DarkGray01: "#2c3030",
   White: "#ffffff",
   Gray01: "#e4e8e8",
-  Gray02: "#c4c4c4",
+  Gray02: "#4E5454",
   Gray03: "#F9F9F9",
   Gray04: "#666565",
   Pink01: "#FFAFB0",
@@ -14,6 +15,9 @@ const palette = {
   Blue01: "#B5C7ED",
   Blue02: "#AEE4FF",
   Blue03: "#4982fc",
+  SkyBlue01: "#e8f9fa",
+  SkyBlue02: "#edfbfb",
+  Mint01: "#1bcad3",
 };
 
 const theme: DefaultTheme = {
@@ -28,5 +32,25 @@ export const media = {
   lm: customMediaQuery(768),
   sm: customMediaQuery(480),
 };
+
+export const hoverStyle01 = css`
+  transition: all 0.3s ease-out;
+  :hover {
+    color: ${(props) => props.theme.palette.Mint01};
+    border-color: ${(props) => props.theme.palette.Mint01};
+  }
+`;
+export const hoverStyle02 = css`
+  transition: all 0.3s ease-out;
+  :hover {
+    color: ${(props) => props.theme.palette.Mint01};
+  }
+`;
+export const hoverStyle03 = css`
+  transition: all 0.3s ease-out;
+  :hover {
+    border-color: ${(props) => props.theme.palette.Mint01};
+  }
+`;
 
 export default theme;
