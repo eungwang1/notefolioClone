@@ -5,7 +5,7 @@ import { faker } from "@faker-js/faker";
 import MiniCard from "./MiniCard";
 import { media } from "../../styles/theme";
 const recruitObj = Array.from({ length: 3 }, (v, k) => ({
-  image: faker.image.city(),
+  image: faker.image.city(480, 480, true),
   title: faker.lorem.words(2),
   name: faker.lorem.word(),
 }));

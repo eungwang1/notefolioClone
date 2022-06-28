@@ -6,7 +6,7 @@ const Notefolio = () => {
   const items = Array.from({ length: 30 }, (v, i) => ({
     username: faker.name.middleName(),
     profile: faker.image.avatar(),
-    contentimg: faker.image.animals(480, 480),
+    contentimg: faker.image.animals(480, 480, true),
     viewcount: 5,
     likecount: 5,
   }));

@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { hoverStyle01, media } from "../../styles/theme";
 const HotcontentSwiper = () => {
   const CardList = Array.from({ length: 8 }, (v, i) => ({
-    coverImage: [faker.image.fashion(), faker.image.animals()],
+    coverImage: [faker.image.fashion(480, 480, true), faker.image.animals(480, 480, true)],
     profileImage: faker.image.avatar(),
     username: faker.lorem.word(),
     category: faker.lorem.words(2),
