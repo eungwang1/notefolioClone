@@ -53,4 +53,11 @@ export const hoverStyle03 = css`
   }
 `;
 
+export const hoverStyle04 = css`
+  transition: all 0.3s ease-out;
+  :hover {
+    color: red;
+  }
+`;
+
 export default theme;
