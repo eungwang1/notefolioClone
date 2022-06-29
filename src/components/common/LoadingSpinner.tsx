@@ -1,7 +1,7 @@
 import React from "react";
 import { SpinnerCircular } from "spinners-react";
 import styled from "styled-components";
-const LoadingSpinner = () => {
+const LoadingSpinner: React.FC = () => {
   return (
     <LoadingSpinnerContainer>
       <SpinnerCircular />

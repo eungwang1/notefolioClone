@@ -5,7 +5,7 @@ import { media } from "../../styles/theme";
 import CustomDropdown from "../common/CustomDropdown";
 import CategorySwiper from "./CategorySwiper";
 
-const Category = () => {
+const Category: React.FC = () => {
   const { isPc } = useMedia();
   const dropdownItem = [
     {

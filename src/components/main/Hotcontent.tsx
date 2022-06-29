@@ -5,7 +5,7 @@ import MiniCard from "./MiniCard";
 import { media } from "../../styles/theme";
 import { useAppSelector } from "../../store/hook";
 import useNotefolio from "../../lib/useNotefolio";
-const Hotcontent = () => {
+const Hotcontent: React.FC = () => {
   const { onLoadRecruitList } = useNotefolio();
   const { getRecruitListLoading } = useAppSelector((state) => state.notefolioSlice);
   useEffect(() => {

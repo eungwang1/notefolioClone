@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { logoIcon02, logoIcon03 } from "../../../assets";
 import { media } from "../../../styles/theme";
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <div className="header-banner">

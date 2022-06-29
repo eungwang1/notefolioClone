@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { hoverStyle01, media } from "../../styles/theme";
 
-const CategorySwiper = () => {
+const CategorySwiper: React.FC = () => {
   const [selectedCategory, setSeletedCategory] = useState("전체분야");
   const categoies = [
     "전체분야",

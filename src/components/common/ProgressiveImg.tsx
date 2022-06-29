@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, ImgHTMLAttributes, useEffect, useState } from "react";
+import React, { HTMLAttributes, useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface IProgressiveImgProps extends HTMLAttributes<HTMLImageElement> {

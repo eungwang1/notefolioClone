@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { media } from "../../../styles/theme";
 
-const FooterMobile = () => {
+const FooterMobile: React.FC = () => {
   return (
     <FooterMobileContainer>
       <div className="footer-mobile-wrapper">

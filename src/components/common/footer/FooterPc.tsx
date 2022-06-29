@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { hoverStyle02, hoverStyle03, media } from "../../../styles/theme";
+import { hoverStyle02, media } from "../../../styles/theme";
 
-const FooterPc = () => {
+const FooterPc: React.FC = () => {
   return (
     <FooterContainer>
       <div className="footer-pc-wrapper">

@@ -7,7 +7,7 @@ import { hoverStyle01, media } from "../../styles/theme";
 import { useMedia } from "../../lib/useMediaQuery";
 import useNotefolio from "../../lib/useNotefolio";
 import { useAppSelector } from "../../store/hook";
-const HotcontentSwiper = () => {
+const HotcontentSwiper: React.FC = () => {
   const { onLoadCreatorList } = useNotefolio();
   useEffect(() => {
     onLoadCreatorList();

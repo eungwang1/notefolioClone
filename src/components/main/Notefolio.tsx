@@ -5,7 +5,7 @@ import { useAppSelector } from "../../store/hook";
 import NotefoiloCard from "./NotefoiloCard";
 import useInfinityScroll from "../../lib/useInfinityScroll";
 
-const Notefolio = () => {
+const Notefolio: React.FC = () => {
   const { notefolioList, getNotefolioListLoading } = useAppSelector((state) => state.notefolioSlice);
   const { onLoadNotefolioList } = useNotefolio();
   const target = useRef<HTMLDivElement>(null);

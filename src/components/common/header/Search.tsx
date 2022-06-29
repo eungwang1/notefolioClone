@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Search = () => {
+const Search: React.FC = () => {
   return (
     <SearchCotainer>
       <input placeholder="크리에이티브 검색" type="text" />
