@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import HotcontentSwiper from "./HotcontentSwiper";
 import MiniCard from "./MiniCard";
 import { media } from "../../styles/theme";
-import db from "../../assets/db/db.json";
-const recruitList = db.recruitList;
+import { useAppSelector } from "../../store/hook";
+import useNotefolio from "../../lib/useNotefolio";
 const Hotcontent = () => {
+  const { onLoadRecruitList } = useNotefolio();
+  const { getRecruitListLoading } = useAppSelector((state) => state.notefolioSlice);
+  useEffect(() => {
+    onLoadRecruitList();
+  }, []);
+  const { recruitList } = useAppSelector((state) => state.notefolioSlice);
   return (
     <HotcontentContainer>
       <HotcontentSwiper />
@@ -14,7 +20,9 @@ const Hotcontent = () => {
         {recruitList.map((item, idx) => (
           <MiniCard image={item.image} title={item.title} name={item.name} key={idx} type="normal" />
         ))}
-        <MiniCard type="primary" title="디자이너를 채용 중이신가요?" name="최고의 디자이너를 찾는 방법" />
+        {!getRecruitListLoading && (
+          <MiniCard type="primary" title="디자이너를 채용 중이신가요?" name="최고의 디자이너를 찾는 방법" />
+        )}
       </div>
     </HotcontentContainer>
   );

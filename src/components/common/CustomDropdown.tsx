@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Dropdown from "rc-dropdown";
-import Menu, { Item as MenuItem, Divider } from "rc-menu";
+import Menu, { Item as MenuItem } from "rc-menu";
 import styled from "styled-components";
 import { bookmarkIcon } from "../../assets";
-import { hoverStyle01, hoverStyle02, hoverStyle03 } from "../../styles/theme";
+import { hoverStyle01, hoverStyle03 } from "../../styles/theme";
 interface items {
   value: string;
   googleIcon?: string;
@@ -16,6 +16,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ items }) => {
   const [selectedKey, setSeletedKey] = useState("노트폴리오 픽");
   function onSelect({ key }: { key: string }) {
     setSeletedKey(() => key);
+    setVisible(false);
   }
   function onVisibleChange(visible: boolean) {
     setVisible(visible);
@@ -40,7 +41,6 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ items }) => {
             <img src={bookmarkIcon} alt="bookmark" width={20} height={20} />
           </div>
           <span>{selectedKey}</span>
-
           <span className={`material-symbols-outlined ${visible && "rotate"}`}>expand_more</span>
         </button>
       </Dropdown>
