@@ -1,13 +1,18 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import CreatorCard from "./CreatorCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import styled from "styled-components";
 import { hoverStyle01, media } from "../../styles/theme";
 import { useMedia } from "../../lib/useMediaQuery";
-import db from "../../assets/db/db.json";
+import useNotefolio from "../../lib/useNotefolio";
+import { useAppSelector } from "../../store/hook";
 const HotcontentSwiper = () => {
-  const cardList = db.cardList;
+  const { onLoadCreatorList } = useNotefolio();
+  useEffect(() => {
+    onLoadCreatorList();
+  }, []);
+  const { creatorList } = useAppSelector((state) => state.notefolioSlice);
   const { isMobile, isTablet, isPc, isMobileSmall } = useMedia();
   const slidesPerView = useMemo(() => {
     if (isMobileSmall) return 1;
@@ -28,7 +33,7 @@ const HotcontentSwiper = () => {
         className="mySwiper"
       >
         <div className="swiper-title">HOT 크리에이터🔥</div>
-        {cardList.map((card, idx) => (
+        {creatorList.map((card, idx) => (
           <SwiperSlide key={idx}>
             <CreatorCard
               username={card.username}
