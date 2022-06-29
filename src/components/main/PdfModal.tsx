@@ -1,27 +1,23 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import React, { useMemo, useState } from "react";
-import { Page, Document } from "react-pdf";
-import { opacityVariants } from "../../lib/motionVariants";
+import styled from "styled-components";
 import { useMedia } from "../../lib/useMediaQuery";
 import { onTogglePdfModalState } from "../../slices/notefolioSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
-import LoadingSpinner from "../common/LoadingSpinner";
 import Modal from "../common/modal/Modal";
+import PdfDocument from "./PdfDocument";
 interface IPdfModal {
   src: string;
 }
 const PdfModal: React.FC<IPdfModal> = ({ src }) => {
+  const { currentNotefolio } = useAppSelector((state) => state.notefolioSlice);
   const [numPages, setNumPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1);
-  const { currentNotefolio } = useAppSelector((state) => state.notefolioSlice);
   const { isMobile, isMobileSmall } = useMedia();
   const maxScale = 1.4;
   const minScale = 0.6;
   const dispatch = useAppDispatch();
-  function onDocumentLoadSuccess({ numPages }: { numPages: any }) {
-    setNumPages(numPages);
-  }
   const pdfModalState = useAppSelector((state) => state.notefolioSlice.pdfModalState);
   const onClose = () => {
     dispatch(onTogglePdfModalState(false));
@@ -51,50 +47,41 @@ const PdfModal: React.FC<IPdfModal> = ({ src }) => {
     if (isMobile) return 550;
     return 700;
   }, [isMobile, isMobileSmall]);
+  const modalProps = {
+    modalState: pdfModalState,
+    onClose: onClose,
+    goNextPage: goNextPage,
+    goPrevPage: goPrevPage,
+    currentPage: pageNumber,
+    totalPage: numPages,
+    onScaleUp: onScaleUp,
+    onScaleDown: onScaleDown,
+    width: resposivePdfWidth * scale,
+    modalNav: true,
+    title: "테스트PDF",
+    src: currentNotefolio ? currentNotefolio.pdfsrc : "",
+  };
+
+  const pdfDocumentProps = {
+    isMobile,
+    isMobileSmall,
+    pageNumber,
+    scale,
+    setNumPages,
+  };
   return (
-    <div>
+    <PdfModalContainer>
       <AnimatePresence>
         {pdfModalState && (
-          <Modal
-            modalState={pdfModalState}
-            onClose={onClose}
-            goNextPage={goNextPage}
-            goPrevPage={goPrevPage}
-            currentPage={pageNumber}
-            totalPage={numPages}
-            onScaleUp={onScaleUp}
-            onScaleDown={onScaleDown}
-            width={resposivePdfWidth * scale}
-            title="테스트PDF"
-          >
-            <div>
-              <Document
-                file={currentNotefolio?.pdfsrc}
-                onLoadSuccess={onDocumentLoadSuccess}
-                loading={<LoadingSpinner />}
-              >
-                <motion.div
-                  key={pageNumber}
-                  variants={opacityVariants(0.5)}
-                  initial="initial"
-                  animate="animate"
-                  exit="leaving"
-                >
-                  <Page
-                    pageNumber={pageNumber}
-                    scale={scale}
-                    width={resposivePdfWidth}
-                    className="pdf-page"
-                    loading={<LoadingSpinner />}
-                  />
-                </motion.div>
-              </Document>
-            </div>
+          <Modal {...modalProps}>
+            <PdfDocument {...pdfDocumentProps} />
           </Modal>
         )}
       </AnimatePresence>
-    </div>
+    </PdfModalContainer>
   );
 };
 
 export default PdfModal;
+
+const PdfModalContainer = styled.div``;
