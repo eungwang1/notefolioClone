@@ -2,18 +2,27 @@ import React from "react";
 import styled from "styled-components";
 import { speakerIcon } from "../../assets";
 import { hoverStyle01 } from "../../styles/theme";
+import ProgressiveImg from "../common/ProgressiveImg";
 interface MiniCardProps {
   image?: string;
   title?: string;
   name?: string;
   type?: "normal" | "primary";
 }
-const MiniCard: React.FC<MiniCardProps> = ({ image, title, name, type = "primary" }) => {
+const MiniCard: React.FC<MiniCardProps> = ({ image, title, name, type = "normal" }) => {
   return (
     <MiniCardContainer>
       <div className={`minicard-item ${type}`}>
         <div className={`minicard-img-wrapper ${type}`}>
-          <img className={`minicard-img`} src={image} alt="logo" width={48} height={48} />
+          <ProgressiveImg
+            className={`minicard-img`}
+            src={image as string}
+            alt="logo"
+            width={48}
+            height={48}
+            borderRadius="5px"
+            placeholderSrc="/images/placeholderImg"
+          />
         </div>
         <div className="minicard-info-wrap">
           <div className={`minicard-info-title ${type}`}>{title}</div>
