@@ -12,13 +12,16 @@ const data = {
     },
   ],
 };
-const notefolio = Array.from({ length: 200 }, (v, i) => ({
+const notefolioLength = 93;
+const notefolio = Array.from({ length: notefolioLength }, (v, i) => ({
   username: faker.name.middleName(),
   profile: faker.image.avatar(),
   title: faker.lorem.sentence(),
   contentimg: faker.image.animals(480, 480, true),
-  viewcount: 5,
-  likecount: 5,
+  pdfsrc: "/pdf/sample.pdf",
+  viewcount: parseInt(Math.random() * 100),
+  likecount: parseInt(Math.random() * 100),
+  id: i + 1 + "",
 }));
 const cardList = Array.from({ length: 8 }, (v, i) => ({
   coverImage: [faker.image.fashion(480, 480, true), faker.image.animals(480, 480, true)],
@@ -32,4 +35,5 @@ const recruitList = Array.from({ length: 3 }, (v, k) => ({
   name: faker.lorem.word(),
 }));
 
-jsonFile.writeFile("./src/assets/db/db.json", { notefolio, cardList, recruitList });
+// jsonFile.writeFile("./src/assets/db/db.json", { notefolio, cardList, recruitList });
+jsonFile.writeFile("./db.json", { notefolio, cardList, recruitList });

@@ -1,22 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppLayout from "../components/common/AppLayout";
-import CustomDropdown from "../components/common/CustomDropdown";
 import Header from "../components/common/header/Header";
 import Nav from "../components/common/header/Nav";
 import Category from "../components/main/Category";
 import Hotcontent from "../components/main/Hotcontent";
 import Notefolio from "../components/main/Notefolio";
-
+import styled from "styled-components";
+import PdfModal from "../components/main/PdfModal";
+import useNotefolio from "../lib/useNotefolio";
 const Main = () => {
   return (
     <AppLayout>
-      <Header />
-      <Nav />
-      <Hotcontent />
-      <Category />
-      <Notefolio />
+      <MainContainer>
+        <Header />
+        <Nav />
+        <Hotcontent />
+        <Category />
+        <Notefolio />
+        <PdfModal src="/pdf/sample.pdf" />
+      </MainContainer>
     </AppLayout>
   );
 };
 
 export default Main;
+
+const MainContainer = styled.div`
+  .pdf-page {
+    transition: all 0.2s;
+  }
+`;

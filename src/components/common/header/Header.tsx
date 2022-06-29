@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { logoIcon02, logoIcon03 } from "../../../assets";
-import Nav from "./Nav";
+import { media } from "../../../styles/theme";
 
 const Header = () => {
   return (
@@ -42,6 +42,9 @@ const HeaderContainer = styled.div`
     display: flex;
     width: 50%;
     margin: 0 auto;
+    ${media.tb} {
+      display: none;
+    }
   }
   .family-gnb {
     display: flex;

@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { useMedia } from "../../lib/useMediaQuery";
 import { media } from "../../styles/theme";
 import CustomDropdown from "../common/CustomDropdown";
 import CategorySwiper from "./CategorySwiper";
 
 const Category = () => {
+  const { isPc } = useMedia();
   const dropdownItem = [
     {
       value: "노트폴리오 픽",
@@ -15,8 +17,11 @@ const Category = () => {
   ];
   return (
     <CategoryContainer>
-      <CustomDropdown items={dropdownItem} />
-      <CategorySwiper />
+      <div className="category-pc-wrapper">
+        <CustomDropdown items={dropdownItem} />
+        {isPc && <CategorySwiper />}
+      </div>
+      {!isPc && <CategorySwiper />}
     </CategoryContainer>
   );
 };
@@ -24,13 +29,19 @@ const Category = () => {
 export default Category;
 
 const CategoryContainer = styled.div`
-  padding: 0 34px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+
+  .category-pc-wrapper {
+    padding: 0 34px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
   ${media.tb} {
-    .category-swiper-container {
-      display: none;
+    .category-pc-wrapper {
+      padding-bottom: 24px;
+      border-bottom: solid 1px #f1f1f1;
     }
   }
 `;

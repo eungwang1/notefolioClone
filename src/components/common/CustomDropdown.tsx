@@ -51,6 +51,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ items }) => {
 export default CustomDropdown;
 
 const DropdownContainer = styled.div`
+  min-width: 180px;
   width: 25%;
   .dropdown-btn {
     padding: 8px;

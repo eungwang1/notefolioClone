@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
-import { hoverStyle01 } from "../../styles/theme";
+import { hoverStyle01, media } from "../../styles/theme";
 
 const CategorySwiper = () => {
   const [selectedCategory, setSeletedCategory] = useState("전체분야");
@@ -110,11 +110,15 @@ const CategorySwiperContainer = styled.div`
     height: 40px;
     top: -7px;
     background-color: white;
-    z-index: 999;
+    z-index: 100;
     ${hoverStyle01}
   }
 
   .material-symbols-outlined {
     font-size: 15px;
+  }
+  ${media.tb} {
+    width: 100%;
+    padding-top: 24px;
   }
 `;

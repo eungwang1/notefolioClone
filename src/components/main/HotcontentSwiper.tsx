@@ -1,21 +1,24 @@
-import React from "react";
-import Card from "./Card";
+import React, { useMemo } from "react";
+import CreatorCard from "./CreatorCard";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { faker } from "@faker-js/faker";
 import { Navigation } from "swiper";
 import styled from "styled-components";
 import { hoverStyle01, media } from "../../styles/theme";
+import { useMedia } from "../../lib/useMediaQuery";
+import db from "../../assets/db/db.json";
 const HotcontentSwiper = () => {
-  const CardList = Array.from({ length: 8 }, (v, i) => ({
-    coverImage: [faker.image.fashion(480, 480, true), faker.image.animals(480, 480, true)],
-    profileImage: faker.image.avatar(),
-    username: faker.lorem.word(),
-    category: faker.lorem.words(2),
-  }));
+  const cardList = db.cardList;
+  const { isMobile, isTablet, isPc, isMobileSmall } = useMedia();
+  const slidesPerView = useMemo(() => {
+    if (isMobileSmall) return 1;
+    if (isMobile) return 2;
+    if (isTablet) return 3;
+    if (isPc) return 4;
+  }, [isMobile, isTablet, isPc]);
   return (
     <HotcontentSwiperContainer>
       <Swiper
-        slidesPerView={4}
+        slidesPerView={slidesPerView}
         slidesPerGroup={1}
         navigation={{
           nextEl: ".swiper-next-btn",
@@ -25,9 +28,9 @@ const HotcontentSwiper = () => {
         className="mySwiper"
       >
         <div className="swiper-title">HOT 크리에이터🔥</div>
-        {CardList.map((card, idx) => (
+        {cardList.map((card, idx) => (
           <SwiperSlide key={idx}>
-            <Card
+            <CreatorCard
               username={card.username}
               category={card.category}
               coverImage={card.coverImage}
