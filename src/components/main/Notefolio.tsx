@@ -13,8 +13,8 @@ const Notefolio = () => {
     target,
     targetArray: notefolioList,
     fetchAction: onLoadNotefolioList,
-    threshold: 0.5,
-    rootMargin: "400px 0px",
+    threshold: 0,
+    rootMargin: "300px 0px",
   });
   return (
     <NotefolioContainer>
