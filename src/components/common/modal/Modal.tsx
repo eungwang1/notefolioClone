@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { opacityVariants } from "../../../lib/motionVariants";
 import { hoverStyle01, media } from "../../../styles/theme";
+import ModalSideNav from "./ModalSideNav";
 interface ModalProps {
   children?: React.ReactNode;
   modalState?: boolean;
@@ -10,11 +11,13 @@ interface ModalProps {
   currentPage?: number;
   width?: number;
   title?: string;
+  modalNav?: boolean;
   onClose?: () => void;
   goNextPage?: () => void;
   onScaleUp?: () => void;
   onScaleDown?: () => void;
   goPrevPage?: () => void;
+  src?: string;
 }
 const Modal: React.FC<ModalProps> = ({
   children,
@@ -28,6 +31,8 @@ const Modal: React.FC<ModalProps> = ({
   totalPage,
   title,
   width,
+  modalNav = false,
+  src,
 }) => {
   return (
     <ModalContainer width={width}>
@@ -70,6 +75,7 @@ const Modal: React.FC<ModalProps> = ({
         <button className="modal-prev-btn" onClick={goPrevPage} disabled={currentPage === 1}>
           <span className="material-symbols-outlined">arrow_circle_left</span>
         </button>
+        {modalNav && <ModalSideNav downloadLink={src} />}
       </motion.div>
     </ModalContainer>
   );
