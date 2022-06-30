@@ -7,30 +7,31 @@ import { hoverStyle01, media } from "../../styles/theme";
 import { useMedia } from "../../lib/useMediaQuery";
 import useNotefolio from "../../lib/useNotefolio";
 import { useAppSelector } from "../../store/hook";
+import { responsiveCreatorSwiperCount } from "../../lib/responsiveValueList";
 const HotcontentSwiper: React.FC = () => {
   const { onLoadCreatorList } = useNotefolio();
   useEffect(() => {
     onLoadCreatorList();
   }, []);
   const { creatorList } = useAppSelector((state) => state.notefolioSlice);
-  const { isMobile, isTablet, isPc, isMobileSmall } = useMedia();
+  const { isMobile, isTablet, isMobileSmall } = useMedia();
   const slidesPerView = useMemo(() => {
-    if (isMobileSmall) return 1;
-    if (isMobile) return 2;
-    if (isTablet) return 3;
-    if (isPc) return 4;
-  }, [isMobile, isTablet, isPc]);
+    if (isMobileSmall) return responsiveCreatorSwiperCount.ms;
+    if (isMobile) return responsiveCreatorSwiperCount.ml;
+    if (isTablet) return responsiveCreatorSwiperCount.tb;
+    return responsiveCreatorSwiperCount.pc;
+  }, [isMobile, isTablet, isMobileSmall]);
   return (
     <HotcontentSwiperContainer>
       <Swiper
         slidesPerView={slidesPerView}
         slidesPerGroup={1}
         navigation={{
-          nextEl: ".swiper-next-btn",
-          prevEl: ".swiper-prev-btn",
+          nextEl: ".hotcontent-swiper-next-btn",
+          prevEl: ".hotcontent-swiper-prev-btn",
         }}
         modules={[Navigation]}
-        className="mySwiper"
+        className="hotcontent-mySwiper"
       >
         <div className="swiper-title">HOT 크리에이터🔥</div>
         {creatorList.map((card, idx) => (
@@ -44,10 +45,10 @@ const HotcontentSwiper: React.FC = () => {
           </SwiperSlide>
         ))}
 
-        <div className="swiper-prev-btn">
+        <div className="hotcontent-swiper-prev-btn">
           <span className="material-symbols-outlined">arrow_back_ios</span>
         </div>
-        <div className="swiper-next-btn">
+        <div className="hotcontent-swiper-next-btn">
           <span className="material-symbols-outlined">arrow_forward_ios</span>
         </div>
       </Swiper>
@@ -76,14 +77,14 @@ const HotcontentSwiperContainer = styled.div`
     position: absolute;
     top: 0px;
   }
-  .swiper-next-btn {
+  .hotcontent-swiper-next-btn {
     right: 20px;
   }
-  .swiper-prev-btn {
+  .hotcontent-swiper-prev-btn {
     right: 40px;
   }
-  .swiper-next-btn,
-  .swiper-prev-btn {
+  .hotcontent-swiper-next-btn,
+  .hotcontent-swiper-prev-btn {
     position: absolute;
     top: 0px;
     cursor: pointer;
