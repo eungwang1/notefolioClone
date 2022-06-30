@@ -1,34 +1,49 @@
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { hoverStyle01, media } from "../../styles/theme";
+import { useAppDispatch, useAppSelector } from "../../store/hook";
+import { onSelectCategory } from "../../slices/notefolioSlice";
+import { useNavigate } from "react-router";
+import { createSearchParams, useSearchParams } from "react-router-dom";
+import { useMedia } from "../../lib/useMediaQuery";
+import { responsiveCategorySwiperCount } from "../../lib/responsiveValueList";
 
 const CategorySwiper: React.FC = () => {
-  const [selectedCategory, setSeletedCategory] = useState("전체분야");
-  const categoies = [
-    "전체분야",
-    "그래픽 디자인",
-    "브랜딩/편집",
-    "영상/모션그래픽",
-    "UI/UX",
-    "일러스트레이션",
-    "캐릭터 디자인",
-    "디지털 아트",
-    "타이포그래피",
-    "포토그래피",
-  ];
+  const { categories, selectedCategory } = useAppSelector((state) => state.notefolioSlice);
+  const [searchParms] = useSearchParams();
+  const search = searchParms.get("search");
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { isMobile, isMobileSmall, isPcMiddle, isPcLarge, isTablet } = useMedia();
+  const swiperCount = useMemo(() => {
+    if (isMobileSmall) return responsiveCategorySwiperCount.ms;
+    if (isMobile) return responsiveCategorySwiperCount.ml;
+    if (isTablet) return responsiveCategorySwiperCount.tb;
+    if (isPcMiddle) return responsiveCategorySwiperCount.pcs;
+    return 7;
+  }, [isMobile, isMobileSmall, isPcMiddle, isTablet]);
   const onSelect = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const button: HTMLButtonElement = e.currentTarget;
-    if (e.currentTarget.name) {
-      setSeletedCategory(button.name);
+    if (button.innerText) {
+      dispatch(onSelectCategory(button.innerText));
+      if (button.name) {
+        navigate({
+          search: createSearchParams({ category: button.name, search: search ? search : "" }).toString(),
+        });
+      } else {
+        navigate({
+          search: createSearchParams({ search: search ? search : "" }).toString(),
+        });
+      }
     }
   };
   return (
     <CategorySwiperContainer className="category-swiper-container">
       <Swiper
-        slidesPerView={7}
+        slidesPerView={swiperCount}
         slidesPerGroup={1}
         navigation={{
           nextEl: ".category-swiper-next-btn",
@@ -37,15 +52,15 @@ const CategorySwiper: React.FC = () => {
         modules={[Navigation]}
         className="category-swiper"
       >
-        {categoies.map((category, idx) => (
-          <SwiperSlide key={category}>
+        {categories.map((category, idx) => (
+          <SwiperSlide key={category.title}>
             <button
-              className={`category-swiper-name ${selectedCategory === category && "active"}`}
+              className={`category-swiper-name ${selectedCategory === category.title && "active"}`}
               type="button"
-              name={category}
+              name={category.code}
               onClick={onSelect}
             >
-              {category}
+              {category.title}
             </button>
           </SwiperSlide>
         ))}
@@ -72,7 +87,7 @@ const CategorySwiperContainer = styled.div`
     color: #4e5454;
     display: block;
     text-align: center;
-    padding: 5px 10px;
+    padding: 8px 10px;
     border-radius: 3px;
     margin: 0 auto;
     cursor: pointer;
@@ -81,7 +96,8 @@ const CategorySwiperContainer = styled.div`
     text-align: center;
   }
   .category-swiper-name.active {
-    background-color: #f6f9f9;
+    background-color: ${(props) => props.theme.palette.Gray05};
+    font-weight: 700;
   }
   .category-swiper {
   }
@@ -112,6 +128,9 @@ const CategorySwiperContainer = styled.div`
     background-color: white;
     z-index: 100;
     ${hoverStyle01}
+    ${media.tb} {
+      display: none;
+    }
   }
 
   .material-symbols-outlined {
