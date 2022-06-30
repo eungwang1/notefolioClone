@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { speakerIcon } from "../../assets";
-import { hoverStyle01 } from "../../styles/theme";
-import ProgressiveImg from "../common/ProgressiveImg";
+import { speakerIcon } from "../../../assets";
+import { hoverStyle01 } from "../../../styles/theme";
+import ProgressiveImg from "../../common/ProgressiveImg";
 interface MiniCardProps {
   image?: string;
   title?: string;

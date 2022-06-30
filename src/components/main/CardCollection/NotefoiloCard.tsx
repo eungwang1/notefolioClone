@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { npbadgeIcon } from "../../assets";
-import { INotefolio } from "../../customTypes/notefolio";
-import useNotefolio from "../../lib/useNotefolio";
-import { onTogglePdfModalState } from "../../slices/notefolioSlice";
-import { useAppDispatch } from "../../store/hook";
-import { hoverStyle01, hoverStyle04, media } from "../../styles/theme";
-import ProgressiveImg from "../common/ProgressiveImg";
+import { npbadgeIcon } from "../../../assets";
+import { INotefolio } from "../../../customTypes/notefolio";
+import useNotefolio from "../../../lib/useNotefolio";
+import { onTogglePdfModalState } from "../../../slices/notefolioSlice";
+import { useAppDispatch } from "../../../store/hook";
+import { hoverStyle01, hoverStyle04, media } from "../../../styles/theme";
+import ProgressiveImg from "../../common/ProgressiveImg";
 interface NotefoiloCardProps {
   item: INotefolio;
   idx: number;

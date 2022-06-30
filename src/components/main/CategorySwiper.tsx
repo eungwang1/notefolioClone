@@ -16,7 +16,7 @@ const CategorySwiper: React.FC = () => {
   const search = searchParms.get("search");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { isMobile, isMobileSmall, isPcMiddle, isPcLarge, isTablet } = useMedia();
+  const { isMobile, isMobileSmall, isPcMiddle, isTablet } = useMedia();
   const swiperCount = useMemo(() => {
     if (isMobileSmall) return responsiveCategorySwiperCount.ms;
     if (isMobile) return responsiveCategorySwiperCount.ml;

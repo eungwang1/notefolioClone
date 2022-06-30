@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { hoverStyle01 } from "../../styles/theme";
-import ProgressiveImg from "../common/ProgressiveImg";
+import { hoverStyle01 } from "../../../styles/theme";
+import ProgressiveImg from "../../common/ProgressiveImg";
 interface CreatorCardProps {
   coverImage?: string[];
   profileImage?: string;

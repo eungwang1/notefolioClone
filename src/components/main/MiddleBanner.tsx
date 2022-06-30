@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import useNotefolio from "../../lib/useNotefolio";
 import { useAppSelector } from "../../store/hook";
-import AcademyCard from "./AcademyCard";
+import AcademyCard from "./CardCollection/AcademyCard";
 import { useMedia } from "../../lib/useMediaQuery";
 import { responsiveAcademyItemCount } from "../../lib/responsiveValueList";
 import { media } from "../../styles/theme";

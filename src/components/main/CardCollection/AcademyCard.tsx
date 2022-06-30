@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { IAcademy } from "../../customTypes/notefolio";
-import ProgressiveImg from "../common/ProgressiveImg";
+import { IAcademy } from "../../../customTypes/notefolio";
+import ProgressiveImg from "../../common/ProgressiveImg";
 interface AcademyCardProps {
   item: IAcademy;
 }
