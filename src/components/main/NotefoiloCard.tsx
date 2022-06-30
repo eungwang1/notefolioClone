@@ -30,6 +30,7 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
           placeholderSrc="/images/placeholderImg.png"
           borderRadius="5px"
         />
+        <div className="notefolio-work-item-hover-background"></div>
         <div className="notefolio-npbadge">
           <img width="35" height="auto" src={npbadgeIcon} alt="bedge" />
         </div>
@@ -94,27 +95,18 @@ const NotefoiloCardContainer = styled.div`
   }
   .image-hover {
     position: relative;
-    :before {
-      content: "";
-      display: block;
-      position: absolute;
-      height: 0%;
-      width: 100%;
-      bottom: 5px;
-      transition: height 0.3s ease-out;
-      background: linear-gradient(to bottom, transparent 0%, ${(props) => props.theme.palette.Gray02} 150%);
-    }
-    :hover:before {
-      height: 30%;
-    }
     :hover {
       .notefolio-work-item-hover-content {
         transition: transform 0.3s ease-out;
-        transform: translateY(-40px);
+        transform: translateY(-50px);
       }
       .notefolio-npbadge {
         transition: transform 0.3s ease-out;
         transform: translateY(100px);
+      }
+      .notefolio-work-item-hover-background {
+        opacity: 1;
+        transition: opacity 0.3s;
       }
     }
   }
@@ -125,8 +117,17 @@ const NotefoiloCardContainer = styled.div`
     position: absolute;
     color: white;
     font-weight: 600;
-    padding: 0 10px;
+    padding: 10px 0px;
     width: 100%;
+  }
+  .notefolio-work-item-hover-background {
+    width: 100%;
+    position: absolute;
+    height: 25%;
+    bottom: 5px;
+    border-radius: 5px;
+    opacity: 0;
+    background: linear-gradient(to bottom, transparent 0%, ${(props) => props.theme.palette.DarkGray01} 120%);
   }
   .notefolio-work-item-hover-title {
     display: -webkit-box;
@@ -134,6 +135,7 @@ const NotefoiloCardContainer = styled.div`
     -webkit-box-orient: vertical;
     line-height: 1.8;
     overflow: hidden;
+    padding: 0 10px;
     width: 70%;
   }
   .notefolio-work-item-hover-icon {
@@ -154,7 +156,6 @@ const NotefoiloCardContainer = styled.div`
   }
   .notefolio-work-item-block {
     width: 100%;
-    height: 100%;
     overflow: hidden;
   }
   .notefolio-work-item-thumbnail {

@@ -16,7 +16,7 @@ const Main = () => {
         <Hotcontent />
         <Category />
         <Notefolio />
-        <PdfModal src="/pdf/sample.pdf" />
+        <PdfModal />
       </MainContainer>
     </AppLayout>
   );

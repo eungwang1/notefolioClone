@@ -12,7 +12,7 @@ interface IProgressiveImgProps extends HTMLAttributes<HTMLImageElement> {
 const ProgressiveImg: React.FC<IProgressiveImgProps> = ({ ...props }) => {
   const { placeholderSrc = "/images/placeholderImg.png", src } = props;
   const [imgSrc, setImgSrc] = useState(placeholderSrc || src);
-  const customClass = placeholderSrc && imgSrc === placeholderSrc ? "loading" : "loaded";
+  const loadingClassName = placeholderSrc && imgSrc === placeholderSrc ? "loading" : "loaded";
   useEffect(() => {
     const img = new Image();
     img.src = src;
@@ -21,13 +21,13 @@ const ProgressiveImg: React.FC<IProgressiveImgProps> = ({ ...props }) => {
     };
   }, [src]);
   return (
-    <ProgressiveImgContainer {...props}>
+    <ProgressiveImgContainer {...props} className="progressiveImage-block">
       <img
         src={imgSrc}
         alt={props.alt}
         width={props.width}
         height={props.height}
-        className={`progressiveImage ${customClass}`}
+        className={`progressiveImage ${loadingClassName}`}
       />
     </ProgressiveImgContainer>
   );

@@ -24,12 +24,28 @@ export interface IRecruit {
   name: string;
 }
 
+export interface IAcademy {
+  image: string;
+  title: string;
+  content: string;
+}
+
+export interface ICategory {
+  title: string;
+  code: string;
+}
 export interface INotefolioSlice {
   pdfModalState: boolean;
   currentNotefolio: INotefolio | null;
   notefolioList: INotefolio[];
+  searchedNotefolioList: INotefolio[];
+  notefolioListAtTop: INotefolio[];
+  notefolioListAtBottom: INotefolio[];
   recruitList: IRecruit[];
   creatorList: ICreator[];
+  academyList: IAcademy[];
+  categories: ICategory[];
+  selectedCategory: string;
   getNotefolioListLoading: boolean;
   getNotefolioListError: SerializedError | null;
   getNotefolioLoading: boolean;
@@ -38,4 +54,6 @@ export interface INotefolioSlice {
   getRecruitListError: SerializedError | null;
   getCreatorListLoading: boolean;
   getCreatorListError: SerializedError | null;
+  getAcademyListLoading: boolean;
+  getAcademyListError: SerializedError | null;
 }

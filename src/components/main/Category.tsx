@@ -6,7 +6,7 @@ import CustomDropdown from "../common/CustomDropdown";
 import CategorySwiper from "./CategorySwiper";
 
 const Category: React.FC = () => {
-  const { isPc } = useMedia();
+  const { isTablet } = useMedia();
   const dropdownItem = [
     {
       value: "노트폴리오 픽",
@@ -16,12 +16,12 @@ const Category: React.FC = () => {
     { value: "최신순으로 보기", googleIcon: "schedule" },
   ];
   return (
-    <CategoryContainer>
+    <CategoryContainer className="category-container">
       <div className="category-pc-wrapper">
         <CustomDropdown items={dropdownItem} />
-        {isPc && <CategorySwiper />}
+        {!isTablet && <CategorySwiper />}
       </div>
-      {!isPc && <CategorySwiper />}
+      {isTablet && <CategorySwiper />}
     </CategoryContainer>
   );
 };

@@ -4,6 +4,7 @@ import React, { useMemo, useState } from "react";
 import { Page, Document } from "react-pdf";
 import styled from "styled-components";
 import { opacityVariants } from "../../lib/motionVariants";
+import { responsivePdfWidth } from "../../lib/responsiveValueList";
 import { useAppSelector } from "../../store/hook";
 import LoadingSpinner from "../common/LoadingSpinner";
 interface PdfDocumentProps {
@@ -21,14 +22,16 @@ const PdfDocument: React.FC<PdfDocumentProps> = ({
   scale,
 }) => {
   const resposivePdfWidth = useMemo(() => {
-    if (isMobileSmall) return 350;
-    if (isMobile) return 550;
-    return 700;
+    if (isMobileSmall) return responsivePdfWidth.ms;
+    if (isMobile) return responsivePdfWidth.ml;
+    return responsivePdfWidth.etc;
   }, [isMobile, isMobileSmall]);
+
   const { currentNotefolio } = useAppSelector((state) => state.notefolioSlice);
   function onDocumentLoadSuccess(pdf: PDFDocumentProxy) {
     setNumPages(pdf.numPages);
   }
+
   return (
     <PdfDocumentContainer>
       <Document

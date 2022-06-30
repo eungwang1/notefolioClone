@@ -1,12 +1,18 @@
 import { useCallback } from "react";
-import { getCreatorList, getNotefolio, getNotefolioList, getRecruitList } from "./../actions/notefolioAction";
+import { getNotefolioListParams } from "../customTypes/params";
+import {
+  getAcademyList,
+  getCreatorList,
+  getNotefolio,
+  getNotefolioList,
+  getRecruitList,
+} from "./../actions/notefolioAction";
 import { useAppDispatch } from "./../store/hook";
 const useNotefolio = () => {
   const dispatch = useAppDispatch();
-
   const onLoadNotefolioList = useCallback(
-    async (page: number) => {
-      await dispatch(getNotefolioList(page));
+    async ({ page, search, category }: getNotefolioListParams) => {
+      await dispatch(getNotefolioList({ page, search, category }));
     },
     [dispatch]
   );
@@ -26,6 +32,16 @@ const useNotefolio = () => {
     [dispatch]
   );
 
-  return { onLoadNotefolio, onLoadNotefolioList, onLoadRecruitList, onLoadCreatorList };
+  const onLoadAcademyList = useCallback(async () => {
+    await dispatch(getAcademyList());
+  }, [dispatch]);
+
+  return {
+    onLoadNotefolio,
+    onLoadNotefolioList,
+    onLoadRecruitList,
+    onLoadCreatorList,
+    onLoadAcademyList,
+  };
 };
 export default useNotefolio;

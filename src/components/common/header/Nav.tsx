@@ -4,10 +4,12 @@ import styled from "styled-components";
 import { logoIcon } from "../../../assets";
 import routes from "../../../lib/routes";
 import { useLocation } from "react-router-dom";
-import Search from "./Search";
+import SearchInput from "./Search";
 import { media } from "../../../styles/theme";
-interface NavProps {}
-const Nav: React.FC<NavProps> = () => {
+interface NavProps {
+  searchInput?: boolean;
+}
+const Nav: React.FC<NavProps> = ({ searchInput = true }) => {
   const location = useLocation();
   const navItem = [
     {
@@ -35,9 +37,7 @@ const Nav: React.FC<NavProps> = () => {
           ))}
         </div>
       </div>
-      <div className="nav-center-container">
-        <Search />
-      </div>
+      <div className="nav-center-container">{searchInput && <SearchInput />}</div>
       <div className="nav-right-container">
         <div className="nav-auth-btn-group">
           <Link to={routes.HOME} className="nav-auth-btn-login">

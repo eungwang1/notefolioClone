@@ -1,11 +1,33 @@
-import { getCreatorList, getNotefolio, getNotefolioList, getRecruitList } from "./../actions/notefolioAction";
-import { ICreator, INotefolio, INotefolioSlice, IRecruit } from "./../customTypes/notefolio";
+import {
+  getAcademyList,
+  getCreatorList,
+  getNotefolio,
+  getNotefolioList,
+  getRecruitList,
+} from "./../actions/notefolioAction";
+import { IAcademy, ICreator, INotefolio, INotefolioSlice, IRecruit } from "./../customTypes/notefolio";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export const initialState: INotefolioSlice = {
   notefolioList: [],
+  notefolioListAtTop: [],
+  notefolioListAtBottom: [],
+  searchedNotefolioList: [],
   recruitList: [],
   creatorList: [],
+  academyList: [],
+  categories: [
+    { title: "전체분야", code: "" },
+    { title: "그래픽 디자인", code: "a1" },
+    { title: "브랜딩/편집", code: "a2" },
+    { title: "UI/UX", code: "a3" },
+    { title: "일러스트레이션", code: "a4" },
+    { title: "캐릭터 디자인", code: "a5" },
+    { title: "디지털 아트", code: "a6" },
+    { title: "타이포그래피", code: "a7" },
+    { title: "포토그래피", code: "a8" },
+  ],
+  selectedCategory: "",
   currentNotefolio: null,
   pdfModalState: false,
   getNotefolioListLoading: false,
@@ -16,6 +38,8 @@ export const initialState: INotefolioSlice = {
   getRecruitListError: null,
   getCreatorListLoading: false,
   getCreatorListError: null,
+  getAcademyListLoading: false,
+  getAcademyListError: null,
 };
 
 export const notefolioSlice = createSlice({
@@ -32,6 +56,12 @@ export const notefolioSlice = createSlice({
     },
     onClearCurrentPdf: (state: INotefolioSlice) => {
       state.currentNotefolio = null;
+    },
+    onClearNotefolioList: (state: INotefolioSlice) => {
+      state.notefolioList = [];
+    },
+    onSelectCategory: (state: INotefolioSlice, action: PayloadAction<string>) => {
+      state.selectedCategory = action.payload;
     },
   },
   extraReducers: (builder) =>
@@ -82,7 +112,19 @@ export const notefolioSlice = createSlice({
       .addCase(getCreatorList.rejected, (state, action: ReturnType<typeof getCreatorList.rejected>) => {
         state.getCreatorListLoading = false;
         state.getCreatorListError = action.error;
+      })
+      .addCase(getAcademyList.pending, (state) => {
+        state.getAcademyListLoading = true;
+      })
+      .addCase(getAcademyList.fulfilled, (state, action: PayloadAction<IAcademy[]>) => {
+        state.getAcademyListLoading = false;
+        state.academyList = action.payload;
+      })
+      .addCase(getAcademyList.rejected, (state, action: ReturnType<typeof getAcademyList.rejected>) => {
+        state.getAcademyListLoading = false;
+        state.getAcademyListError = action.error;
       }),
 });
-export const { onTogglePdfModalState, onClearCurrentPdf } = notefolioSlice.actions;
+export const { onTogglePdfModalState, onClearCurrentPdf, onClearNotefolioList, onSelectCategory } =
+  notefolioSlice.actions;
 export default notefolioSlice.reducer;

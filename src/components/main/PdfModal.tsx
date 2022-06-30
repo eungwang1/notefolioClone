@@ -6,10 +6,8 @@ import { onTogglePdfModalState } from "../../slices/notefolioSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import Modal from "../common/modal/Modal";
 import PdfDocument from "./PdfDocument";
-interface IPdfModal {
-  src: string;
-}
-const PdfModal: React.FC<IPdfModal> = ({ src }) => {
+
+const PdfModal: React.FC = () => {
   const { currentNotefolio } = useAppSelector((state) => state.notefolioSlice);
   const [numPages, setNumPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
