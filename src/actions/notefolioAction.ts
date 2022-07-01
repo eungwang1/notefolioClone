@@ -3,7 +3,7 @@ import axios from "axios";
 import { getNotefolioListParams } from "../customTypes/params";
 
 const api =
-  process.env.NODE_ENV === "production"
+  process.env.NODE_ENV === "development"
     ? "http://localhost:4000"
     : "https://my-cool-project-eungwang.herokuapp.com";
 export const getNotefolioList = createAsyncThunk(
