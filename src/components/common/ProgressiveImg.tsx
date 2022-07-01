@@ -23,7 +23,7 @@ const ProgressiveImg: React.FC<IProgressiveImgProps> = ({ ...props }) => {
   return (
     <ProgressiveImgContainer {...props} className="progressiveImage-block">
       <img
-        src={imgSrc}
+        src={src}
         alt={props.alt}
         width={props.width}
         height={props.height}
@@ -39,12 +39,12 @@ const ProgressiveImgContainer = styled.div<IProgressiveImgProps>`
   .progressiveImage {
     border-radius: ${(props) => props.borderRadius};
   }
-  .loading {
+  /* .loading {
     filter: blur(10px);
     clip-path: inset(0);
   }
   .loaded {
     filter: blur(0px);
     transition: filter 0.5s linear;
-  }
+  } */
 `;

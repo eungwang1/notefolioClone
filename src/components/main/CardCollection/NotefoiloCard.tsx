@@ -7,6 +7,7 @@ import { onTogglePdfModalState } from "../../../slices/notefolioSlice";
 import { useAppDispatch } from "../../../store/hook";
 import { hoverStyle01, hoverStyle04, media } from "../../../styles/theme";
 import ProgressiveImg from "../../common/ProgressiveImg";
+
 interface NotefoiloCardProps {
   item: INotefolio;
   idx: number;
@@ -21,7 +22,7 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
   return (
     <NotefoiloCardContainer onClick={() => onOpenModal(item.id)}>
       <div className="notefolio-work-item-block image-hover">
-        <ProgressiveImg
+        {/* <ProgressiveImg
           className="notefolio-work-item-thumbnail"
           src={item.contentimg}
           alt="work"
@@ -29,7 +30,8 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
           height="auto"
           placeholderSrc="/images/placeholderImg.png"
           borderRadius="5px"
-        />
+        /> */}
+        <img src={item.contentimg} alt="work" width="100%" height="auto" style={{ borderRadius: "5px" }} />
         <div className="notefolio-work-item-hover-background"></div>
         <div className="notefolio-npbadge">
           <img width="35" height="auto" src={npbadgeIcon} alt="bedge" />
@@ -53,6 +55,7 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
             borderRadius="50%"
             placeholderSrc="/images/placeholderImg.png"
           />
+
           <span className="notefolio-user-profile-username">{item.username}</span>
         </div>
         <div className="notefolio-work-info-group">
