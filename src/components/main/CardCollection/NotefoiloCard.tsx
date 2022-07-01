@@ -125,7 +125,7 @@ const NotefoiloCardContainer = styled.div`
     width: 100%;
     position: absolute;
     height: 25%;
-    bottom: 5px;
+    bottom: 0;
     border-radius: 5px;
     opacity: 0;
     background: linear-gradient(to bottom, transparent 0%, ${(props) => props.theme.palette.DarkGray01} 120%);

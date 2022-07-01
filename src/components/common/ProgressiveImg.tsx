@@ -13,13 +13,13 @@ const ProgressiveImg: React.FC<IProgressiveImgProps> = ({ ...props }) => {
   const { placeholderSrc = "/images/placeholderImg.png", src } = props;
   const [imgSrc, setImgSrc] = useState(placeholderSrc || src);
   const loadingClassName = placeholderSrc && imgSrc === placeholderSrc ? "loading" : "loaded";
-  useEffect(() => {
-    const img = new Image();
-    img.src = src;
-    img.onload = () => {
-      setImgSrc(src);
-    };
-  }, [src]);
+  // useEffect(() => {
+  //   const img = new Image();
+  //   img.src = src;
+  //   img.onload = () => {
+  //     setImgSrc(src);
+  //   };
+  // }, [src]);
   return (
     <ProgressiveImgContainer {...props} className="progressiveImage-block">
       <img

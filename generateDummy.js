@@ -1,6 +1,6 @@
 let jsonFile = require("jsonfile");
 let faker = require("@faker-js/faker").faker;
-const notefolioLength = 50;
+const notefolioLength = 500;
 const creatorListLength = 10;
 const recruitListLength = 3;
 const academyListLength = 10;

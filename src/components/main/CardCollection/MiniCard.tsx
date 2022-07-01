@@ -57,6 +57,11 @@ const MiniCardContainer = styled.div`
     cursor: pointer;
     ${hoverStyle01}
   }
+  .minicard-img-wrapper {
+    width: 48px;
+    height: 48px;
+    background-color: #f1f1f1;
+  }
   .minicard-img-wrapper,
   .minicard-img-wrapper-right {
     display: flex;
