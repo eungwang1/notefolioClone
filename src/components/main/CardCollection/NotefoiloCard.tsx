@@ -22,16 +22,14 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
   return (
     <NotefoiloCardContainer onClick={() => onOpenModal(item.id)}>
       <div className="notefolio-work-item-block image-hover">
-        {/* <ProgressiveImg
+        <img
+          loading="lazy"
           className="notefolio-work-item-thumbnail"
           src={item.contentimg}
           alt="work"
           width="100%"
           height="auto"
-          placeholderSrc="/images/placeholderImg.png"
-          borderRadius="5px"
-        /> */}
-        <img src={item.contentimg} alt="work" width="100%" height="auto" style={{ borderRadius: "5px" }} />
+        />
         <div className="notefolio-work-item-hover-background"></div>
         <div className="notefolio-npbadge">
           <img width="35" height="auto" src={npbadgeIcon} alt="bedge" />
@@ -159,6 +157,8 @@ const NotefoiloCardContainer = styled.div`
   }
   .notefolio-work-item-block {
     width: 100%;
+    aspect-ratio: 1/ 1;
+    background-color: #f1f1f1;
     overflow: hidden;
   }
   .notefolio-work-item-thumbnail {
@@ -223,5 +223,8 @@ const NotefoiloCardContainer = styled.div`
     position: absolute;
     top: -100px;
     right: 5%;
+  }
+  .notefolio-work-item-thumbnail {
+    border-radius: 5px;
   }
 `;
