@@ -51,7 +51,17 @@ const Modal: React.FC<ModalProps> = ({
           </div>
 
           <div className="modal-header-center">
+            <button className="modal-mobile-prev-btn" onClick={goPrevPage} disabled={currentPage === 1}>
+              <span className="material-symbols-outlined">arrow_circle_left</span>
+            </button>
             <span className="modal-title">{title}</span>
+            <button
+              className="modal-mobile-next-btn"
+              onClick={goNextPage}
+              disabled={currentPage === totalPage}
+            >
+              <span className="material-symbols-outlined">arrow_circle_right</span>
+            </button>
           </div>
 
           <div className="modal-header-right">
@@ -145,6 +155,11 @@ const ModalContainer = styled.div<ModalContainerCss>`
   .modal-prev-btn {
     left: -10%;
   }
+
+  .modal-mobile-prev-btn,
+  .modal-mobile-next-btn {
+    display: none;
+  }
   .modal-header-container {
     display: flex;
     flex-direction: row;
@@ -168,6 +183,10 @@ const ModalContainer = styled.div<ModalContainerCss>`
   }
   .modal-header-center {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
   }
   .modal-header-right {
     display: flex;
@@ -193,6 +212,28 @@ const ModalContainer = styled.div<ModalContainerCss>`
     .modal-container,
     .modal-wrapper {
       width: 100%;
+    }
+    .modal-mobile-prev-btn,
+    .modal-mobile-next-btn {
+      display: block;
+      span {
+        color: ${(props) => props.theme.palette.Gray04};
+        :hover {
+          ${hoverStyle01}
+        }
+      }
+      :disabled {
+        span {
+          color: ${(props) => props.theme.palette.Gray01};
+        }
+        span:hover {
+          color: ${(props) => props.theme.palette.Gray01};
+        }
+      }
+    }
+    .modal-next-btn,
+    .modal-prev-btn {
+      display: none;
     }
   }
 `;
