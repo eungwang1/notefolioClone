@@ -8,8 +8,10 @@ import Category from "../components/main/Category";
 import Notefolio from "../components/main/Notefolio";
 import PdfModal from "../components/main/PdfModal";
 import SearchResult from "../components/search/SearchResult";
+import { useAppSelector } from "../store/hook";
 
 const Search = () => {
+  const pdfModalState = useAppSelector((state) => state.notefolioSlice.pdfModalState);
   return (
     <AppLayout>
       <SearchContainer>
@@ -21,7 +23,7 @@ const Search = () => {
         </div>
         <Category />
         <Notefolio />
-        <PdfModal />
+        {pdfModalState && <PdfModal />}
       </SearchContainer>
     </AppLayout>
   );

@@ -47,13 +47,13 @@ const PdfModal: React.FC = () => {
   }, [isMobile, isMobileSmall]);
   const modalProps = {
     modalState: pdfModalState,
-    onClose: onClose,
-    goNextPage: goNextPage,
-    goPrevPage: goPrevPage,
+    onClose,
+    goNextPage,
+    goPrevPage,
     currentPage: pageNumber,
     totalPage: numPages,
-    onScaleUp: onScaleUp,
-    onScaleDown: onScaleDown,
+    onScaleUp,
+    onScaleDown,
     width: resposivePdfWidth * scale,
     modalNav: true,
     title: "테스트PDF",
@@ -65,16 +65,16 @@ const PdfModal: React.FC = () => {
     isMobileSmall,
     pageNumber,
     scale,
+    numPages,
     setNumPages,
+    setPageNumber,
   };
   return (
     <PdfModalContainer>
       <AnimatePresence>
-        {pdfModalState && (
-          <Modal {...modalProps}>
-            <PdfDocument {...pdfDocumentProps} />
-          </Modal>
-        )}
+        <Modal {...modalProps}>
+          <PdfDocument {...pdfDocumentProps} />
+        </Modal>
       </AnimatePresence>
     </PdfModalContainer>
   );
@@ -82,4 +82,6 @@ const PdfModal: React.FC = () => {
 
 export default PdfModal;
 
-const PdfModalContainer = styled.div``;
+const PdfModalContainer = styled.div`
+  width: 100%;
+`;

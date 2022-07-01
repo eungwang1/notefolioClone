@@ -30,6 +30,7 @@ export const initialState: INotefolioSlice = {
   selectedCategory: "",
   currentNotefolio: null,
   pdfModalState: false,
+  pdfMobilePage: 1,
   getNotefolioListLoading: false,
   getNotefolioListError: null,
   getNotefolioLoading: false,
@@ -62,6 +63,9 @@ export const notefolioSlice = createSlice({
     },
     onSelectCategory: (state: INotefolioSlice, action: PayloadAction<string>) => {
       state.selectedCategory = action.payload;
+    },
+    onChangePdfPageNumber: (state: INotefolioSlice, action: PayloadAction<number>) => {
+      state.pdfMobilePage = action.payload;
     },
   },
   extraReducers: (builder) =>
@@ -125,6 +129,11 @@ export const notefolioSlice = createSlice({
         state.getAcademyListError = action.error;
       }),
 });
-export const { onTogglePdfModalState, onClearCurrentPdf, onClearNotefolioList, onSelectCategory } =
-  notefolioSlice.actions;
+export const {
+  onChangePdfPageNumber,
+  onTogglePdfModalState,
+  onClearCurrentPdf,
+  onClearNotefolioList,
+  onSelectCategory,
+} = notefolioSlice.actions;
 export default notefolioSlice.reducer;

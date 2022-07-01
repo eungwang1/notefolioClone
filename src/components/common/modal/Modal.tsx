@@ -51,17 +51,7 @@ const Modal: React.FC<ModalProps> = ({
           </div>
 
           <div className="modal-header-center">
-            <button className="modal-mobile-prev-btn" onClick={goPrevPage} disabled={currentPage === 1}>
-              <span className="material-symbols-outlined">arrow_circle_left</span>
-            </button>
             <span className="modal-title">{title}</span>
-            <button
-              className="modal-mobile-next-btn"
-              onClick={goNextPage}
-              disabled={currentPage === totalPage}
-            >
-              <span className="material-symbols-outlined">arrow_circle_right</span>
-            </button>
           </div>
 
           <div className="modal-header-right">
@@ -213,6 +203,9 @@ const ModalContainer = styled.div<ModalContainerCss>`
     .modal-wrapper {
       width: 100%;
     }
+    .modal-header-zoom-wrapper {
+      display: none;
+    }
     .modal-mobile-prev-btn,
     .modal-mobile-next-btn {
       display: block;
@@ -234,6 +227,13 @@ const ModalContainer = styled.div<ModalContainerCss>`
     .modal-next-btn,
     .modal-prev-btn {
       display: none;
+    }
+    .modal-header-right,
+    .modal-header-left {
+      flex: 1;
+    }
+    .modal-header-center {
+      flex: 5;
     }
   }
 `;
