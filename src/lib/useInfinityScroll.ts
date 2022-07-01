@@ -1,5 +1,5 @@
 import { useAppDispatch } from "./../store/hook";
-import React, { MutableRefObject, useCallback, useEffect, useState } from "react";
+import React, { MutableRefObject, useCallback, useEffect, useRef, useState } from "react";
 import { throttle } from "lodash";
 import { onClearNotefolioList } from "../slices/notefolioSlice";
 interface useInfinityScrollProps {
@@ -20,8 +20,16 @@ const useInfinityScroll = ({
   category,
   rootMargin = "0px 0px",
 }: useInfinityScrollProps) => {
+  function usePreviousValue(value: number) {
+    const ref = useRef<number>();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
   const [page, setPage] = useState<number>(0);
   const [count, setCount] = useState<number>(1);
+  const previousPage = usePreviousValue(page);
   const dispatch = useAppDispatch();
   const onIntersect: IntersectionObserverCallback = useCallback(
     async ([entry], observer) => {
@@ -31,7 +39,7 @@ const useInfinityScroll = ({
       if (entry.isIntersecting && target.current) {
         setCount(() => targetArray.length);
         setPage((prev) => prev + 1);
-        observer.unobserve(target.current as HTMLDivElement);
+        observer.disconnect();
         fetchAction({ search: searchValue, page, category });
         observer.observe(target.current as HTMLDivElement);
       }
@@ -49,10 +57,12 @@ const useInfinityScroll = ({
   }, [page, rootMargin, target, threshold, throttledOnIntersect]);
 
   useEffect(() => {
-    setPage((prev) => 0);
-    dispatch(onClearNotefolioList());
-    fetchAction({ search: searchValue, page, category });
-  }, [category, searchValue]);
+    if (category || searchValue) {
+      setPage((prev) => 0);
+      dispatch(onClearNotefolioList());
+      fetchAction({ search: searchValue, page, category });
+    }
+  }, [category]);
 
   return { page };
 };
