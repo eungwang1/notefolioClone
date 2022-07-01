@@ -54,7 +54,7 @@ const useInfinityScroll = ({
       observer.observe(target.current);
     }
     return () => observer.disconnect();
-  }, [page, rootMargin, target, threshold, throttledOnIntersect]);
+  }, [throttledOnIntersect]);
 
   useEffect(() => {
     if (category || searchValue) {

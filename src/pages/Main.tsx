@@ -7,7 +7,9 @@ import Hotcontent from "../components/main/Hotcontent";
 import Notefolio from "../components/main/Notefolio";
 import styled from "styled-components";
 import PdfModal from "../components/main/PdfModal";
+import { useAppSelector } from "../store/hook";
 const Main = () => {
+  const pdfModalState = useAppSelector((state) => state.notefolioSlice.pdfModalState);
   return (
     <AppLayout>
       <MainContainer>
@@ -16,7 +18,7 @@ const Main = () => {
         <Hotcontent />
         <Category />
         <Notefolio />
-        <PdfModal />
+        {pdfModalState && <PdfModal />}
       </MainContainer>
     </AppLayout>
   );
