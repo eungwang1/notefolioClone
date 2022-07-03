@@ -4,8 +4,10 @@ import { createSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 interface ISearch {
   size?: "middle" | "large";
+  className?: string;
+  onAfterSearch?: () => void;
 }
-const SearchInput: React.FC<ISearch> = ({ size = "middle" }) => {
+const SearchInput: React.FC<ISearch> = ({ size = "middle", className, onAfterSearch }) => {
   const [value, setValue] = useState("");
   const navigate = useNavigate();
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,10 +21,11 @@ const SearchInput: React.FC<ISearch> = ({ size = "middle" }) => {
           search: value,
         }).toString(),
       });
+      onAfterSearch && onAfterSearch();
     }
   };
   return (
-    <SearchCotainer size={size} className="search-input-container">
+    <SearchCotainer size={size} className={className}>
       <input
         className="search-input-input"
         placeholder="크리에이티브 검색"

@@ -1,11 +1,11 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { npbadgeIcon } from "../../../assets";
 import { INotefolio } from "../../../customTypes/notefolio";
 import useNotefolio from "../../../lib/useNotefolio";
 import { onTogglePdfModalState } from "../../../slices/notefolioSlice";
 import { useAppDispatch } from "../../../store/hook";
-import { hoverStyle01, hoverStyle04, media } from "../../../styles/theme";
+import { hoverStyle01, media, scalingKeyframes } from "../../../styles/theme";
 
 interface NotefoiloCardProps {
   item: INotefolio;
@@ -18,9 +18,32 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
     dispatch(onTogglePdfModalState(true));
     onLoadNotefolio(id);
   };
+  const onItemClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const node = e.target as Element;
+    if (node.className.includes("heart")) {
+      if (node.className.includes("active")) {
+        node.className = "material-symbols-outlined heart";
+      } else {
+        node.className += "-active";
+      }
+      return;
+    }
+    if (node.className.includes("folder")) {
+      if (node.className.includes("active")) {
+        node.className = "material-symbols-outlined folder";
+        alert("저장이 취소되었습니다.");
+      } else {
+        node.className += "-active";
+        alert("저장되었습니다.");
+      }
+      return;
+    } else {
+      onOpenModal(item.id);
+    }
+  };
   return (
-    <NotefoiloCardContainer onClick={() => onOpenModal(item.id)}>
-      <div className="notefolio-work-item-block image-hover">
+    <NotefoiloCardContainer>
+      <div className="notefolio-work-item-block image-hover" onClick={() => onOpenModal(item.id)}>
         <img
           className="notefolio-work-item-thumbnail"
           src={item.contentimg}
@@ -33,14 +56,16 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
         <div className="notefolio-npbadge">
           <img width="35" height="auto" src={npbadgeIcon} alt="bedge" />
         </div>
-        <div className="notefolio-work-item-hover-content">
-          <div className="notefolio-work-item-hover-title">{item.title}</div>
-          <div className="notefolio-work-item-hover-icon">
-            <span className="material-symbols-outlined heart">favorite</span>
-            <span className="material-symbols-outlined folder">create_new_folder</span>
-          </div>
+      </div>
+
+      <div className="notefolio-work-item-hover-content" onClick={onItemClick}>
+        <div className="notefolio-work-item-hover-title">{item.title}</div>
+        <div className="notefolio-work-item-hover-icon">
+          <span className="material-symbols-outlined heart">favorite</span>
+          <span className="material-symbols-outlined folder">create_new_folder</span>
         </div>
       </div>
+
       <div className="notefolio-user-info-container">
         <div className="notefolio-user-profile-group">
           <div className="notefolio-user-profile-img-wrapper">
@@ -70,7 +95,25 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
 };
 
 export default NotefoiloCard;
+
 const NotefoiloCardContainer = styled.div`
+  overflow: hidden;
+  ${scalingKeyframes(1.2)};
+  :hover {
+    .notefolio-work-item-hover-content {
+      transition: transform, opacity 0.3s ease-out;
+      transform: translateY(-80px);
+      opacity: 1;
+    }
+    .notefolio-npbadge {
+      transition: transform 0.3s ease-out;
+      transform: translateY(100px);
+    }
+    .notefolio-work-item-hover-background {
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+  }
   display: flex;
   flex-direction: column;
   position: relative;
@@ -95,10 +138,6 @@ const NotefoiloCardContainer = styled.div`
   .image-hover {
     position: relative;
     :hover {
-      .notefolio-work-item-hover-content {
-        transition: transform 0.3s ease-out;
-        transform: translateY(-50px);
-      }
       .notefolio-npbadge {
         transition: transform 0.3s ease-out;
         transform: translateY(100px);
@@ -118,6 +157,15 @@ const NotefoiloCardContainer = styled.div`
     font-weight: 600;
     padding: 10px 0px;
     width: 100%;
+    bottom: -50px;
+    opacity: 0;
+    .heart-active {
+      color: red;
+      animation: scaling 0.5s;
+    }
+    .folder-active {
+      color: ${(props) => props.theme.palette.Mint01};
+    }
   }
   .notefolio-work-item-hover-background {
     width: 100%;
@@ -137,18 +185,13 @@ const NotefoiloCardContainer = styled.div`
     padding: 0 10px;
     width: 70%;
   }
+
   .notefolio-work-item-hover-icon {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 5px;
-    .heart:hover {
-      ${hoverStyle04}
-    }
-    .folder:hover {
-      ${hoverStyle01}
-    }
     span {
       font-size: 24px;
     }
@@ -230,5 +273,20 @@ const NotefoiloCardContainer = styled.div`
   }
   .notefolio-work-item-thumbnail {
     border-radius: 5px;
+  }
+  ${media.tb} {
+    .notefolio-work-item-hover-content {
+      transition: transform 0.3s ease-out;
+      transform: translateY(-80px);
+      opacity: 1;
+    }
+    .notefolio-npbadge {
+      transition: transform 0.3s ease-out;
+      transform: translateY(100px);
+    }
+    .notefolio-work-item-hover-background {
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
   }
 `;

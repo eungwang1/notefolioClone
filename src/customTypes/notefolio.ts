@@ -36,6 +36,7 @@ export interface ICategory {
 }
 export interface INotefolioSlice {
   pdfModalState: boolean;
+  searchModalState: boolean;
   pdfMobilePage: number;
   currentNotefolio: INotefolio | null;
   notefolioList: INotefolio[];

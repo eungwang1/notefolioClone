@@ -1,14 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import { onToggleSearchModalState } from "../../../slices/notefolioSlice";
+import { useAppDispatch } from "../../../store/hook";
 import { media } from "../../../styles/theme";
 
 const FooterMobile: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const onOpenModal = () => {
+    dispatch(onToggleSearchModalState(true));
+  };
   return (
     <FooterMobileContainer>
       <div className="footer-mobile-wrapper">
         <span className="material-symbols-outlined">grid_view</span>
         <span className="material-symbols-outlined">notifications</span>
-        <span className="material-symbols-outlined">search</span>
+        <span className="material-symbols-outlined" onClick={onOpenModal}>
+          search
+        </span>
         <span className="material-symbols-outlined">account_circle</span>
         <span className="material-symbols-outlined">menu</span>
       </div>

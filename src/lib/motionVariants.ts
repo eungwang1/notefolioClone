@@ -45,7 +45,7 @@ export const verticalVariants = (startY: number, endY: number) => {
       transition: { duration: 0.3 },
     },
     animate: {
-      transform: `translateX(0px)`,
+      transform: `translateY(0px)`,
       opacity: 1,
       transition: { duration: 0.3 },
     },

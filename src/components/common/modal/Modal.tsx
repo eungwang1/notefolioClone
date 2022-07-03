@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
-import { opacityVariants } from "../../../lib/motionVariants";
+import { opacityVariants, verticalVariants } from "../../../lib/motionVariants";
 import { useMedia } from "../../../lib/useMediaQuery";
 import { hoverStyle01, media } from "../../../styles/theme";
 import ModalSideNav from "./ModalSideNav";
@@ -10,6 +10,7 @@ interface ModalProps {
   modalState?: boolean;
   totalPage?: number;
   currentPage?: number;
+  className?: string;
   width?: number;
   title?: string;
   modalNav?: boolean;
@@ -18,11 +19,14 @@ interface ModalProps {
   onScaleUp?: () => void;
   onScaleDown?: () => void;
   goPrevPage?: () => void;
+  animation?: "vertical" | "opacity";
   src?: string;
+  heartCount?: number;
 }
 const Modal: React.FC<ModalProps> = ({
   children,
   onScaleUp,
+  className,
   onScaleDown,
   onClose,
   goNextPage,
@@ -33,52 +37,73 @@ const Modal: React.FC<ModalProps> = ({
   width,
   modalNav = false,
   src,
+  heartCount,
+  modalState = true,
+  animation = "opacity",
 }) => {
   const { isMobile } = useMedia();
+  const variants = useMemo(() => {
+    if (animation === "opacity") {
+      return opacityVariants(0.5);
+    }
+    if (animation === "vertical") {
+      return verticalVariants(300, 300);
+    }
+    return opacityVariants(0.5);
+  }, [animation]);
+
   return (
-    <ModalContainer width={width}>
-      <div className="modal-dimmed" onClick={onClose}></div>
-      <motion.div
-        className="modal-container"
-        key="modal"
-        variants={opacityVariants(0.5)}
-        initial="initial"
-        animate="animate"
-        exit="leaving"
-      >
-        <div className="modal-header-container">
-          <div className="modal-header-left">
-            {!isMobile && <div className="modal-page-wrapper">{`${currentPage} / ${totalPage}`}</div>}
-          </div>
+    <>
+      {modalState && (
+        <ModalContainer width={width} className={className}>
+          <div className="modal-dimmed" onClick={onClose}></div>
+          <motion.div
+            className="modal-container"
+            key="modal"
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="leaving"
+          >
+            <div className="modal-header-container">
+              <div className="modal-header-left">
+                {!isMobile && currentPage && (
+                  <div className="modal-page-wrapper">{`${currentPage} / ${totalPage}`}</div>
+                )}
+              </div>
 
-          <div className="modal-header-center">
-            <span className="modal-title">{title}</span>
-          </div>
+              <div className="modal-header-center">
+                <span className="modal-title">{title}</span>
+              </div>
 
-          <div className="modal-header-right">
-            <div className="modal-header-zoom-wrapper">
-              <span className="material-symbols-outlined zoomin" onClick={onScaleUp}>
-                zoom_in
-              </span>
-              <span className="material-symbols-outlined zoomout" onClick={onScaleDown}>
-                zoom_out
-              </span>
+              <div className="modal-header-right">
+                {onScaleUp && (
+                  <div className="modal-header-zoom-wrapper">
+                    <span className="material-symbols-outlined zoomin" onClick={onScaleUp}>
+                      zoom_in
+                    </span>
+                    <span className="material-symbols-outlined zoomout" onClick={onScaleDown}>
+                      zoom_out
+                    </span>
+                  </div>
+                )}
+                <div className="modal-close-btn" onClick={onClose}>
+                  <span className="material-symbols-outlined">cancel</span>
+                </div>
+              </div>
             </div>
-            <div className="modal-close-btn" onClick={onClose}>
-              <span className="material-symbols-outlined">cancel</span>
-            </div>
-          </div>
-        </div>
-        <div className="modal-wrapper">{children}</div>
-        <button className="modal-next-btn" onClick={goNextPage} disabled={currentPage === totalPage}>
-          <span className="material-symbols-outlined">arrow_circle_right</span>
-        </button>
-        <button className="modal-prev-btn" onClick={goPrevPage} disabled={currentPage === 1}>
-          <span className="material-symbols-outlined">arrow_circle_left</span>
-        </button>
-        {modalNav && <ModalSideNav downloadLink={src} />}
-      </motion.div>
-    </ModalContainer>
+            <div className="modal-wrapper">{children}</div>
+            <button className="modal-next-btn" onClick={goNextPage} disabled={currentPage === totalPage}>
+              <span className="material-symbols-outlined">arrow_circle_right</span>
+            </button>
+            <button className="modal-prev-btn" onClick={goPrevPage} disabled={currentPage === 1}>
+              <span className="material-symbols-outlined">arrow_circle_left</span>
+            </button>
+            {modalNav && <ModalSideNav downloadLink={src} heartCount={heartCount} />}
+          </motion.div>
+        </ModalContainer>
+      )}
+    </>
   );
 };
 

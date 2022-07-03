@@ -8,6 +8,19 @@ interface CreatorCardProps {
   category?: string;
 }
 const CreatorCard: React.FC<CreatorCardProps> = ({ coverImage, profileImage, username, category }) => {
+  const onFollow = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const node = e.target as Element;
+    if (node.className === "card-follow-btn") {
+      alert("팔로우 하였습니다.");
+      node.className += " active";
+      node.innerHTML = "팔로잉";
+      console.log(node);
+    } else {
+      alert("팔로우를 취소하였습니다.");
+      node.className = "card-follow-btn";
+      node.innerHTML = "팔로우";
+    }
+  };
   return (
     <CreatorCardContainer>
       <div className="card-covers">
@@ -30,7 +43,9 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ coverImage, profileImage, use
       <div className="card-user-info">
         <div className="card-user-name">{username}</div>
         <div className="card-user-category">{category}</div>
-        <div className="card-follow-btn">팔로우</div>
+        <div className="card-follow-btn" onClick={onFollow}>
+          팔로우
+        </div>
       </div>
     </CreatorCardContainer>
   );
@@ -140,5 +155,9 @@ const CreatorCardContainer = styled.div`
     line-height: 16px;
     color: ${(props) => props.theme.palette.DarkGray01};
     ${hoverStyle01}
+  }
+  .card-follow-btn.active {
+    color: ${(props) => props.theme.palette.Mint01};
+    border-color: ${(props) => props.theme.palette.Mint01};
   }
 `;

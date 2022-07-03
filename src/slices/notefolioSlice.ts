@@ -31,6 +31,7 @@ export const initialState: INotefolioSlice = {
   currentNotefolio: null,
   pdfModalState: false,
   pdfMobilePage: 1,
+  searchModalState: false,
   getNotefolioListLoading: false,
   getNotefolioListError: null,
   getNotefolioLoading: false,
@@ -52,7 +53,15 @@ export const notefolioSlice = createSlice({
       if (action.payload) {
         document.body.style.overflow = "hidden";
       } else {
-        document.body.style.overflow = "unset";
+        document.body.style.overflowY = "unset";
+      }
+    },
+    onToggleSearchModalState: (state: INotefolioSlice, action: PayloadAction<boolean>) => {
+      state.searchModalState = action.payload;
+      if (action.payload) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflowY = "unset";
       }
     },
     onClearCurrentPdf: (state: INotefolioSlice) => {
@@ -132,6 +141,7 @@ export const notefolioSlice = createSlice({
 export const {
   onChangePdfPageNumber,
   onTogglePdfModalState,
+  onToggleSearchModalState,
   onClearCurrentPdf,
   onClearNotefolioList,
   onSelectCategory,

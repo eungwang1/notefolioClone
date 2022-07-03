@@ -1,4 +1,4 @@
-import { css, DefaultTheme } from "styled-components";
+import { css, DefaultTheme, keyframes } from "styled-components";
 const palette = {
   Black01: "#161c1c",
   DarkGray01: "#2c3030",
@@ -60,5 +60,19 @@ export const hoverStyle04 = css`
     color: red;
   }
 `;
+
+export const scalingKeyframes = (sacale: number) => {
+  return keyframes`
+     0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(scale);
+    }
+    0% {
+      transform: scale(1);
+    }
+  `;
+};
 
 export default theme;
