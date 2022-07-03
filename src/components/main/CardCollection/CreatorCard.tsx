@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { hoverStyle01 } from "../../../styles/theme";
-import ProgressiveImg from "../../common/ProgressiveImg";
 interface CreatorCardProps {
   coverImage?: string[];
   profileImage?: string;
@@ -14,18 +13,18 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ coverImage, profileImage, use
       <div className="card-covers">
         <div className="card-cover">
           {coverImage && coverImage.length >= 2 && (
-            <ProgressiveImg src={coverImage[0]} alt="card" width="100%" height="auto" />
+            <img src={coverImage[0]} alt="card" width="100%" height="auto" />
           )}
         </div>
         <div className="card-cover">
           {coverImage && coverImage.length >= 2 && (
-            <ProgressiveImg src={coverImage[1]} alt="card" width="100%" height="auto" />
+            <img src={coverImage[1]} alt="card" width="100%" height="auto" />
           )}
         </div>
       </div>
       <div className="card-profile">
         <div className="card-point-cursor">
-          <ProgressiveImg src={profileImage as string} alt="profileImage" width="100%" height="auto" />
+          <img src={profileImage as string} alt="profileImage" width="100%" height="auto" />
         </div>
       </div>
       <div className="card-user-info">
@@ -79,6 +78,7 @@ const CreatorCardContainer = styled.div`
     width: 64px;
     height: 64px;
     top: -40px;
+    background-color: #f1f1f1;
     border: solid 3px white;
     position: relative;
     border-radius: 50%;

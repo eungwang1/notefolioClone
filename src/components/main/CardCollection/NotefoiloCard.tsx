@@ -6,7 +6,6 @@ import useNotefolio from "../../../lib/useNotefolio";
 import { onTogglePdfModalState } from "../../../slices/notefolioSlice";
 import { useAppDispatch } from "../../../store/hook";
 import { hoverStyle01, hoverStyle04, media } from "../../../styles/theme";
-import ProgressiveImg from "../../common/ProgressiveImg";
 
 interface NotefoiloCardProps {
   item: INotefolio;
@@ -23,10 +22,10 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
     <NotefoiloCardContainer onClick={() => onOpenModal(item.id)}>
       <div className="notefolio-work-item-block image-hover">
         <img
-          loading="lazy"
           className="notefolio-work-item-thumbnail"
           src={item.contentimg}
           alt="work"
+          placeholder="./images/banner.png"
           width="100%"
           height="auto"
         />
@@ -44,16 +43,15 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
       </div>
       <div className="notefolio-user-info-container">
         <div className="notefolio-user-profile-group">
-          <ProgressiveImg
-            className="notefolio-user-profile-img"
-            src={item.profile}
-            alt="profile"
-            width={24}
-            height={24}
-            borderRadius="50%"
-            placeholderSrc="/images/placeholderImg.png"
-          />
-
+          <div className="notefolio-user-profile-img-wrapper">
+            <img
+              className="notefolio-user-profile-img"
+              src={item.profile}
+              alt="profile"
+              width="100%"
+              height="auto"
+            />
+          </div>
           <span className="notefolio-user-profile-username">{item.username}</span>
         </div>
         <div className="notefolio-work-info-group">
@@ -181,6 +179,12 @@ const NotefoiloCardContainer = styled.div`
     cursor: pointer;
   }
   .notefolio-user-profile-img {
+    border-radius: 50%;
+  }
+  .notefolio-user-profile-img-wrapper {
+    background-color: #f1f1f1;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
   }
   .notefolio-user-profile-username {

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { speakerIcon } from "../../../assets";
 import { hoverStyle01 } from "../../../styles/theme";
-import ProgressiveImg from "../../common/ProgressiveImg";
 interface MiniCardProps {
   image?: string;
   title?: string;
@@ -14,22 +13,14 @@ const MiniCard: React.FC<MiniCardProps> = ({ image, title, name, type = "normal"
     <MiniCardContainer>
       <div className={`minicard-item ${type}`}>
         <div className={`minicard-img-wrapper ${type}`}>
-          <ProgressiveImg
-            className={`minicard-img`}
-            src={image as string}
-            alt="logo"
-            width={48}
-            height={48}
-            borderRadius="5px"
-            placeholderSrc="/images/placeholderImg"
-          />
+          <img className="minicard-img" src={image as string} alt="logo" width="100%" height="auto" />
         </div>
         <div className="minicard-info-wrap">
           <div className={`minicard-info-title ${type}`}>{title}</div>
           <div className="minicard-info-name">{name}</div>
         </div>
         <div className={`minicard-img-wrapper-right ${type}`}>
-          <img className={`minicard-img`} src={speakerIcon} alt="logo" width={48} height={48} />
+          <img className="minicard-img" src={speakerIcon} alt="logo" width={48} height={48} />
         </div>
       </div>
     </MiniCardContainer>
@@ -42,6 +33,7 @@ const MiniCardContainer = styled.div`
   display: flex;
   width: 90%;
   flex-direction: column;
+
   justify-content: center;
   border-radius: 6px;
   margin-bottom: 12px;
@@ -58,8 +50,9 @@ const MiniCardContainer = styled.div`
     ${hoverStyle01}
   }
   .minicard-img-wrapper {
-    width: 48px;
-    height: 48px;
+    max-width: 48px;
+    height: auto;
+    border-radius: 4px;
     background-color: #f1f1f1;
   }
   .minicard-img-wrapper,
@@ -68,7 +61,6 @@ const MiniCardContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    padding: 8px 0px;
   }
   .minicard-img {
     object-fit: cover;

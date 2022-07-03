@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { IAcademy } from "../../../customTypes/notefolio";
-import ProgressiveImg from "../../common/ProgressiveImg";
 interface AcademyCardProps {
   item: IAcademy;
 }
@@ -9,7 +8,7 @@ const AcademyCard: React.FC<AcademyCardProps> = ({ item }) => {
   return (
     <AcademyCardContainer>
       <div className="academycard-image-block">
-        <ProgressiveImg borderRadius="5px" width="100%" height="auto" src={item.image} alt={item.title} />
+        <img width="100%" height="auto" src={item.image} alt={item.title} />
       </div>
       <div className="academycard-info">
         <div className="academycard-info-title">{item.title}</div>
@@ -33,6 +32,11 @@ const AcademyCardContainer = styled.div`
   }
   .academycard-image-block {
     object-fit: cover;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    img {
+      border-radius: 5px;
+    }
   }
   .academycard-info-title {
     font-size: 18px;
