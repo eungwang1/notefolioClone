@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 import { opacityVariants } from "../../../lib/motionVariants";
+import { useMedia } from "../../../lib/useMediaQuery";
 import { hoverStyle01, media } from "../../../styles/theme";
 import ModalSideNav from "./ModalSideNav";
 interface ModalProps {
@@ -21,7 +22,6 @@ interface ModalProps {
 }
 const Modal: React.FC<ModalProps> = ({
   children,
-  modalState = false,
   onScaleUp,
   onScaleDown,
   onClose,
@@ -34,6 +34,7 @@ const Modal: React.FC<ModalProps> = ({
   modalNav = false,
   src,
 }) => {
+  const { isMobile } = useMedia();
   return (
     <ModalContainer width={width}>
       <div className="modal-dimmed" onClick={onClose}></div>
@@ -47,7 +48,7 @@ const Modal: React.FC<ModalProps> = ({
       >
         <div className="modal-header-container">
           <div className="modal-header-left">
-            <div className="modal-page-wrapper">{`${currentPage} / ${totalPage}`}</div>
+            {!isMobile && <div className="modal-page-wrapper">{`${currentPage} / ${totalPage}`}</div>}
           </div>
 
           <div className="modal-header-center">

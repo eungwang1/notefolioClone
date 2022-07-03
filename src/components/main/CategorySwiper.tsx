@@ -30,13 +30,19 @@ const CategorySwiper: React.FC = () => {
     if (button.innerText) {
       dispatch(onSelectCategory(button.innerText));
       if (button.name) {
-        navigate({
-          search: createSearchParams({ category: button.name, search: search ? search : "" }).toString(),
-        });
+        search
+          ? navigate({
+              search: createSearchParams({ category: button.name, search }).toString(),
+            })
+          : navigate({
+              search: createSearchParams({ category: button.name }).toString(),
+            });
       } else {
-        navigate({
-          search: createSearchParams({ search: search ? search : "" }).toString(),
-        });
+        search
+          ? navigate({
+              search: createSearchParams({ search }).toString(),
+            })
+          : navigate("");
       }
     }
   };

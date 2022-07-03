@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
-import React, { useMemo, useState } from "react";
+import { Navigation, Pagination } from "swiper";
+import React, { useMemo } from "react";
 import { Page, Document } from "react-pdf";
 import styled from "styled-components";
 import { opacityVariants } from "../../lib/motionVariants";
 import { responsivePdfWidth } from "../../lib/responsiveValueList";
-import { useAppDispatch, useAppSelector } from "../../store/hook";
+import { useAppSelector } from "../../store/hook";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { media } from "../../styles/theme";
 interface PdfDocumentProps {
@@ -28,7 +28,6 @@ const PdfDocument: React.FC<PdfDocumentProps> = ({
   scale,
   numPages,
 }) => {
-  const dispatch = useAppDispatch();
   const resposivePdfWidth = useMemo(() => {
     if (isMobileSmall) return responsivePdfWidth.ms;
     if (isMobile) return responsivePdfWidth.ml;
@@ -43,17 +42,13 @@ const PdfDocument: React.FC<PdfDocumentProps> = ({
   const PdfPage = () =>
     isMobile ? (
       <Swiper
-        slidesPerView={1}
-        slidesPerGroup={1}
-        modules={[Navigation]}
-        className="hotcontent-mySwiper"
-        // onSlideChange={(swiper) => {
-        //   dispatch(onChangePdfPageNumber(swiper.activeIndex));
-        // }}
+        pagination={{ type: "fraction" }}
+        modules={[Pagination, Navigation]}
+        className="pdfdocument-mySwiper"
       >
         {Array.from({ length: numPages }, (v, i) => i).map((el, idx) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={idx}>
               <Page
                 pageNumber={idx + 1}
                 scale={scale}
@@ -105,5 +100,17 @@ const PdfDocumentContainer = styled.div`
     .react-pdf__Page__canvas {
       width: 100% !important;
     }
+  }
+
+  .pdfdocument-mySwiper {
+    position: relative;
+  }
+  .swiper-pagination-fraction {
+    top: 15px;
+    margin-right: auto;
+    position: fixed;
+    height: 10px;
+    padding-left: 10px;
+    text-align: start;
   }
 `;

@@ -1,5 +1,5 @@
+import React, { MutableRefObject, useEffect, useRef } from "react";
 import { useAppDispatch } from "./../store/hook";
-import React, { MutableRefObject, useCallback, useEffect, useRef, useState } from "react";
 import { debounce, throttle } from "lodash";
 import { onClearNotefolioList } from "../slices/notefolioSlice";
 interface useInfinityScrollProps {
@@ -22,7 +22,6 @@ const useInfinityScroll = ({
 }: useInfinityScrollProps) => {
   const page = useRef(0);
   const count = useRef(0);
-  // const [count, setCount] = useState<number>(1);
   const dispatch = useAppDispatch();
   const onIntersect: IntersectionObserverCallback = async ([entry], observer) => {
     if (count.current === targetArray.length) {

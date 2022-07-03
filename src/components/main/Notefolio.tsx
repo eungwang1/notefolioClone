@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import styled from "styled-components";
 import useNotefolio from "../../lib/useNotefolio";
 import { useAppSelector } from "../../store/hook";
@@ -22,7 +22,7 @@ const Notefolio: React.FC = () => {
     target,
     targetArray: notefolioList,
     fetchAction: onLoadNotefolioList,
-    threshold: 0,
+    threshold: 0.5,
     rootMargin: "300px 0px",
     searchValue: searchValue as string,
     category: category as string,
