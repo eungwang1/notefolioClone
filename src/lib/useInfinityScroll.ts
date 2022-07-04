@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { MutableRefObject, useEffect, useRef } from "react";
 import { useAppDispatch } from "./../store/hook";
 import { debounce, throttle } from "lodash";
@@ -24,6 +25,7 @@ const useInfinityScroll = ({
 }: useInfinityScrollProps) => {
   const page = useRef(0);
   const count = useRef(0);
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const onIntersect: IntersectionObserverCallback = async ([entry], observer) => {
     if (count.current === targetArray.length) {
@@ -47,14 +49,8 @@ const useInfinityScroll = ({
     return () => observer.disconnect();
   }, [throttledOnIntersect]);
 
-  const onFirstLoadData = async () => {
-    dispatch(onClearNotefolioList());
-    await fetchAction({ search: searchValue, page: 0, category, sort });
-  };
-  const debouncedOnFirstLoadData = debounce(onFirstLoadData, 300);
   useEffect(() => {
     page.current = 0;
-    page.current === 0 && debouncedOnFirstLoadData();
   }, [category, searchValue, sort]);
 
   return { page };

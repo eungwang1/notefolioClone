@@ -7,12 +7,12 @@ import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { onSelectCategory } from "../../slices/notefolioSlice";
 import { useMedia } from "../../lib/useMediaQuery";
 import { responsiveCategorySwiperCount } from "../../lib/responsiveValueList";
-import useSetParams from "../../lib/useSetParams";
+import { useRouter } from "next/router";
 
 const CategorySwiper: React.FC = () => {
-  const { categories, selectedCategory } = useAppSelector((state) => state.notefolioSlice);
-  const useParamsUtil = useSetParams();
+  const { categories } = useAppSelector((state) => state.notefolioSlice);
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const { isMobile, isMobileSmall, isPcMiddle, isTablet } = useMedia();
   const swiperCount = useMemo(() => {
     if (isMobileSmall) return responsiveCategorySwiperCount.ms;
@@ -26,7 +26,13 @@ const CategorySwiper: React.FC = () => {
     const button: HTMLButtonElement = e.currentTarget;
     if (button.innerText) {
       dispatch(onSelectCategory(button.innerText));
-      useParamsUtil.setParam("category", button.name);
+      router.push({
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          category: button.name,
+        },
+      });
     }
   };
   return (
@@ -44,7 +50,7 @@ const CategorySwiper: React.FC = () => {
         {categories.map((category, idx) => (
           <SwiperSlide key={category.title}>
             <button
-              className={`category-swiper-name ${selectedCategory === category.title && "active"}`}
+              className={`category-swiper-name ${router.query.category === category.code && "active"}`}
               type="button"
               name={category.code}
               onClick={onSelect}

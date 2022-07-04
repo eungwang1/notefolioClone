@@ -1,8 +1,8 @@
-import logoIcon from "./logo.svg";
-import logoIcon02 from "./logo02.svg";
-import logoIcon03 from "./logo03.svg";
-import speakerIcon from "./speaker.svg";
-import bookmarkIcon from "./bookmark.svg";
-import npbadgeIcon from "./npbadge.svg";
+import LogoIcon from "./logo.svg";
+import LogoIcon02 from "./logo02.svg";
+import LogoIcon03 from "./logo03.svg";
+import SpeakerIcon from "./speaker.svg";
+import BookmarkIcon from "./bookmark.svg";
+import NpbadgeIcon from "./npbadge.svg";
 
-export { logoIcon, speakerIcon, bookmarkIcon, logoIcon02, logoIcon03, npbadgeIcon };
+export { LogoIcon, SpeakerIcon, BookmarkIcon, LogoIcon02, LogoIcon03, NpbadgeIcon };

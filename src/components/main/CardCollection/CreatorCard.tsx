@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
 import { hoverStyle01 } from "../../../styles/theme";
@@ -26,18 +27,40 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ coverImage, profileImage, use
       <div className="card-covers">
         <div className="card-cover">
           {coverImage && coverImage.length >= 2 && (
-            <img src={coverImage[0]} alt="card" width="100%" height="auto" />
+            <Image
+              src={coverImage[0]}
+              alt="card"
+              width={100}
+              height={125}
+              layout="responsive"
+              blurDataURL="https://via.placeholder.com/480"
+              placeholder="blur"
+            />
           )}
         </div>
         <div className="card-cover">
           {coverImage && coverImage.length >= 2 && (
-            <img src={coverImage[1]} alt="card" width="100%" height="auto" />
+            <Image
+              src={coverImage[1]}
+              alt="card"
+              width={100}
+              height={125}
+              layout="responsive"
+              blurDataURL="https://via.placeholder.com/480"
+              placeholder="blur"
+            />
           )}
         </div>
       </div>
       <div className="card-profile">
         <div className="card-point-cursor">
-          <img src={profileImage as string} alt="profileImage" width="100%" height="auto" />
+          <Image
+            src={profileImage as string}
+            alt="profileImage"
+            width={100}
+            height={100}
+            layout="responsive"
+          />
         </div>
       </div>
       <div className="card-user-info">

@@ -1,6 +1,7 @@
+import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-import { npbadgeIcon } from "../../../assets";
+import { NpbadgeIcon } from "../../../assets";
 import { INotefolio } from "../../../customTypes/notefolio";
 import useNotefolio from "../../../lib/useNotefolio";
 import { onTogglePdfModalState } from "../../../slices/notefolioSlice";
@@ -44,17 +45,21 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
   return (
     <NotefoiloCardContainer>
       <div className="notefolio-work-item-block image-hover" onClick={() => onOpenModal(item.id)}>
-        <img
-          className="notefolio-work-item-thumbnail"
-          src={item.contentimg}
-          alt="work"
-          placeholder="./images/banner.png"
-          width="100%"
-          height="auto"
-        />
+        <div>
+          <Image
+            className="notefolio-work-item-thumbnail"
+            src={item.contentimg}
+            alt="work"
+            width={100}
+            height={100}
+            layout="responsive"
+            blurDataURL="https://via.placeholder.com/480"
+            placeholder="blur"
+          />
+        </div>
         <div className="notefolio-work-item-hover-background"></div>
         <div className="notefolio-npbadge">
-          <img width="35" height="auto" src={npbadgeIcon} alt="bedge" />
+          <NpbadgeIcon />
         </div>
       </div>
 
@@ -69,12 +74,15 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
       <div className="notefolio-user-info-container">
         <div className="notefolio-user-profile-group">
           <div className="notefolio-user-profile-img-wrapper">
-            <img
+            <Image
               className="notefolio-user-profile-img"
               src={item.profile}
               alt="profile"
-              width="100%"
-              height="auto"
+              width={1}
+              height={1}
+              layout="responsive"
+              blurDataURL="https://via.placeholder.com/480"
+              placeholder="blur"
             />
           </div>
           <span className="notefolio-user-profile-username">{item.username}</span>
@@ -197,7 +205,6 @@ const NotefoiloCardContainer = styled.div`
   }
   .notefolio-work-item-block {
     width: 100%;
-    aspect-ratio: 1/ 1;
     background-color: #f1f1f1;
     overflow: hidden;
   }

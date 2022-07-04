@@ -1,14 +1,13 @@
-import React, { useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
-import useNotefolio from "../../lib/useNotefolio";
 import { useAppSelector } from "../../store/hook";
 import AcademyCard from "./CardCollection/AcademyCard";
 import { useMedia } from "../../lib/useMediaQuery";
 import { responsiveAcademyItemCount } from "../../lib/responsiveValueList";
 import { media } from "../../styles/theme";
+import Link from "next/link";
 
 interface MiddleBannerProps {
   title?: string;
@@ -22,7 +21,6 @@ const MiddleBanner: React.FC<MiddleBannerProps> = ({
   link = "/",
   linktitle = "아카데미 바로가기 >",
 }) => {
-  const { onLoadAcademyList } = useNotefolio();
   const { academyList } = useAppSelector((state) => state.notefolioSlice);
   const { isMobile, isPcMiddle, isTablet } = useMedia();
   const slidesPerView = useMemo(() => {
@@ -34,16 +32,14 @@ const MiddleBanner: React.FC<MiddleBannerProps> = ({
     }
     return responsiveAcademyItemCount.pcs;
   }, [isMobile, isTablet]);
-  useEffect(() => {
-    onLoadAcademyList();
-  }, []);
+
   return (
     <MiddleBannerContainer>
       <div className="middle-banner-wrapper">
         <div className="middle-banner-explain">
           <div className="middle-banner-explain-title">{title}</div>
           <div className="middle-banner-explain-content">{content}</div>
-          <Link to={link} className="middle-banner-link">
+          <Link href={link} className="middle-banner-link">
             {linktitle}
           </Link>
         </div>

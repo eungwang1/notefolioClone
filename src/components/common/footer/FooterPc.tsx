@@ -1,5 +1,5 @@
+import Link from "next/link";
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { hoverStyle02, media } from "../../../styles/theme";
 
@@ -14,12 +14,12 @@ const FooterPc: React.FC = () => {
               <div className="footer-pc-company-more-btn">사업자 정보</div>
             </div>
             <div className="footer-pc-site-map">
-              <Link to="/">서비스소개</Link>
-              <Link to="/">공지사항</Link>
-              <Link to="/">운영정책</Link>
-              <Link to="/">개인정보처리방침</Link>
-              <Link to="/">자주묻는질문</Link>
-              <Link to="/">문의하기</Link>
+              <Link href="/">서비스소개</Link>
+              <Link href="/">공지사항</Link>
+              <Link href="/">운영정책</Link>
+              <Link href="/">개인정보처리방침</Link>
+              <Link href="/">자주묻는질문</Link>
+              <Link href="/">문의하기</Link>
             </div>
           </div>
           <div className="footer-pc-top-sns"></div>
