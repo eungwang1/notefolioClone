@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
 import { SpeakerIcon } from "../../../assets";
@@ -13,7 +14,18 @@ const MiniCard: React.FC<MiniCardProps> = ({ image, title, name, type = "normal"
     <MiniCardContainer>
       <div className={`minicard-item ${type}`}>
         <div className={`minicard-img-wrapper ${type}`}>
-          <img className="minicard-img" src={image as string} alt="logo" width="100%" height="auto" />
+          {image && (
+            <Image
+              className="minicard-img"
+              src={image as string}
+              alt="logo"
+              width={1}
+              height={1}
+              blurDataURL="https://via.placeholder.com/480"
+              placeholder="blur"
+              layout="responsive"
+            />
+          )}
         </div>
         <div className="minicard-info-wrap">
           <div className={`minicard-info-title ${type}`}>{title}</div>
