@@ -50,7 +50,7 @@ const SearchCotainer = styled.div<ISearch>`
   .search {
     position: absolute;
     fill: #444444;
-    top: 4px;
+    top: 8px;
     left: 12px;
     font-size: 18px;
   }
@@ -72,6 +72,7 @@ const SearchCotainer = styled.div<ISearch>`
         font-size: 35px;
         line-height: 45px;
         left: 20px;
+        top: 4px;
       }
       input {
         padding: 20px 70px;
