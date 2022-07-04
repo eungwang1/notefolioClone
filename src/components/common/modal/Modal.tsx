@@ -69,9 +69,15 @@ const Modal: React.FC<ModalProps> = ({
           >
             <div className="modal-header-container">
               <div className="modal-header-left">
+                <button onClick={goPrevPage} disabled={currentPage === 1}>
+                  <span className="material-symbols-outlined arrow-left">chevron_left</span>
+                </button>
                 {!isMobile && currentPage && (
                   <div className="modal-page-wrapper">{`${currentPage} / ${totalPage}`}</div>
                 )}
+                <button onClick={goNextPage} disabled={currentPage === totalPage}>
+                  <span className="material-symbols-outlined arrow-right">chevron_right</span>
+                </button>
               </div>
 
               <div className="modal-header-center">
@@ -86,12 +92,7 @@ const Modal: React.FC<ModalProps> = ({
               </div>
             </div>
             <div className="modal-wrapper">{children}</div>
-            <button className="modal-next-btn" onClick={goNextPage} disabled={currentPage === totalPage}>
-              <span className="material-symbols-outlined">arrow_circle_right</span>
-            </button>
-            <button className="modal-prev-btn" onClick={goPrevPage} disabled={currentPage === 1}>
-              <span className="material-symbols-outlined">arrow_circle_left</span>
-            </button>
+
             {modalNav && (
               <ModalSideNav
                 downloadLink={src}
@@ -174,7 +175,6 @@ const ModalContainer = styled.div<ModalContainerCss>`
   .modal-prev-btn {
     left: -10%;
   }
-
   .modal-mobile-prev-btn,
   .modal-mobile-next-btn {
     display: none;
@@ -218,6 +218,19 @@ const ModalContainer = styled.div<ModalContainerCss>`
     justify-content: flex-end;
     align-items: center;
   }
+  .modal-header-left {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .arrow-left,
+  .arrow-right {
+    font-size: 25px;
+    line-height: 30px;
+    font-weight: 300;
+    cursor: pointer;
+    ${hoverStyle01}
+  }
   .modal-header-zoom-wrapper {
     margin-right: 20px;
     span {
@@ -229,9 +242,7 @@ const ModalContainer = styled.div<ModalContainerCss>`
       }
     }
   }
-
   /* mobile */
-
   ${media.lm} {
     .modal-container,
     .modal-wrapper {
@@ -259,7 +270,9 @@ const ModalContainer = styled.div<ModalContainerCss>`
       }
     }
     .modal-next-btn,
-    .modal-prev-btn {
+    .modal-prev-btn,
+    .arrow-left,
+    .arrow-right {
       display: none;
     }
     .modal-header-right,
