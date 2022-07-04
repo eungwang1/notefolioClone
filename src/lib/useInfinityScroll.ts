@@ -49,14 +49,8 @@ const useInfinityScroll = ({
     return () => observer.disconnect();
   }, [throttledOnIntersect]);
 
-  const onFirstLoadData = async () => {
-    dispatch(onClearNotefolioList());
-    await fetchAction({ search: searchValue, page: 0, category, sort });
-  };
-  const debouncedOnFirstLoadData = debounce(onFirstLoadData, 300);
   useEffect(() => {
     page.current = 0;
-    page.current === 0 && debouncedOnFirstLoadData();
   }, [category, searchValue, sort]);
 
   return { page };

@@ -1,5 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import {
+  getAcademyList,
+  getCreatorList,
+  getNotefolioList,
+  getRecruitList,
+} from "../src/actions/notefolioAction";
 import AppLayout from "../src/components/common/AppLayout";
 import Header from "../src/components/common/header/Header";
 import Nav from "../src/components/common/header/Nav";
@@ -8,6 +14,8 @@ import Category from "../src/components/main/Category";
 import Notefolio from "../src/components/main/Notefolio";
 import PdfModal from "../src/components/main/PdfModal";
 import SearchResult from "../src/components/search/SearchResult";
+import { onClearNotefolioList } from "../src/slices/notefolioSlice";
+import wrapper from "../src/store/configureStore";
 import { useAppSelector } from "../src/store/hook";
 
 const Search = () => {
@@ -23,7 +31,6 @@ const Search = () => {
         </div>
         <Category />
         <Notefolio />
-        {pdfModalState && <PdfModal />}
       </SearchContainer>
     </AppLayout>
   );
@@ -44,3 +51,21 @@ const SearchContainer = styled.div`
     align-items: center;
   }
 `;
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
+  const { search, sort, category } = ctx.query;
+  await Promise.all([
+    store.dispatch(getAcademyList()),
+    store.dispatch(onClearNotefolioList()),
+    store.dispatch(
+      getNotefolioList({
+        search: search ? (search as string) : "",
+        sort: sort ? (sort as string) : "",
+        category: category ? (category as string) : "",
+        page: 0,
+      })
+    ),
+  ]);
+
+  return { props: {} };
+});

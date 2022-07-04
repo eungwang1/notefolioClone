@@ -10,7 +10,7 @@ import { responsiveCategorySwiperCount } from "../../lib/responsiveValueList";
 import { useRouter } from "next/router";
 
 const CategorySwiper: React.FC = () => {
-  const { categories, selectedCategory } = useAppSelector((state) => state.notefolioSlice);
+  const { categories } = useAppSelector((state) => state.notefolioSlice);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { isMobile, isMobileSmall, isPcMiddle, isTablet } = useMedia();
@@ -50,7 +50,7 @@ const CategorySwiper: React.FC = () => {
         {categories.map((category, idx) => (
           <SwiperSlide key={category.title}>
             <button
-              className={`category-swiper-name ${selectedCategory === category.title && "active"}`}
+              className={`category-swiper-name ${router.query.category === category.code && "active"}`}
               type="button"
               name={category.code}
               onClick={onSelect}

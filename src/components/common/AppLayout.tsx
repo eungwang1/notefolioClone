@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { onTogglePdfModalState, onToggleSearchModalState } from "../../slices/notefolioSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
+import PdfModal from "../main/PdfModal";
 import FooterMobile from "./footer/FooterMobile";
 import FooterPc from "./footer/FooterPc";
 import SearchInput from "./header/Search";
@@ -22,16 +23,15 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
       {children}
       <FooterPc />
       <FooterMobile />
-      {
-        <Modal
-          title="검색"
-          onClose={onClose}
-          modalState={searchModalState}
-          className="mobile-search-input-modal"
-        >
-          <SearchInput size="large" className="mobile-search-input-container" onAfterSearch={onClose} />
-        </Modal>
-      }
+      <Modal
+        title="검색"
+        onClose={onClose}
+        modalState={searchModalState}
+        className="mobile-search-input-modal"
+      >
+        <SearchInput size="large" className="mobile-search-input-container" onAfterSearch={onClose} />
+      </Modal>
+      <PdfModal />
     </AppLayoutContainer>
   );
 };

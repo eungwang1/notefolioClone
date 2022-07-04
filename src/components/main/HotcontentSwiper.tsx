@@ -1,18 +1,13 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import CreatorCard from "./CardCollection/CreatorCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import styled from "styled-components";
 import { hoverStyle01, media } from "../../styles/theme";
 import { useMedia } from "../../lib/useMediaQuery";
-import useNotefolio from "../../lib/useNotefolio";
 import { useAppSelector } from "../../store/hook";
 import { responsiveCreatorSwiperCount } from "../../lib/responsiveValueList";
 const HotcontentSwiper: React.FC = () => {
-  const { onLoadCreatorList } = useNotefolio();
-  useEffect(() => {
-    onLoadCreatorList();
-  }, []);
   const { creatorList } = useAppSelector((state) => state.notefolioSlice);
   const { isMobile, isTablet, isMobileSmall } = useMedia();
   const slidesPerView = useMemo(() => {

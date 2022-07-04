@@ -1,8 +1,7 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
-import useNotefolio from "../../lib/useNotefolio";
 import { useAppSelector } from "../../store/hook";
 import AcademyCard from "./CardCollection/AcademyCard";
 import { useMedia } from "../../lib/useMediaQuery";
@@ -22,7 +21,6 @@ const MiddleBanner: React.FC<MiddleBannerProps> = ({
   link = "/",
   linktitle = "아카데미 바로가기 >",
 }) => {
-  const { onLoadAcademyList } = useNotefolio();
   const { academyList } = useAppSelector((state) => state.notefolioSlice);
   const { isMobile, isPcMiddle, isTablet } = useMedia();
   const slidesPerView = useMemo(() => {
@@ -34,9 +32,7 @@ const MiddleBanner: React.FC<MiddleBannerProps> = ({
     }
     return responsiveAcademyItemCount.pcs;
   }, [isMobile, isTablet]);
-  useEffect(() => {
-    onLoadAcademyList();
-  }, []);
+
   return (
     <MiddleBannerContainer>
       <div className="middle-banner-wrapper">

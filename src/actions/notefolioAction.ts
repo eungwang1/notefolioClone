@@ -11,7 +11,7 @@ export const getNotefolioList = createAsyncThunk(
   async ({ page, search, category, sort }: getNotefolioListParams, thunkAPI) => {
     try {
       const res = await axios.get(
-        `${api}/notefolio?_page=${page}&_limit=30&q=${search || ""}${
+        `${api}/notefolio?_page=${page}&_limit=20&q=${search || ""}${
           category ? `&category=${category}` : ""
         }${
           sort === "likecount"
