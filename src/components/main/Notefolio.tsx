@@ -9,6 +9,7 @@ import { responsiveSliceCount } from "../../lib/responsiveValueList";
 import { useSearchParams } from "react-router-dom";
 import NotefoiloCard from "./CardCollection/NotefoiloCard";
 import shortid from "shortid";
+import LoadingSpinner from "../common/LoadingSpinner";
 const Notefolio: React.FC = () => {
   const { notefolioList, getNotefolioListLoading } = useAppSelector((state) => state.notefolioSlice);
   const [searchParms] = useSearchParams();
@@ -23,8 +24,8 @@ const Notefolio: React.FC = () => {
     target,
     targetArray: notefolioList,
     fetchAction: onLoadNotefolioList,
-    threshold: 0.5,
-    rootMargin: "300px 0px",
+    threshold: 1,
+    rootMargin: "500px 0px",
     sort: sort as string,
     searchValue: searchValue as string,
     category: category as string,
@@ -52,7 +53,7 @@ const Notefolio: React.FC = () => {
         ))}
       </div>
       <div ref={target} className="Loading">
-        {getNotefolioListLoading && "Loading..."}
+        {getNotefolioListLoading && <LoadingSpinner />}
       </div>
     </NotefolioContainer>
   );

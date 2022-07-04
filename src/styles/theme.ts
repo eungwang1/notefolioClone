@@ -8,6 +8,7 @@ const palette = {
   Gray03: "#F9F9F9",
   Gray04: "#666565",
   Gray05: "#f7f9f9",
+  Gray06: "#808e9b",
   Pink01: "#FFAFB0",
   Orange01: "#FFC282",
   Yellow01: "#c4c4c4",

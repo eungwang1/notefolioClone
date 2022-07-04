@@ -10,6 +10,7 @@ declare module "styled-components" {
       Gray03: string;
       Gray04: string;
       Gray05: string;
+      Gray06: string;
       Pink01: string;
       Orange01: string;
       Yellow01: string;
