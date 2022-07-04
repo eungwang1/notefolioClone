@@ -13,6 +13,7 @@ const randomNumber = (start, end) => {
 const notefolio = Array.from({ length: notefolioLength }, (v, i) => {
   const random1to9 = randomNumber(0, 9);
   return {
+    createdAt: faker.date.between("2021-01-01T00:00:00.000Z", "2022-07-04T00:00:00.000Z"),
     username: faker.name.middleName(),
     profile: faker.image.avatar(),
     title: faker.lorem.sentence(),
