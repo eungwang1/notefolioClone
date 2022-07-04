@@ -2,9 +2,8 @@ import React, { useRef, useState } from "react";
 import Dropdown from "rc-dropdown";
 import Menu, { Item as MenuItem } from "rc-menu";
 import styled from "styled-components";
-import { bookmarkIcon } from "../../assets";
 import { hoverStyle01, hoverStyle03 } from "../../styles/theme";
-import useSetParams from "../../lib/useSetParams";
+import { useRouter } from "next/router";
 interface items {
   value: string;
   googleIcon?: string;
@@ -15,8 +14,8 @@ interface CustomDropdownProps {
 const CustomDropdown: React.FC<CustomDropdownProps> = ({ items }) => {
   const [visible, setVisible] = useState(false);
   const [selectedKey, setSeletedKey] = useState("노트폴리오 픽");
-  const useParamsUtil = useSetParams();
   const sortkey = useRef<string>("");
+  const router = useRouter();
   function onSelect({ key }: { key: string }) {
     setSeletedKey(() => key);
     if (key === "추천순으로 보기") {
@@ -28,7 +27,13 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ items }) => {
     if (key === "최신순으로 보기") {
       sortkey.current = "createdAt";
     }
-    useParamsUtil.setParam("sort", sortkey.current);
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        sort: sortkey.current,
+      },
+    });
     setVisible(false);
   }
   function onVisibleChange(visible: boolean) {
@@ -50,8 +55,8 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ items }) => {
     <DropdownContainer>
       <Dropdown trigger={["click"]} overlay={menu} animation="slide-up" onVisibleChange={onVisibleChange}>
         <button className="dropdown-btn">
-          <div>
-            <img src={bookmarkIcon} alt="bookmark" width={20} height={20} />
+          <div className="dropdown-bookmark-icon-wrapper">
+            <span className="material-symbols-outlined dropdown-bookmark-icon">bookmark</span>
           </div>
           <span>{selectedKey}</span>
           <span className={`material-symbols-outlined ${visible && "rotate"}`}>expand_more</span>
@@ -66,6 +71,10 @@ export default CustomDropdown;
 const DropdownContainer = styled.div`
   min-width: 180px;
   width: 25%;
+  .dropdown-bookmark-icon-wrapper {
+    width: 20px;
+    height: 20px;
+  }
   .dropdown-btn {
     padding: 8px;
     border: 1px solid #e8e8e8;
@@ -78,6 +87,9 @@ const DropdownContainer = styled.div`
     gap: 10px;
     border-radius: 5px;
     ${hoverStyle03}
+  }
+  .dropdown-bookmark-icon {
+    line-height: 18px;
   }
   .material-symbols-outlined {
     transition: all 0.3s;

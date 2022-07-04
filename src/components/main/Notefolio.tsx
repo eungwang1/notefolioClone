@@ -6,20 +6,17 @@ import useInfinityScroll from "../../lib/useInfinityScroll";
 import MiddleBanner from "./MiddleBanner";
 import { useMedia } from "../../lib/useMediaQuery";
 import { responsiveSliceCount } from "../../lib/responsiveValueList";
-import { useSearchParams } from "react-router-dom";
 import NotefoiloCard from "./CardCollection/NotefoiloCard";
 import shortid from "shortid";
 import LoadingSpinner from "../common/LoadingSpinner";
+import { useRouter } from "next/router";
 const Notefolio: React.FC = () => {
   const { notefolioList, getNotefolioListLoading } = useAppSelector((state) => state.notefolioSlice);
-  const [searchParms] = useSearchParams();
-  const searchValue = searchParms.get("search");
-  const category = searchParms.get("category");
-  const sort = searchParms.get("sort");
+  const router = useRouter();
+  const { sort, search, category } = router.query;
   const { onLoadNotefolioList } = useNotefolio();
   const target = useRef<HTMLDivElement>(null);
   const { isTablet, isMobile, isMobileSmall, isPcMiddle } = useMedia();
-
   useInfinityScroll({
     target,
     targetArray: notefolioList,
@@ -27,7 +24,7 @@ const Notefolio: React.FC = () => {
     threshold: 1,
     rootMargin: "500px 0px",
     sort: sort as string,
-    searchValue: searchValue as string,
+    searchValue: search as string,
     category: category as string,
   });
 

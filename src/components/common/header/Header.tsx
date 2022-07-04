@@ -1,7 +1,7 @@
+import Link from "next/link";
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { logoIcon02, logoIcon03 } from "../../../assets";
+import { LogoIcon02, LogoIcon03 } from "../../../assets";
 import { media } from "../../../styles/theme";
 
 const Header: React.FC = () => {
@@ -11,11 +11,15 @@ const Header: React.FC = () => {
         <img src="/images/banner.png" alt="banner" width="100%" height="auto" />
       </div>
       <div className="family-gnb">
-        <Link to="/" className="gnb-logo">
-          <img src={logoIcon02} alt="logo" width="100%" height="auto" />
+        <Link href="/">
+          <span className="gnb-logo">
+            <LogoIcon02 className="header-logo-icon" />
+          </span>
         </Link>
-        <Link to="/" className="gnb-menu">
-          <img src={logoIcon03} alt="logo" width="100%" height="auto" />
+        <Link href="/">
+          <span className="gnb-menu">
+            <LogoIcon03 className="header-logo-icon" />
+          </span>
         </Link>
       </div>
     </HeaderContainer>
@@ -25,6 +29,10 @@ const Header: React.FC = () => {
 export default Header;
 
 const HeaderContainer = styled.div`
+  .header-logo-icon {
+    width: 100%;
+    height: auto;
+  }
   .gnb-logo,
   .gnb-menu {
     display: flex;

@@ -1,10 +1,10 @@
+import { useRouter } from "next/router";
 import React from "react";
-import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 interface SearchResultProps {}
 const SearchResult: React.FC<SearchResultProps> = () => {
-  const [searchParms] = useSearchParams();
-  const searchValue = searchParms.get("search");
+  const router = useRouter();
+  const searchValue = router.query.search;
 
   return (
     <SearchResultContainer>

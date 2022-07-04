@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import AppLayout from "../components/common/AppLayout";
-import Header from "../components/common/header/Header";
-import Nav from "../components/common/header/Nav";
-import SearchInput from "../components/common/header/Search";
-import Category from "../components/main/Category";
-import Notefolio from "../components/main/Notefolio";
-import PdfModal from "../components/main/PdfModal";
-import SearchResult from "../components/search/SearchResult";
-import { useAppSelector } from "../store/hook";
+import AppLayout from "../src/components/common/AppLayout";
+import Header from "../src/components/common/header/Header";
+import Nav from "../src/components/common/header/Nav";
+import SearchInput from "../src/components/common/header/Search";
+import Category from "../src/components/main/Category";
+import Notefolio from "../src/components/main/Notefolio";
+import PdfModal from "../src/components/main/PdfModal";
+import SearchResult from "../src/components/search/SearchResult";
+import { useAppSelector } from "../src/store/hook";
 
 const Search = () => {
   const pdfModalState = useAppSelector((state) => state.notefolioSlice.pdfModalState);

@@ -1,38 +1,40 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { logoIcon } from "../../../assets";
+import { LogoIcon } from "../../../assets";
 import routes from "../../../lib/routes";
-import { useLocation } from "react-router-dom";
 import SearchInput from "./Search";
 import { media } from "../../../styles/theme";
+import Link from "next/link";
+import { useRouter } from "next/router";
 interface NavProps {
   searchInput?: boolean;
 }
 const Nav: React.FC<NavProps> = ({ searchInput = true }) => {
-  const location = useLocation();
+  const router = useRouter();
   const navItem = [
     {
       name: "발견",
       to: routes.HOME,
-      isActive: routes.HOME === location.pathname ? "active" : "",
+      isActive: routes.HOME === router.pathname ? "active" : "",
     },
     {
       name: "채용",
       to: routes.JOB,
-      isActive: routes.JOB === location.pathname ? "active" : "",
+      isActive: routes.JOB === router.pathname ? "active" : "",
     },
   ];
   return (
     <NavContainer>
       <div className="nav-left-container">
-        <Link to={routes.HOME} className="nav-left-logo">
-          <img src={logoIcon} alt="logo" />
+        <Link href={routes.HOME}>
+          <span className="nav-left-logo">
+            <LogoIcon />
+          </span>
         </Link>
         <div className="nav-left-menu-container">
           {navItem.map((item, idx) => (
-            <Link to={item.to} className={`nav-left-menu-item ${item.isActive}`} key={idx}>
-              {item.name}
+            <Link href={item.to} key={idx}>
+              <span className={`nav-left-menu-item ${item.isActive}`}>{item.name}</span>
             </Link>
           ))}
         </div>
@@ -40,11 +42,11 @@ const Nav: React.FC<NavProps> = ({ searchInput = true }) => {
       <div className="nav-center-container">{searchInput && <SearchInput />}</div>
       <div className="nav-right-container">
         <div className="nav-auth-btn-group">
-          <Link to={routes.HOME} className="nav-auth-btn-login">
-            로그인
+          <Link href={routes.HOME}>
+            <span className="nav-auth-btn-login">로그인</span>
           </Link>
-          <Link to={routes.HOME} className="nav-auth-btn-register">
-            회원가입
+          <Link href={routes.HOME}>
+            <span className="nav-auth-btn-register">회원가입</span>
           </Link>
         </div>
       </div>
@@ -88,6 +90,7 @@ const NavContainer = styled.nav`
     font-size: 15px;
     line-height: 18px;
     text-align: center;
+    cursor: pointer;
   }
   .active {
     ::after {
@@ -157,5 +160,6 @@ const NavContainer = styled.nav`
     color: ${(props) => props.theme.palette.White};
     letter-spacing: -0.4px;
     font-weight: 700;
+    cursor: pointer;
   }
 `;

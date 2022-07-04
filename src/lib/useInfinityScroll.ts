@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { MutableRefObject, useEffect, useRef } from "react";
 import { useAppDispatch } from "./../store/hook";
 import { debounce, throttle } from "lodash";
@@ -24,6 +25,7 @@ const useInfinityScroll = ({
 }: useInfinityScrollProps) => {
   const page = useRef(0);
   const count = useRef(0);
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const onIntersect: IntersectionObserverCallback = async ([entry], observer) => {
     if (count.current === targetArray.length) {

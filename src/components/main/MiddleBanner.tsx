@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
@@ -9,6 +8,7 @@ import AcademyCard from "./CardCollection/AcademyCard";
 import { useMedia } from "../../lib/useMediaQuery";
 import { responsiveAcademyItemCount } from "../../lib/responsiveValueList";
 import { media } from "../../styles/theme";
+import Link from "next/link";
 
 interface MiddleBannerProps {
   title?: string;
@@ -43,7 +43,7 @@ const MiddleBanner: React.FC<MiddleBannerProps> = ({
         <div className="middle-banner-explain">
           <div className="middle-banner-explain-title">{title}</div>
           <div className="middle-banner-explain-content">{content}</div>
-          <Link to={link} className="middle-banner-link">
+          <Link href={link} className="middle-banner-link">
             {linktitle}
           </Link>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { speakerIcon } from "../../../assets";
+import { SpeakerIcon } from "../../../assets";
 import { hoverStyle01 } from "../../../styles/theme";
 interface MiniCardProps {
   image?: string;
@@ -20,7 +20,7 @@ const MiniCard: React.FC<MiniCardProps> = ({ image, title, name, type = "normal"
           <div className="minicard-info-name">{name}</div>
         </div>
         <div className={`minicard-img-wrapper-right ${type}`}>
-          <img className="minicard-img" src={speakerIcon} alt="logo" width="100%" height="auto" />
+          <SpeakerIcon />
         </div>
       </div>
     </MiniCardContainer>

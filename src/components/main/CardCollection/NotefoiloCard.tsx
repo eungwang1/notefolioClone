@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { npbadgeIcon } from "../../../assets";
+import { NpbadgeIcon } from "../../../assets";
 import { INotefolio } from "../../../customTypes/notefolio";
 import useNotefolio from "../../../lib/useNotefolio";
 import { onTogglePdfModalState } from "../../../slices/notefolioSlice";
@@ -54,7 +54,7 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
         />
         <div className="notefolio-work-item-hover-background"></div>
         <div className="notefolio-npbadge">
-          <img width="35" height="auto" src={npbadgeIcon} alt="bedge" />
+          <NpbadgeIcon />
         </div>
       </div>
 
