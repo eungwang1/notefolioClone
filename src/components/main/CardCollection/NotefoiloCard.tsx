@@ -22,18 +22,18 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
     const node = e.target as Element;
     if (node.className.includes("heart")) {
       if (node.className.includes("active")) {
-        node.className = "material-symbols-outlined heart";
+        node.className = "material-symbols-outlined heart not-draggable";
       } else {
-        node.className += "-active";
+        node.className += " active";
       }
       return;
     }
     if (node.className.includes("folder")) {
       if (node.className.includes("active")) {
-        node.className = "material-symbols-outlined folder";
+        node.className = "material-symbols-outlined folder not-draggable";
         alert("저장이 취소되었습니다.");
       } else {
-        node.className += "-active";
+        node.className += " active";
         alert("저장되었습니다.");
       }
       return;
@@ -61,8 +61,8 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
       <div className="notefolio-work-item-hover-content" onClick={onItemClick}>
         <div className="notefolio-work-item-hover-title">{item.title}</div>
         <div className="notefolio-work-item-hover-icon">
-          <span className="material-symbols-outlined heart">favorite</span>
-          <span className="material-symbols-outlined folder">create_new_folder</span>
+          <span className="material-symbols-outlined heart not-draggable">favorite</span>
+          <span className="material-symbols-outlined folder not-draggable">create_new_folder</span>
         </div>
       </div>
 
@@ -98,7 +98,6 @@ export default NotefoiloCard;
 
 const NotefoiloCardContainer = styled.div`
   overflow: hidden;
-  ${scalingKeyframes(1.2)};
   :hover {
     .notefolio-work-item-hover-content {
       transition: transform, opacity 0.3s ease-out;
@@ -159,11 +158,11 @@ const NotefoiloCardContainer = styled.div`
     width: 100%;
     bottom: -50px;
     opacity: 0;
-    .heart-active {
+    .heart.active {
       color: red;
-      animation: scaling 0.5s;
+      animation: ${scalingKeyframes(1.2)} 0.5s;
     }
-    .folder-active {
+    .folder.active {
       color: ${(props) => props.theme.palette.Mint01};
     }
   }
@@ -274,6 +273,15 @@ const NotefoiloCardContainer = styled.div`
   .notefolio-work-item-thumbnail {
     border-radius: 5px;
   }
+
+  /* .heart,
+  .folder {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  } */
+
   ${media.tb} {
     .notefolio-work-item-hover-content {
       transition: transform 0.3s ease-out;

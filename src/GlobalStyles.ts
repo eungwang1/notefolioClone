@@ -76,6 +76,12 @@ const Globalstyles = createGlobalStyle`
     overflow: visible; 
     cursor: pointer
   }
+  .not-draggable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 `;
 
 export default Globalstyles;

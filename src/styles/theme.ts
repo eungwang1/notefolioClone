@@ -61,13 +61,13 @@ export const hoverStyle04 = css`
   }
 `;
 
-export const scalingKeyframes = (sacale: number) => {
+export const scalingKeyframes = (scale: number) => {
   return keyframes`
      0% {
       transform: scale(1);
     }
     50% {
-      transform: scale(scale);
+      transform: scale(${scale});
     }
     0% {
       transform: scale(1);

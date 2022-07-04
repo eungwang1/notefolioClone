@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { hoverStyle01, hoverStyle04, scalingKeyframes } from "../../../styles/theme";
+import { hoverStyle01, scalingKeyframes } from "../../../styles/theme";
 interface IModalSideNavProps {
   downloadLink?: string;
   heartCount?: number;
@@ -10,9 +10,9 @@ const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, heartCount }
     const node = e.target as Element;
     if (node.className.includes("heart")) {
       if (node.className.includes("active")) {
-        node.className = "material-symbols-outlined heart";
+        node.className = "material-symbols-outlined heart not-draggable";
       } else {
-        node.className += "-active";
+        node.className += " active";
       }
       return;
     }
@@ -21,7 +21,7 @@ const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, heartCount }
     <ModalSideNavContainer>
       <div className="modal-side-nav-heart-container">
         <div className="modal-side-nav-heart-wrapper">
-          <span className="material-symbols-outlined heart" onClick={onToggleHeart}>
+          <span className="material-symbols-outlined heart not-draggable" onClick={onToggleHeart}>
             favorite
           </span>
         </div>
@@ -29,7 +29,7 @@ const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, heartCount }
       </div>
       <a href={downloadLink} target="_blank" rel="noreferrer">
         <div className="modal-side-nav-download-wrapper">
-          <span className="material-symbols-outlined download">download</span>
+          <span className="material-symbols-outlined download not-draggable">download</span>
         </div>
       </a>
     </ModalSideNavContainer>
@@ -39,7 +39,6 @@ const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, heartCount }
 export default ModalSideNav;
 
 const ModalSideNavContainer = styled.div`
-  ${scalingKeyframes(1.2)};
   position: absolute;
   top: 8%;
   right: -10%;
@@ -72,8 +71,8 @@ const ModalSideNavContainer = styled.div`
   .download {
     ${hoverStyle01}
   }
-  .heart-active {
-    animation: scaling 0.5s;
+  .heart.active {
+    animation: ${scalingKeyframes(1.2)} 0.5s;
     color: red;
   }
 `;
