@@ -4,8 +4,10 @@ import { hoverStyle01, scalingKeyframes } from "../../../styles/theme";
 interface IModalSideNavProps {
   downloadLink?: string;
   heartCount?: number;
+  onScaleUp?: () => void;
+  onScaleDown?: () => void;
 }
-const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, heartCount }) => {
+const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, heartCount, onScaleDown, onScaleUp }) => {
   const heartCountRef = useRef<HTMLDivElement>(null);
   const onToggleHeart = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const node = e.target as Element;
@@ -41,6 +43,16 @@ const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, heartCount }
           <span className="material-symbols-outlined download not-draggable">download</span>
         </div>
       </a>
+      <div className="modal-side-nav-zoom-wrapper">
+        <span className="material-symbols-outlined zoomin" onClick={onScaleUp}>
+          zoom_in
+        </span>
+      </div>
+      <div className="modal-side-nav-zoom-wrapper">
+        <span className="material-symbols-outlined zoomout" onClick={onScaleDown}>
+          zoom_out
+        </span>
+      </div>
     </ModalSideNavContainer>
   );
 };
@@ -68,7 +80,8 @@ const ModalSideNavContainer = styled.div`
     align-items: center;
   }
   .modal-side-nav-heart-wrapper,
-  .modal-side-nav-download-wrapper {
+  .modal-side-nav-download-wrapper,
+  .modal-side-nav-zoom-wrapper {
     border-radius: 50%;
     padding: 11px;
     display: flex;
@@ -77,9 +90,12 @@ const ModalSideNavContainer = styled.div`
     background-color: white;
     cursor: pointer;
   }
-  .download {
+  .download,
+  .zoomin,
+  .zoomout {
     ${hoverStyle01}
   }
+
   .heart.active {
     animation: ${scalingKeyframes(1.2)} 0.5s;
     color: red;

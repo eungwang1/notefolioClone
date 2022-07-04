@@ -77,16 +77,6 @@ const Modal: React.FC<ModalProps> = ({
               </div>
 
               <div className="modal-header-right">
-                {onScaleUp && (
-                  <div className="modal-header-zoom-wrapper">
-                    <span className="material-symbols-outlined zoomin" onClick={onScaleUp}>
-                      zoom_in
-                    </span>
-                    <span className="material-symbols-outlined zoomout" onClick={onScaleDown}>
-                      zoom_out
-                    </span>
-                  </div>
-                )}
                 <div className="modal-close-btn" onClick={onClose}>
                   <span className="material-symbols-outlined">cancel</span>
                 </div>
@@ -99,7 +89,14 @@ const Modal: React.FC<ModalProps> = ({
             <button className="modal-prev-btn" onClick={goPrevPage} disabled={currentPage === 1}>
               <span className="material-symbols-outlined">arrow_circle_left</span>
             </button>
-            {modalNav && <ModalSideNav downloadLink={src} heartCount={heartCount} />}
+            {modalNav && (
+              <ModalSideNav
+                downloadLink={src}
+                heartCount={heartCount}
+                onScaleDown={onScaleDown}
+                onScaleUp={onScaleUp}
+              />
+            )}
           </motion.div>
         </ModalContainer>
       )}
