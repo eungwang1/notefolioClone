@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { hoverStyle01, scalingKeyframes } from "../../../styles/theme";
 interface IModalSideNavProps {
@@ -6,13 +6,20 @@ interface IModalSideNavProps {
   heartCount?: number;
 }
 const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, heartCount }) => {
+  const heartCountRef = useRef<HTMLDivElement>(null);
   const onToggleHeart = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const node = e.target as Element;
     if (node.className.includes("heart")) {
       if (node.className.includes("active")) {
         node.className = "material-symbols-outlined heart not-draggable";
+        if (heartCountRef.current) {
+          heartCountRef.current.innerText = Number(heartCountRef.current.innerText) - 1 + "";
+        }
       } else {
         node.className += " active";
+        if (heartCountRef.current) {
+          heartCountRef.current.innerText = Number(heartCountRef.current.innerText) + 1 + "";
+        }
       }
       return;
     }
@@ -25,7 +32,9 @@ const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, heartCount }
             favorite
           </span>
         </div>
-        <span className="modal-side-nav-heart-count">{heartCount}</span>
+        <span className="modal-side-nav-heart-count" ref={heartCountRef}>
+          {heartCount}
+        </span>
       </div>
       <a href={downloadLink} target="_blank" rel="noreferrer">
         <div className="modal-side-nav-download-wrapper">

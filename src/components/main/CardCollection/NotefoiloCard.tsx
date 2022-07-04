@@ -1,11 +1,11 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { npbadgeIcon } from "../../../assets";
 import { INotefolio } from "../../../customTypes/notefolio";
 import useNotefolio from "../../../lib/useNotefolio";
 import { onTogglePdfModalState } from "../../../slices/notefolioSlice";
 import { useAppDispatch } from "../../../store/hook";
-import { hoverStyle01, media, scalingKeyframes } from "../../../styles/theme";
+import { media, scalingKeyframes } from "../../../styles/theme";
 
 interface NotefoiloCardProps {
   item: INotefolio;
