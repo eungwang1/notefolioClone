@@ -8,10 +8,18 @@ const api =
     : "https://my-cool-project-eungwang.herokuapp.com";
 export const getNotefolioList = createAsyncThunk(
   "get/notefolioList",
-  async ({ page, search, category }: getNotefolioListParams, thunkAPI) => {
+  async ({ page, search, category, sort }: getNotefolioListParams, thunkAPI) => {
     try {
       const res = await axios.get(
-        `${api}/notefolio?_page=${page}&_limit=30&q=${search || ""}${category ? `&category=${category}` : ""}`
+        `${api}/notefolio?_page=${page}&_limit=30&q=${search || ""}${
+          category ? `&category=${category}` : ""
+        }${
+          sort === "likecount"
+            ? `&_sort=likecount&_order=desc`
+            : sort === "createdAt"
+            ? `&_sort=createdAt&_order=desc`
+            : ""
+        }`
       );
       return res.data;
     } catch (e) {

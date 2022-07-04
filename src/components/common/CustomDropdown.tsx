@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Dropdown from "rc-dropdown";
 import Menu, { Item as MenuItem } from "rc-menu";
 import styled from "styled-components";
 import { bookmarkIcon } from "../../assets";
 import { hoverStyle01, hoverStyle03 } from "../../styles/theme";
+import useSetParams from "../../lib/useSetParams";
 interface items {
   value: string;
   googleIcon?: string;
@@ -14,8 +15,20 @@ interface CustomDropdownProps {
 const CustomDropdown: React.FC<CustomDropdownProps> = ({ items }) => {
   const [visible, setVisible] = useState(false);
   const [selectedKey, setSeletedKey] = useState("노트폴리오 픽");
+  const useParamsUtil = useSetParams();
+  const sortkey = useRef<string>("");
   function onSelect({ key }: { key: string }) {
     setSeletedKey(() => key);
+    if (key === "추천순으로 보기") {
+      sortkey.current = "likecount";
+    }
+    if (key === "노트폴리오 픽") {
+      sortkey.current = "";
+    }
+    if (key === "최신순으로 보기") {
+      sortkey.current = "createdAt";
+    }
+    useParamsUtil.setParam("sort", sortkey.current);
     setVisible(false);
   }
   function onVisibleChange(visible: boolean) {

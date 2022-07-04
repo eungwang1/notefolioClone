@@ -14,6 +14,7 @@ const Notefolio: React.FC = () => {
   const [searchParms] = useSearchParams();
   const searchValue = searchParms.get("search");
   const category = searchParms.get("category");
+  const sort = searchParms.get("sort");
   const { onLoadNotefolioList } = useNotefolio();
   const target = useRef<HTMLDivElement>(null);
   const { isTablet, isMobile, isMobileSmall, isPcMiddle } = useMedia();
@@ -24,6 +25,7 @@ const Notefolio: React.FC = () => {
     fetchAction: onLoadNotefolioList,
     threshold: 0.5,
     rootMargin: "300px 0px",
+    sort: sort as string,
     searchValue: searchValue as string,
     category: category as string,
   });

@@ -10,6 +10,7 @@ interface useInfinityScrollProps {
   rootMargin?: string;
   searchValue?: string;
   category?: string;
+  sort?: string;
 }
 const useInfinityScroll = ({
   target,
@@ -18,6 +19,7 @@ const useInfinityScroll = ({
   threshold = 1,
   searchValue,
   category,
+  sort,
   rootMargin = "0px 0px",
 }: useInfinityScrollProps) => {
   const page = useRef(0);
@@ -31,7 +33,7 @@ const useInfinityScroll = ({
       count.current = targetArray.length;
       page.current += 1;
       observer.disconnect();
-      page.current >= 1 && fetchAction({ search: searchValue, page: page.current, category });
+      page.current >= 1 && fetchAction({ search: searchValue, page: page.current, category, sort });
       observer.observe(target.current as HTMLDivElement);
     }
   };
@@ -47,13 +49,13 @@ const useInfinityScroll = ({
 
   const onFirstLoadData = async () => {
     dispatch(onClearNotefolioList());
-    await fetchAction({ search: searchValue, page: 0, category });
+    await fetchAction({ search: searchValue, page: 0, category, sort });
   };
   const debouncedOnFirstLoadData = debounce(onFirstLoadData, 300);
   useEffect(() => {
     page.current = 0;
     page.current === 0 && debouncedOnFirstLoadData();
-  }, [category, searchValue]);
+  }, [category, searchValue, sort]);
 
   return { page };
 };

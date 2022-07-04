@@ -5,17 +5,14 @@ import { Navigation } from "swiper";
 import { hoverStyle01, media } from "../../styles/theme";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { onSelectCategory } from "../../slices/notefolioSlice";
-import { useNavigate } from "react-router";
-import { createSearchParams, useSearchParams } from "react-router-dom";
 import { useMedia } from "../../lib/useMediaQuery";
 import { responsiveCategorySwiperCount } from "../../lib/responsiveValueList";
+import useSetParams from "../../lib/useSetParams";
 
 const CategorySwiper: React.FC = () => {
   const { categories, selectedCategory } = useAppSelector((state) => state.notefolioSlice);
-  const [searchParms] = useSearchParams();
-  const search = searchParms.get("search");
+  const useParamsUtil = useSetParams();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const { isMobile, isMobileSmall, isPcMiddle, isTablet } = useMedia();
   const swiperCount = useMemo(() => {
     if (isMobileSmall) return responsiveCategorySwiperCount.ms;
@@ -29,21 +26,7 @@ const CategorySwiper: React.FC = () => {
     const button: HTMLButtonElement = e.currentTarget;
     if (button.innerText) {
       dispatch(onSelectCategory(button.innerText));
-      if (button.name) {
-        search
-          ? navigate({
-              search: createSearchParams({ category: button.name, search }).toString(),
-            })
-          : navigate({
-              search: createSearchParams({ category: button.name }).toString(),
-            });
-      } else {
-        search
-          ? navigate({
-              search: createSearchParams({ search }).toString(),
-            })
-          : navigate("");
-      }
+      useParamsUtil.setParam("category", button.name);
     }
   };
   return (

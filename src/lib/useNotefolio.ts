@@ -11,8 +11,8 @@ import { useAppDispatch } from "./../store/hook";
 const useNotefolio = () => {
   const dispatch = useAppDispatch();
   const onLoadNotefolioList = useCallback(
-    async ({ page, search, category }: getNotefolioListParams) => {
-      await dispatch(getNotefolioList({ page, search, category }));
+    async ({ page, search, category, sort }: getNotefolioListParams) => {
+      await dispatch(getNotefolioList({ page, search, category, sort }));
     },
     [dispatch]
   );
