@@ -40,9 +40,7 @@ export default AppLayout;
 
 const AppLayoutContainer = styled.div`
   width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+
   .mobile-search-input-modal {
     .modal-container,
     .modal-wrapper {
