@@ -24,9 +24,6 @@ const AcademyCard: React.FC<AcademyCardProps> = ({ item }) => {
 export default AcademyCard;
 
 const AcademyCardContainer = styled.div`
-  .progressiveImage {
-    aspect-ratio: 4 / 3;
-  }
   .academycard-info {
     margin-top: 10px;
   }
@@ -35,7 +32,10 @@ const AcademyCardContainer = styled.div`
     background-color: #f1f1f1;
     border-radius: 5px;
     img {
+      display: block;
+      aspect-ratio: 4 / 3;
       border-radius: 5px;
+      object-fit: cover;
     }
   }
   .academycard-info-title {

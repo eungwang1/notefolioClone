@@ -20,7 +20,7 @@ const MiniCard: React.FC<MiniCardProps> = ({ image, title, name, type = "normal"
           <div className="minicard-info-name">{name}</div>
         </div>
         <div className={`minicard-img-wrapper-right ${type}`}>
-          <img className="minicard-img" src={speakerIcon} alt="logo" width={48} height={48} />
+          <img className="minicard-img" src={speakerIcon} alt="logo" width="100%" height="auto" />
         </div>
       </div>
     </MiniCardContainer>
@@ -50,7 +50,7 @@ const MiniCardContainer = styled.div`
     ${hoverStyle01}
   }
   .minicard-img-wrapper {
-    max-width: 48px;
+    width: 55px;
     height: auto;
     border-radius: 4px;
     background-color: #f1f1f1;
@@ -63,6 +63,7 @@ const MiniCardContainer = styled.div`
     align-content: center;
   }
   .minicard-img {
+    display: block;
     object-fit: cover;
     border-radius: 4px;
   }
