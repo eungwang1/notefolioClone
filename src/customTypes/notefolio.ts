@@ -9,6 +9,7 @@ export interface INotefolio {
   viewcount: number;
   likecount: number;
   id: string;
+  createdAt: string;
 }
 
 export interface ICreator {

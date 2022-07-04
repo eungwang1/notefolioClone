@@ -1,6 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
+import { convertToDateTime } from "../../lib/convertToDateTime";
 import { useMedia } from "../../lib/useMediaQuery";
 import { onTogglePdfModalState } from "../../slices/notefolioSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
@@ -54,6 +55,7 @@ const PdfModal: React.FC = () => {
     totalPage: numPages,
     onScaleUp,
     onScaleDown,
+    date: convertToDateTime(currentNotefolio?.createdAt as string),
     width: resposivePdfWidth * scale,
     modalNav: true,
     title: "테스트PDF",

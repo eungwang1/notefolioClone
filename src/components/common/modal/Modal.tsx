@@ -22,6 +22,7 @@ interface ModalProps {
   animation?: "vertical" | "opacity";
   src?: string;
   heartCount?: number;
+  date?: string;
 }
 const Modal: React.FC<ModalProps> = ({
   children,
@@ -40,6 +41,7 @@ const Modal: React.FC<ModalProps> = ({
   heartCount,
   modalState = true,
   animation = "opacity",
+  date,
 }) => {
   const { isMobile } = useMedia();
   const variants = useMemo(() => {
@@ -74,11 +76,12 @@ const Modal: React.FC<ModalProps> = ({
 
               <div className="modal-header-center">
                 <span className="modal-title">{title}</span>
+                {date && <span className="modal-date">{date}</span>}
               </div>
 
               <div className="modal-header-right">
                 <div className="modal-close-btn" onClick={onClose}>
-                  <span className="material-symbols-outlined">cancel</span>
+                  <span className="material-symbols-outlined">close</span>
                 </div>
               </div>
             </div>
@@ -146,6 +149,9 @@ const ModalContainer = styled.div<ModalContainerCss>`
   .modal-close-btn {
     cursor: pointer;
     ${hoverStyle01}
+    span {
+      margin-right: 15px;
+    }
   }
   .modal-next-btn,
   .modal-prev-btn {
@@ -196,10 +202,15 @@ const ModalContainer = styled.div<ModalContainerCss>`
   }
   .modal-header-center {
     text-align: center;
+    flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 2px;
+  }
+  .modal-date {
+    color: ${(props) => props.theme.palette.Gray06};
+    font-size: 14px;
   }
   .modal-header-right {
     display: flex;
