@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { NpbadgeIcon } from "@assets/index";
 import { INotefolio } from "@customTypes/notefolio";
@@ -7,6 +7,7 @@ import { onFilterCurrentNoteFolio, onTogglePdfModalState } from "@slices/notefol
 import { useAppDispatch, useAppSelector } from "@store/hook";
 import { media, scalingKeyframes } from "@styles/theme";
 import { postLike } from "@actions/notefolioAction";
+import useNotefolio from "@lib/useNotefolio";
 
 interface NotefoiloCardProps {
   item: INotefolio;
@@ -14,40 +15,35 @@ interface NotefoiloCardProps {
 }
 const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
   const dispatch = useAppDispatch();
-  const me = useAppSelector((state) => state.notefolioSlice.me);
-  const likedLengthRef = useRef<HTMLDivElement>(null);
+  const { onLoadNotefolio } = useNotefolio();
+  const { me } = useAppSelector((state) => state.notefolioSlice);
+  const [notefolio, setNotefolio] = useState<INotefolio>(item);
+  const [saveState, setSaveState] = useState(false);
   const onOpenModal = (id: string) => (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     dispatch(onTogglePdfModalState(true));
     dispatch(onFilterCurrentNoteFolio(id));
   };
+  useEffect(() => {
+    onLoadNotefolio(notefolio?.id as string).then((el) => setNotefolio(el.payload));
+  }, []);
   const likedState = useMemo(() => {
-    return item.likedUserList.filter((el) => el.username === me.username).length >= 1;
-  }, [item]);
+    return notefolio.likedUserList.filter((el) => el.username === me.username).length >= 1;
+  }, [notefolio]);
 
   const onItemClick = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const node = e.target as Element;
     if (node.className.includes("heart")) {
-      const res = await dispatch(postLike(item.id));
-      if (res.payload) {
-        node.className += " active";
-        if (likedLengthRef.current) {
-          likedLengthRef.current.innerText = Number(likedLengthRef.current.innerText) + 1 + "";
-        }
-      } else {
-        node.className = "material-symbols-outlined heart not-draggable";
-        if (likedLengthRef.current) {
-          likedLengthRef.current.innerText = Number(likedLengthRef.current.innerText) - 1 + "";
-        }
-      }
+      await dispatch(postLike(item.id as string));
+      onLoadNotefolio(item.id as string).then((el) => setNotefolio(el.payload));
       return;
     }
     if (node.className.includes("folder")) {
       if (node.className.includes("active")) {
-        node.className = "material-symbols-outlined folder not-draggable";
+        setSaveState(false);
         alert("저장이 취소되었습니다.");
       } else {
-        node.className += " active";
+        setSaveState(true);
         alert("저장되었습니다.");
       }
       return;
@@ -83,7 +79,9 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
           <span className={`material-symbols-outlined heart not-draggable ${likedState && "active"}`}>
             favorite
           </span>
-          <span className="material-symbols-outlined folder not-draggable">create_new_folder</span>
+          <span className={`material-symbols-outlined folder not-draggable ${saveState && "active"}`}>
+            create_new_folder
+          </span>
         </div>
       </div>
 
@@ -110,9 +108,7 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
           </div>
           <div className="notefolio-work-info-view">
             <span className="material-symbols-outlined">favorite</span>
-            <span className="notefolio-like-count" ref={likedLengthRef}>
-              {item.likedUserList.length}
-            </span>
+            <span className="notefolio-like-count">{notefolio.likedUserList.length}</span>
           </div>
         </div>
       </div>

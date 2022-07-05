@@ -1,6 +1,8 @@
 import { postLike } from "@actions/notefolioAction";
-import { useAppDispatch } from "@store/hook";
-import React, { useRef } from "react";
+import { INotefolio } from "@customTypes/notefolio";
+import useNotefolio from "@lib/useNotefolio";
+import { useAppDispatch, useAppSelector } from "@store/hook";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { hoverStyle01, scalingKeyframes } from "../../../styles/theme";
 interface IModalSideNavProps {
@@ -8,57 +10,37 @@ interface IModalSideNavProps {
   heartCount?: number;
   onScaleUp?: () => void;
   onScaleDown?: () => void;
-  id?: string;
 }
-const ModalSideNav: React.FC<IModalSideNavProps> = ({
-  downloadLink,
-  heartCount,
-  onScaleDown,
-  onScaleUp,
-  id,
-}) => {
+const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, onScaleDown, onScaleUp }) => {
   const dispatch = useAppDispatch();
-  const heartCountRef = useRef<HTMLDivElement>(null);
-  const onToggleHeart = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const node = e.target as Element;
-    if (node.className.includes("heart")) {
-      const res = await dispatch(postLike(id as string));
-      if (res.payload) {
-        node.className += " active";
-        if (heartCountRef.current) {
-          heartCountRef.current.innerText = Number(heartCountRef.current.innerText) + 1 + "";
-        }
-      } else {
-        node.className = "material-symbols-outlined heart not-draggable";
-        if (heartCountRef.current) {
-          heartCountRef.current.innerText = Number(heartCountRef.current.innerText) - 1 + "";
-        }
-      }
-      // if (node.className.includes("active")) {
-      //   node.className = "material-symbols-outlined heart not-draggable";
-      //   if (heartCountRef.current) {
-      //     heartCountRef.current.innerText = Number(heartCountRef.current.innerText) - 1 + "";
-      //   }
-      // } else {
-      //   node.className += " active";
-      //   if (heartCountRef.current) {
-      //     heartCountRef.current.innerText = Number(heartCountRef.current.innerText) + 1 + "";
-      //   }
-      // }
-      return;
+  const { onLoadNotefolio } = useNotefolio();
+  const { me, currentNotefolio } = useAppSelector((state) => state.notefolioSlice);
+  const [notefolio, setNotefolio] = useState<INotefolio>(currentNotefolio as INotefolio);
+  const likedState = useMemo(() => {
+    if (notefolio) {
+      return notefolio.likedUserList.filter((el) => el.username === me.username).length >= 1;
     }
+  }, [notefolio]);
+  useEffect(() => {
+    onLoadNotefolio(notefolio?.id as string).then((el) => setNotefolio(el.payload));
+  }, []);
+
+  const onToggleHeart = async () => {
+    await dispatch(postLike(notefolio?.id as string));
+    onLoadNotefolio(notefolio?.id as string).then((el) => setNotefolio(el.payload));
   };
   return (
     <ModalSideNavContainer>
       <div className="modal-side-nav-heart-container">
         <div className="modal-side-nav-heart-wrapper">
-          <span className="material-symbols-outlined heart not-draggable" onClick={onToggleHeart}>
+          <span
+            className={`material-symbols-outlined heart not-draggable ${likedState && "active"}`}
+            onClick={onToggleHeart}
+          >
             favorite
           </span>
         </div>
-        <span className="modal-side-nav-heart-count" ref={heartCountRef}>
-          {heartCount}
-        </span>
+        <span className="modal-side-nav-heart-count">{notefolio.likedUserList.length}</span>
       </div>
       <a href={downloadLink} target="_blank" rel="noreferrer">
         <div className="modal-side-nav-download-wrapper">
