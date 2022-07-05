@@ -62,7 +62,6 @@ export const notefolioSlice = createSlice({
         document.body.style.overflow = "hidden";
       } else {
         document.body.style.overflowY = "unset";
-        state.currentNotefolio = null;
       }
     },
     onToggleSearchModalState: (state: INotefolioSlice, action: PayloadAction<boolean>) => {

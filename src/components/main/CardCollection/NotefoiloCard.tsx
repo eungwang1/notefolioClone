@@ -16,7 +16,7 @@ interface NotefoiloCardProps {
 const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
   const dispatch = useAppDispatch();
   const { onLoadNotefolio } = useNotefolio();
-  const { me } = useAppSelector((state) => state.notefolioSlice);
+  const { me, currentNotefolio } = useAppSelector((state) => state.notefolioSlice);
   const [notefolio, setNotefolio] = useState<INotefolio>(item);
   const [saveState, setSaveState] = useState(false);
   const onOpenModal = (id: string) => (e: React.MouseEvent<HTMLDivElement>) => {
@@ -25,7 +25,8 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
     dispatch(onFilterCurrentNoteFolio(id));
   };
   useEffect(() => {
-    onLoadNotefolio(notefolio?.id as string).then((el) => setNotefolio(el.payload));
+    if (currentNotefolio?.id === item.id)
+      onLoadNotefolio(notefolio?.id as string).then((el) => setNotefolio(el.payload));
   }, []);
   const likedState = useMemo(() => {
     return notefolio.likedUserList.filter((el) => el.username === me.username).length >= 1;
