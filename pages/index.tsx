@@ -6,8 +6,6 @@ import Category from "../src/components/main/Category";
 import Hotcontent from "../src/components/main/Hotcontent";
 import Notefolio from "../src/components/main/Notefolio";
 import styled from "styled-components";
-import PdfModal from "../src/components/main/PdfModal";
-import { useAppSelector } from "../src/store/hook";
 import wrapper from "../src/store/configureStore";
 import {
   getAcademyList,

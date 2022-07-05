@@ -16,10 +16,8 @@ import PdfModal from "../src/components/main/PdfModal";
 import SearchResult from "../src/components/search/SearchResult";
 import { onClearNotefolioList } from "../src/slices/notefolioSlice";
 import wrapper from "../src/store/configureStore";
-import { useAppSelector } from "../src/store/hook";
 
 const Search = () => {
-  const pdfModalState = useAppSelector((state) => state.notefolioSlice.pdfModalState);
   return (
     <AppLayout>
       <SearchContainer>
