@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
@@ -8,7 +9,7 @@ const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <div className="header-banner">
-        <img src="/images/banner.png" alt="banner" width="100%" height="auto" />
+        <Image src="/images/banner.png" alt="banner" width={1440} height={84} layout="responsive" />
       </div>
       <div className="family-gnb">
         <Link href="/">
@@ -47,7 +48,7 @@ const HeaderContainer = styled.div`
     box-sizing: border-box;
   }
   .header-banner {
-    display: flex;
+    display: block;
     width: 50%;
     margin: 0 auto;
     ${media.tb} {
