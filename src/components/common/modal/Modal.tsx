@@ -58,7 +58,14 @@ const Modal: React.FC<ModalProps> = ({
     <>
       {modalState && (
         <ModalContainer width={width} className={className}>
-          <div className="modal-dimmed" onClick={onClose}></div>
+          <motion.div
+            variants={variants}
+            initial="initial"
+            animate="animate"
+            exit="leaving"
+            className="modal-dimmed"
+            onClick={onClose}
+          ></motion.div>
           <motion.div
             className="modal-container"
             key="modal"
@@ -129,7 +136,7 @@ const ModalContainer = styled.div<ModalContainerCss>`
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.8);
   }
   .modal-wrapper {
     width: 100%;
