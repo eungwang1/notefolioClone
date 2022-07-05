@@ -10,6 +10,7 @@ import MiddleBanner from "./MiddleBanner";
 import NotefoiloCard from "./CardCollection/NotefoiloCard";
 import LoadingSpinner from "@components/common/LoadingSpinner";
 import { useRouter } from "next/router";
+import PdfModal from "./pdfComponent/PdfModal";
 const Notefolio: React.FC = () => {
   const { notefolioList, getNotefolioListLoading } = useAppSelector((state) => state.notefolioSlice);
   const router = useRouter();
@@ -22,7 +23,7 @@ const Notefolio: React.FC = () => {
     targetArray: notefolioList,
     fetchAction: onLoadNotefolioList,
     threshold: 1,
-    rootMargin: "500px 0px",
+    rootMargin: "200px 0px",
     sort: sort as string,
     searchValue: search as string,
     category: category as string,
@@ -49,9 +50,10 @@ const Notefolio: React.FC = () => {
           <NotefoiloCard item={item} idx={idx} key={shortid.generate()} />
         ))}
       </div>
-      <div ref={target} className="Loading">
-        {getNotefolioListLoading && <LoadingSpinner />}
+      <div ref={target}>
+        {getNotefolioListLoading && <LoadingSpinner height="150px" position="flex-start" />}
       </div>
+      <PdfModal />
     </NotefolioContainer>
   );
 };

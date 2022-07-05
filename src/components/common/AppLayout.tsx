@@ -30,7 +30,6 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
       >
         <SearchInput size="large" className="mobile-search-input-container" onAfterSearch={onClose} />
       </Modal>
-      <PdfModal />
     </AppLayoutContainer>
   );
 };

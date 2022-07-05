@@ -47,7 +47,7 @@ const PdfDocument: React.FC<PdfDocumentProps> = ({
       <Document
         file={currentNotefolio?.pdfsrc}
         onLoadSuccess={onDocumentLoadSuccess}
-        loading={<LoadingSpinner />}
+        loading={<LoadingSpinner height={`calc(100vh - 60px)`} />}
       >
         <PdfPage />
       </Document>
