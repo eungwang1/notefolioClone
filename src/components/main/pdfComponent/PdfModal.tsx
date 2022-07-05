@@ -1,11 +1,11 @@
 import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import { convertToDateTime } from "../../lib/convertToDateTime";
-import { useMedia } from "../../lib/useMediaQuery";
-import { onTogglePdfModalState } from "../../slices/notefolioSlice";
-import { useAppDispatch, useAppSelector } from "../../store/hook";
-import Modal from "../common/modal/Modal";
+import { convertToDateTime } from "../../../lib/convertToDateTime";
+import { useMedia } from "../../../lib/useMediaQuery";
+import { onTogglePdfModalState } from "../../../slices/notefolioSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hook";
+import Modal from "../../common/modal/Modal";
 import PdfDocument from "./PdfDocument";
 
 const PdfModal: React.FC = () => {

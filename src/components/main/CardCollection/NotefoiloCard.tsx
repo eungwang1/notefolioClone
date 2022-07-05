@@ -56,6 +56,7 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
             layout="responsive"
             blurDataURL="https://via.placeholder.com/480"
             placeholder="blur"
+            priority={true}
           />
         </div>
         <div className="notefolio-work-item-hover-background"></div>

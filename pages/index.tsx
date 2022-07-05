@@ -14,17 +14,23 @@ import {
   getRecruitList,
 } from "../src/actions/notefolioAction";
 import { onClearNotefolioList } from "../src/slices/notefolioSlice";
+import Head from "next/head";
 const Main = () => {
   return (
-    <AppLayout>
-      <MainContainer>
-        <Header />
-        <Nav />
-        <Hotcontent />
-        <Category />
-        <Notefolio />
-      </MainContainer>
-    </AppLayout>
+    <>
+      <Head>
+        <title>해피폴리오</title>
+      </Head>
+      <AppLayout>
+        <MainContainer>
+          <Header />
+          <Nav />
+          <Hotcontent />
+          <Category />
+          <Notefolio />
+        </MainContainer>
+      </AppLayout>
+    </>
   );
 };
 

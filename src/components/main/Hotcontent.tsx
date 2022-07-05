@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import HotcontentSwiper from "./HotcontentSwiper";
-import MiniCard from "./CardCollection/MiniCard";
+import MiniCard from "./cardCollection/MiniCard";
 import { media } from "../../styles/theme";
 import { useAppSelector } from "../../store/hook";
 import useNotefolio from "../../lib/useNotefolio";

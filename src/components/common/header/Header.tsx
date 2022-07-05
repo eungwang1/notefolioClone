@@ -9,7 +9,14 @@ const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <div className="header-banner">
-        <Image src="/images/banner.png" alt="banner" width={1440} height={84} layout="responsive" />
+        <Image
+          src="/images/banner.png"
+          alt="banner"
+          width={1440}
+          height={84}
+          layout="responsive"
+          priority={true}
+        />
       </div>
       <div className="family-gnb">
         <Link href="/">

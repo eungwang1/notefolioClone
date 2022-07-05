@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { useAppSelector } from "../../store/hook";
-import AcademyCard from "./CardCollection/AcademyCard";
+import AcademyCard from "./cardCollection/AcademyCard";
 import { useMedia } from "../../lib/useMediaQuery";
 import { responsiveAcademyItemCount } from "../../lib/responsiveValueList";
 import { media } from "../../styles/theme";

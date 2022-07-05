@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { onTogglePdfModalState, onToggleSearchModalState } from "../../slices/notefolioSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
-import PdfModal from "../main/PdfModal";
+import PdfModal from "../main/pdfComponent/PdfModal";
 import FooterMobile from "./footer/FooterMobile";
 import FooterPc from "./footer/FooterPc";
 import SearchInput from "./header/Search";
