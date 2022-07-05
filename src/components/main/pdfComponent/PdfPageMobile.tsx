@@ -1,9 +1,8 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
-import { Page, Document } from "react-pdf";
-import LoadingSpinner from "../../common/LoadingSpinner";
-import styled from "styled-components";
+import { Page } from "react-pdf";
+import LoadingSpinner from "@components/common/LoadingSpinner";
 
 interface PdfDocumentMobileProps {
   numPages: number;

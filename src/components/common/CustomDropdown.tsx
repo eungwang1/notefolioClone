@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Dropdown from "rc-dropdown";
 import Menu, { Item as MenuItem } from "rc-menu";
 import styled from "styled-components";
-import { hoverStyle01, hoverStyle03 } from "../../styles/theme";
+import { hoverStyle01, hoverStyle03 } from "@styles/theme";
 import { useRouter } from "next/router";
 interface items {
   value: string;

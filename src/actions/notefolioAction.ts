@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getNotefolioListParams } from "../customTypes/params";
+import { getNotefolioListParams } from "@customTypes/params";
 
 const api =
   process.env.NODE_ENV === "development"

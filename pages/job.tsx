@@ -1,7 +1,7 @@
+import AppLayout from "@components/common/AppLayout";
+import Header from "@components/common/header/Header";
+import Nav from "@components/common/header/Nav";
 import React from "react";
-import AppLayout from "../src/components/common/AppLayout";
-import Header from "../src/components/common/header/Header";
-import Nav from "../src/components/common/header/Nav";
 
 const Job = () => {
   return (

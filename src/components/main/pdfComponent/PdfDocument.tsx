@@ -2,10 +2,10 @@ import React, { useMemo } from "react";
 import { PDFDocumentProxy } from "pdfjs-dist/types/src/display/api";
 import { Document } from "react-pdf";
 import styled from "styled-components";
-import { responsivePdfWidth } from "../../../lib/responsiveValueList";
-import { useAppSelector } from "../../../store/hook";
-import LoadingSpinner from "../../common/LoadingSpinner";
-import { media } from "../../../styles/theme";
+import { responsivePdfWidth } from "@lib/responsiveValueList";
+import { useAppSelector } from "@store/hook";
+import { media } from "@styles/theme";
+import LoadingSpinner from "@components/common/LoadingSpinner";
 import PdfPageMobile from "./PdfPageMobile";
 import PdfPagePc from "./PdfPagePc";
 interface PdfDocumentProps {

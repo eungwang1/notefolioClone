@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useMedia } from "../../lib/useMediaQuery";
-import { media } from "../../styles/theme";
-import CustomDropdown from "../common/CustomDropdown";
+import { useMedia } from "@lib/useMediaQuery";
+import { media } from "@styles/theme";
+import CustomDropdown from "@components/common/CustomDropdown";
 import CategorySwiper from "./CategorySwiper";
 
 const Category: React.FC = () => {

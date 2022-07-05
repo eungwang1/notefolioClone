@@ -1,12 +1,11 @@
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-import { NpbadgeIcon } from "../../../assets";
-import { INotefolio } from "../../../customTypes/notefolio";
-import useNotefolio from "../../../lib/useNotefolio";
-import { onFilterCurrentNoteFolio, onTogglePdfModalState } from "../../../slices/notefolioSlice";
-import { useAppDispatch } from "../../../store/hook";
-import { media, scalingKeyframes } from "../../../styles/theme";
+import { NpbadgeIcon } from "@assets/index";
+import { INotefolio } from "@customTypes/notefolio";
+import { onFilterCurrentNoteFolio, onTogglePdfModalState } from "@slices/notefolioSlice";
+import { useAppDispatch } from "@store/hook";
+import { media, scalingKeyframes } from "@styles/theme";
 
 interface NotefoiloCardProps {
   item: INotefolio;
@@ -45,7 +44,7 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
   };
   return (
     <NotefoiloCardContainer>
-      <div className="notefolio-work-item-block image-hover" onClick={(e) => onOpenModal(item.id)(e)}>
+      <div className="notefolio-work-item-block image-hover" onClick={onOpenModal(item.id)}>
         <div>
           <Image
             className="notefolio-work-item-thumbnail"

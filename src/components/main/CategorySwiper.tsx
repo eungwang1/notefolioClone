@@ -2,14 +2,14 @@ import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
-import { hoverStyle01, media } from "../../styles/theme";
-import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { onSelectCategory } from "../../slices/notefolioSlice";
-import { useMedia } from "../../lib/useMediaQuery";
-import { responsiveCategorySwiperCount } from "../../lib/responsiveValueList";
-import { useRouter } from "next/router";
-import { ICategory } from "../../customTypes/notefolio";
 import { motion } from "framer-motion";
+import { hoverStyle01, media } from "@styles/theme";
+import { useAppDispatch, useAppSelector } from "@store/hook";
+import { onSelectCategory } from "@slices/notefolioSlice";
+import { useMedia } from "@lib/useMediaQuery";
+import { responsiveCategorySwiperCount } from "@lib/responsiveValueList";
+import { useRouter } from "next/router";
+import { ICategory } from "@customTypes/notefolio";
 
 const CategorySwiper: React.FC = () => {
   const { categories } = useAppSelector((state) => state.notefolioSlice);

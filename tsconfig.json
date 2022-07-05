@@ -15,8 +15,20 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pages/*": ["pages/*"],
+      "@components/*": ["src/components/*"],
+      "@slices/*": ["src/slices/*"],
+      "@store/*": ["src/store/*"],
+      "@lib/*": ["src/lib/*"],
+      "@actions/*": ["src/actions/*"],
+      "@customTypes/*": ["src/customTypes/*"],
+      "@assets/*": ["src/assets/*"],
+      "@styles/*": ["src/styles/*"]
+    }
   },
-  "include": ["src", "pages/Job.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

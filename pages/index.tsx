@@ -1,42 +1,30 @@
 import React from "react";
-import AppLayout from "../src/components/common/AppLayout";
-import Header from "../src/components/common/header/Header";
-import Nav from "../src/components/common/header/Nav";
-import Category from "../src/components/main/Category";
-import TopContent from "../src/components/main/topContent/TopContent";
-import Notefolio from "../src/components/main/Notefolio";
 import styled from "styled-components";
-import wrapper from "../src/store/configureStore";
-import {
-  getAcademyList,
-  getCreatorList,
-  getNotefolioList,
-  getRecruitList,
-} from "../src/actions/notefolioAction";
-import { onClearNotefolioList } from "../src/slices/notefolioSlice";
-import useScrollRestoration from "../src/lib/useScrollRestoration";
-import Head from "next/head";
+import { getAcademyList, getCreatorList, getNotefolioList, getRecruitList } from "@actions/notefolioAction";
 import { useRouter } from "next/router";
+import AppLayout from "@components/common/AppLayout";
+import Header from "@components/common/header/Header";
+import Nav from "@components/common/header/Nav";
+import TopContent from "@components/main/topContent/TopContent";
+import Category from "@components/main/Category";
+import Notefolio from "@components/main/Notefolio";
+import useScrollRestoration from "@lib/useScrollRestoration";
+import wrapper from "@store/configureStore";
+import { onClearNotefolioList } from "@slices/notefolioSlice";
 const Main = () => {
   const router = useRouter();
   const { category, sort } = router.query;
   useScrollRestoration("main", [category as string, sort as string]);
-
   return (
-    <>
-      <Head>
-        <title>해피폴리오</title>
-      </Head>
-      <AppLayout>
-        <MainContainer>
-          <Header />
-          <Nav />
-          <TopContent />
-          <Category />
-          <Notefolio />
-        </MainContainer>
-      </AppLayout>
-    </>
+    <AppLayout>
+      <MainContainer>
+        <Header />
+        <Nav />
+        <TopContent />
+        <Category />
+        <Notefolio />
+      </MainContainer>
+    </AppLayout>
   );
 };
 

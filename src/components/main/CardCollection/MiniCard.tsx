@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-import { SpeakerIcon } from "../../../assets";
-import { hoverStyle01 } from "../../../styles/theme";
+import { SpeakerIcon } from "@assets/index";
+import { hoverStyle01 } from "@styles/theme";
 interface MiniCardProps {
   image?: string;
   title?: string;

@@ -1,13 +1,12 @@
-import { stat } from "fs";
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { onTogglePdfModalState, onToggleSearchModalState } from "../../slices/notefolioSlice";
-import { useAppDispatch, useAppSelector } from "../../store/hook";
-import PdfModal from "../main/pdfComponent/PdfModal";
-import FooterMobile from "./footer/FooterMobile";
+import { onToggleSearchModalState } from "@slices/notefolioSlice";
+import { useAppDispatch, useAppSelector } from "@store/hook";
+import PdfModal from "@components/main/pdfComponent/PdfModal";
 import FooterPc from "./footer/FooterPc";
-import SearchInput from "./header/Search";
+import FooterMobile from "./footer/FooterMobile";
 import Modal from "./modal/Modal";
+import SearchInput from "./header/Search";
 
 interface AppLayoutProps {
   children: React.ReactNode;

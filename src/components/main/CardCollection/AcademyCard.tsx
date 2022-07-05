@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IAcademy } from "../../../customTypes/notefolio";
+import { IAcademy } from "@customTypes/notefolio";
 interface AcademyCardProps {
   item: IAcademy;
 }

@@ -1,14 +1,14 @@
 import React, { useMemo, useRef } from "react";
 import styled from "styled-components";
-import useNotefolio from "../../lib/useNotefolio";
-import { useAppSelector } from "../../store/hook";
-import useInfinityScroll from "../../lib/useInfinityScroll";
-import MiddleBanner from "./MiddleBanner";
-import { useMedia } from "../../lib/useMediaQuery";
-import { responsiveSliceCount } from "../../lib/responsiveValueList";
-import NotefoiloCard from "./CardCollection/NotefoiloCard";
+import useNotefolio from "@lib/useNotefolio";
+import { useAppSelector } from "@store/hook";
+import useInfinityScroll from "@lib/useInfinityScroll";
+import { useMedia } from "@lib/useMediaQuery";
+import { responsiveSliceCount } from "@lib/responsiveValueList";
 import shortid from "shortid";
-import LoadingSpinner from "../common/LoadingSpinner";
+import MiddleBanner from "./MiddleBanner";
+import NotefoiloCard from "./CardCollection/NotefoiloCard";
+import LoadingSpinner from "@components/common/LoadingSpinner";
 import { useRouter } from "next/router";
 const Notefolio: React.FC = () => {
   const { notefolioList, getNotefolioListLoading } = useAppSelector((state) => state.notefolioSlice);

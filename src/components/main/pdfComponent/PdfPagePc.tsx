@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { opacityVariants } from "../../../lib/motionVariants";
 import { Page } from "react-pdf";
-import LoadingSpinner from "../../common/LoadingSpinner";
+import { opacityVariants } from "@lib/motionVariants";
+import LoadingSpinner from "@components/common/LoadingSpinner";
 interface PdfDocumentProps {
   pageNumber: number;
   scale: number;
