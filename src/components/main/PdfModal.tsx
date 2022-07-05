@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { convertToDateTime } from "../../lib/convertToDateTime";
 import { useMedia } from "../../lib/useMediaQuery";
@@ -10,6 +10,7 @@ import PdfDocument from "./PdfDocument";
 
 const PdfModal: React.FC = () => {
   const { currentNotefolio } = useAppSelector((state) => state.notefolioSlice);
+  const pdfModalState = useAppSelector((state) => state.notefolioSlice.pdfModalState);
   const [numPages, setNumPages] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1);
@@ -17,7 +18,9 @@ const PdfModal: React.FC = () => {
   const maxScale = 1.4;
   const minScale = 0.6;
   const dispatch = useAppDispatch();
-  const pdfModalState = useAppSelector((state) => state.notefolioSlice.pdfModalState);
+  useEffect(() => {
+    setPageNumber(1);
+  }, [pdfModalState]);
   const onClose = () => {
     dispatch(onTogglePdfModalState(false));
   };
@@ -41,6 +44,7 @@ const PdfModal: React.FC = () => {
       setScale((scale) => scale - 0.2);
     }
   };
+
   const resposivePdfWidth = useMemo(() => {
     if (isMobileSmall) return 350;
     if (isMobile) return 550;
