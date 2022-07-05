@@ -54,6 +54,7 @@ export const notefolioSlice = createSlice({
         document.body.style.overflow = "hidden";
       } else {
         document.body.style.overflowY = "unset";
+        state.currentNotefolio = null;
       }
     },
     onToggleSearchModalState: (state: INotefolioSlice, action: PayloadAction<boolean>) => {
@@ -76,6 +77,9 @@ export const notefolioSlice = createSlice({
     onChangePdfPageNumber: (state: INotefolioSlice, action: PayloadAction<number>) => {
       state.pdfMobilePage = action.payload;
     },
+    onFilterCurrentNoteFolio: (state: INotefolioSlice, action: PayloadAction<string>) => {
+      state.currentNotefolio = state.notefolioList.filter((item) => item.id === action.payload)[0];
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -96,7 +100,7 @@ export const notefolioSlice = createSlice({
       })
       .addCase(getNotefolio.fulfilled, (state, action: PayloadAction<INotefolio>) => {
         state.getNotefolioLoading = false;
-        state.currentNotefolio = action.payload;
+        // state.currentNotefolio = action.payload;
       })
       .addCase(getNotefolio.rejected, (state, action: ReturnType<typeof getNotefolio.rejected>) => {
         state.getNotefolioLoading = false;
@@ -145,5 +149,6 @@ export const {
   onClearCurrentPdf,
   onClearNotefolioList,
   onSelectCategory,
+  onFilterCurrentNoteFolio,
 } = notefolioSlice.actions;
 export default notefolioSlice.reducer;

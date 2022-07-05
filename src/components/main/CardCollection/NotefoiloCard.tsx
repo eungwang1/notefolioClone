@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { NpbadgeIcon } from "../../../assets";
 import { INotefolio } from "../../../customTypes/notefolio";
 import useNotefolio from "../../../lib/useNotefolio";
-import { onTogglePdfModalState } from "../../../slices/notefolioSlice";
+import { onFilterCurrentNoteFolio, onTogglePdfModalState } from "../../../slices/notefolioSlice";
 import { useAppDispatch } from "../../../store/hook";
 import { media, scalingKeyframes } from "../../../styles/theme";
 
@@ -14,11 +14,12 @@ interface NotefoiloCardProps {
 }
 const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
   const dispatch = useAppDispatch();
-  const { onLoadNotefolio } = useNotefolio();
-  const onOpenModal = (id: string) => {
+  const onOpenModal = (id: string) => (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
     dispatch(onTogglePdfModalState(true));
-    onLoadNotefolio(id);
+    dispatch(onFilterCurrentNoteFolio(id));
   };
+
   const onItemClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const node = e.target as Element;
     if (node.className.includes("heart")) {
@@ -44,7 +45,7 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
   };
   return (
     <NotefoiloCardContainer>
-      <div className="notefolio-work-item-block image-hover" onClick={() => onOpenModal(item.id)}>
+      <div className="notefolio-work-item-block image-hover" onClick={(e) => onOpenModal(item.id)(e)}>
         <div>
           <Image
             className="notefolio-work-item-thumbnail"
