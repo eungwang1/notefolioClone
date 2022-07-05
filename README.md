@@ -2,4 +2,4 @@
 
 - npm install
 - npx json-server db.json --port 4000
-- npm start
+- npm run dev

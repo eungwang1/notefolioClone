@@ -47,7 +47,7 @@ const CategorySwiper: React.FC = () => {
         modules={[Navigation]}
         className="category-swiper"
       >
-        {categories.map((category, idx) => (
+        {categories.map((category) => (
           <SwiperSlide key={category.title}>
             <button
               className={`category-swiper-name ${router.query.category === category.code && "active"}`}
@@ -61,10 +61,10 @@ const CategorySwiper: React.FC = () => {
         ))}
       </Swiper>
       <div className="category-swiper-prev-btn">
-        <span className="material-symbols-outlined">arrow_back_ios</span>
+        <span className="material-symbols-outlined not-draggable">arrow_back_ios</span>
       </div>
       <div className="category-swiper-next-btn">
-        <span className="material-symbols-outlined">arrow_forward_ios</span>
+        <span className="material-symbols-outlined not-draggable">arrow_forward_ios</span>
       </div>
     </CategorySwiperContainer>
   );

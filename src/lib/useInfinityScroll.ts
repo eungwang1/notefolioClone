@@ -25,8 +25,6 @@ const useInfinityScroll = ({
 }: useInfinityScrollProps) => {
   const page = useRef(0);
   const count = useRef(0);
-  const router = useRouter();
-  const dispatch = useAppDispatch();
   const onIntersect: IntersectionObserverCallback = async ([entry], observer) => {
     if (count.current === targetArray.length) {
       return observer.disconnect();

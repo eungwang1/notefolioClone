@@ -1,18 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  getAcademyList,
-  getCreatorList,
-  getNotefolioList,
-  getRecruitList,
-} from "../src/actions/notefolioAction";
+import { getAcademyList, getNotefolioList } from "../src/actions/notefolioAction";
 import AppLayout from "../src/components/common/AppLayout";
 import Header from "../src/components/common/header/Header";
 import Nav from "../src/components/common/header/Nav";
 import SearchInput from "../src/components/common/header/Search";
 import Category from "../src/components/main/Category";
 import Notefolio from "../src/components/main/Notefolio";
-import PdfModal from "../src/components/main/PdfModal";
 import SearchResult from "../src/components/search/SearchResult";
 import { onClearNotefolioList } from "../src/slices/notefolioSlice";
 import wrapper from "../src/store/configureStore";

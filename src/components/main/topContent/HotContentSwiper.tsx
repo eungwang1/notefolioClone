@@ -1,13 +1,13 @@
 import React, { useMemo } from "react";
-import CreatorCard from "./cardCollection/CreatorCard";
+import CreatorCard from "../cardCollection/CreatorCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import styled from "styled-components";
-import { hoverStyle01, media } from "../../styles/theme";
-import { useMedia } from "../../lib/useMediaQuery";
-import { useAppSelector } from "../../store/hook";
-import { responsiveCreatorSwiperCount } from "../../lib/responsiveValueList";
-const HotcontentSwiper: React.FC = () => {
+import { hoverStyle01, media } from "../../../styles/theme";
+import { useMedia } from "../../../lib/useMediaQuery";
+import { useAppSelector } from "../../../store/hook";
+import { responsiveCreatorSwiperCount } from "../../../lib/responsiveValueList";
+const HotContentSwiper: React.FC = () => {
   const { creatorList } = useAppSelector((state) => state.notefolioSlice);
   const { isMobile, isTablet, isMobileSmall } = useMedia();
   const slidesPerView = useMemo(() => {
@@ -17,7 +17,7 @@ const HotcontentSwiper: React.FC = () => {
     return responsiveCreatorSwiperCount.pc;
   }, [isMobile, isTablet, isMobileSmall]);
   return (
-    <HotcontentSwiperContainer>
+    <HotContentSwiperContainer>
       <Swiper
         slidesPerView={slidesPerView}
         slidesPerGroup={1}
@@ -41,19 +41,19 @@ const HotcontentSwiper: React.FC = () => {
         ))}
 
         <div className="hotcontent-swiper-prev-btn">
-          <span className="material-symbols-outlined">arrow_back_ios</span>
+          <span className="material-symbols-outlined not-draggable">arrow_back_ios</span>
         </div>
         <div className="hotcontent-swiper-next-btn">
-          <span className="material-symbols-outlined">arrow_forward_ios</span>
+          <span className="material-symbols-outlined not-draggable">arrow_forward_ios</span>
         </div>
       </Swiper>
-    </HotcontentSwiperContainer>
+    </HotContentSwiperContainer>
   );
 };
 
-export default HotcontentSwiper;
+export default HotContentSwiper;
 
-const HotcontentSwiperContainer = styled.div`
+const HotContentSwiperContainer = styled.div`
   padding: 24px;
   width: 80%;
   ${media.custom(1340)} {

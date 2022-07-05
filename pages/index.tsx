@@ -3,7 +3,7 @@ import AppLayout from "../src/components/common/AppLayout";
 import Header from "../src/components/common/header/Header";
 import Nav from "../src/components/common/header/Nav";
 import Category from "../src/components/main/Category";
-import Hotcontent from "../src/components/main/Hotcontent";
+import TopContent from "../src/components/main/topContent/TopContent";
 import Notefolio from "../src/components/main/Notefolio";
 import styled from "styled-components";
 import wrapper from "../src/store/configureStore";
@@ -25,7 +25,7 @@ const Main = () => {
         <MainContainer>
           <Header />
           <Nav />
-          <Hotcontent />
+          <TopContent />
           <Category />
           <Notefolio />
         </MainContainer>
@@ -36,11 +36,7 @@ const Main = () => {
 
 export default Main;
 
-const MainContainer = styled.div`
-  .pdf-page {
-    transition: all 0.2s;
-  }
-`;
+const MainContainer = styled.div``;
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
   const { search, sort, category } = ctx.query;
