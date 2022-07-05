@@ -12,15 +12,21 @@ const randomNumber = (start, end) => {
 
 const notefolio = Array.from({ length: notefolioLength }, (v, i) => {
   const random1to9 = randomNumber(0, 9);
+  const random5to100 = randomNumber(5, 100);
+  const likedUserList = Array.from({ length: random5to100 }, (v, i) => ({
+    id: i + "",
+    username: faker.name.middleName(),
+  }));
   return {
     createdAt: faker.date.between("2021-01-01T00:00:00.000Z", "2022-07-04T00:00:00.000Z"),
+    likedUserList,
     username: faker.name.middleName(),
     profile: faker.image.avatar(),
     title: faker.lorem.sentence(),
     contentimg: faker.image.animals(480, 480, true),
     pdfsrc: "/pdf/sample.pdf",
     viewcount: parseInt(Math.random() * 100),
-    likecount: parseInt(Math.random() * 100),
+    likecount: likedUserList.length,
     id: i + 1 + "",
     category: categoryList[random1to9],
   };

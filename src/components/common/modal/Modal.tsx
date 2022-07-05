@@ -23,6 +23,7 @@ interface ModalProps {
   src?: string;
   heartCount?: number;
   date?: string;
+  id?: string;
 }
 const Modal: React.FC<ModalProps> = ({
   children,
@@ -42,6 +43,7 @@ const Modal: React.FC<ModalProps> = ({
   modalState = true,
   animation = "opacity",
   date,
+  id,
 }) => {
   const { isMobile } = useMedia();
   const variants = useMemo(() => {
@@ -106,6 +108,7 @@ const Modal: React.FC<ModalProps> = ({
                 heartCount={heartCount}
                 onScaleDown={onScaleDown}
                 onScaleUp={onScaleUp}
+                id={id}
               />
             )}
           </motion.div>

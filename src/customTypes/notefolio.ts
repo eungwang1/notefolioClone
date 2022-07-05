@@ -1,5 +1,9 @@
 import { SerializedError } from "@reduxjs/toolkit";
 
+export interface likeObj {
+  username: string;
+  id: string;
+}
 export interface INotefolio {
   username: string;
   profile: string;
@@ -10,6 +14,13 @@ export interface INotefolio {
   likecount: number;
   id: string;
   createdAt: string;
+  likedUserList: likeObj[];
+}
+
+export interface me {
+  username: string;
+  id: string;
+  profileImg: string;
 }
 
 export interface ICreator {
@@ -49,6 +60,7 @@ export interface INotefolioSlice {
   academyList: IAcademy[];
   categories: ICategory[];
   selectedCategory: string;
+  me: me;
   getNotefolioListLoading: boolean;
   getNotefolioListError: SerializedError | null;
   getNotefolioLoading: boolean;
@@ -59,4 +71,6 @@ export interface INotefolioSlice {
   getCreatorListError: SerializedError | null;
   getAcademyListLoading: boolean;
   getAcademyListError: SerializedError | null;
+  postLikeLoading: boolean;
+  postLikeError: SerializedError | null;
 }
