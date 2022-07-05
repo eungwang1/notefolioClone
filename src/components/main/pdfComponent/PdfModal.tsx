@@ -63,8 +63,10 @@ const PdfModal: React.FC = () => {
     width: resposivePdfWidth * scale,
     modalNav: true,
     title: "테스트PDF",
+    item: currentNotefolio,
     src: currentNotefolio ? currentNotefolio.pdfsrc : "",
-    heartCount: currentNotefolio?.likecount,
+    heartCount: currentNotefolio?.likedUserList.length,
+    id: currentNotefolio?.id,
   };
 
   const pdfDocumentProps = {

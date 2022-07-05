@@ -1,3 +1,5 @@
+import { postLike } from "@actions/notefolioAction";
+import { useAppDispatch } from "@store/hook";
 import React, { useRef } from "react";
 import styled from "styled-components";
 import { hoverStyle01, scalingKeyframes } from "../../../styles/theme";
@@ -6,23 +8,43 @@ interface IModalSideNavProps {
   heartCount?: number;
   onScaleUp?: () => void;
   onScaleDown?: () => void;
+  id?: string;
 }
-const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, heartCount, onScaleDown, onScaleUp }) => {
+const ModalSideNav: React.FC<IModalSideNavProps> = ({
+  downloadLink,
+  heartCount,
+  onScaleDown,
+  onScaleUp,
+  id,
+}) => {
+  const dispatch = useAppDispatch();
   const heartCountRef = useRef<HTMLDivElement>(null);
-  const onToggleHeart = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const onToggleHeart = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const node = e.target as Element;
     if (node.className.includes("heart")) {
-      if (node.className.includes("active")) {
-        node.className = "material-symbols-outlined heart not-draggable";
-        if (heartCountRef.current) {
-          heartCountRef.current.innerText = Number(heartCountRef.current.innerText) - 1 + "";
-        }
-      } else {
+      const res = await dispatch(postLike(id as string));
+      if (res.payload) {
         node.className += " active";
         if (heartCountRef.current) {
           heartCountRef.current.innerText = Number(heartCountRef.current.innerText) + 1 + "";
         }
+      } else {
+        node.className = "material-symbols-outlined heart not-draggable";
+        if (heartCountRef.current) {
+          heartCountRef.current.innerText = Number(heartCountRef.current.innerText) - 1 + "";
+        }
       }
+      // if (node.className.includes("active")) {
+      //   node.className = "material-symbols-outlined heart not-draggable";
+      //   if (heartCountRef.current) {
+      //     heartCountRef.current.innerText = Number(heartCountRef.current.innerText) - 1 + "";
+      //   }
+      // } else {
+      //   node.className += " active";
+      //   if (heartCountRef.current) {
+      //     heartCountRef.current.innerText = Number(heartCountRef.current.innerText) + 1 + "";
+      //   }
+      // }
       return;
     }
   };

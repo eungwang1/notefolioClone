@@ -1,11 +1,12 @@
 import Image from "next/image";
-import React from "react";
+import React, { useMemo, useRef } from "react";
 import styled from "styled-components";
 import { NpbadgeIcon } from "@assets/index";
 import { INotefolio } from "@customTypes/notefolio";
 import { onFilterCurrentNoteFolio, onTogglePdfModalState } from "@slices/notefolioSlice";
-import { useAppDispatch } from "@store/hook";
+import { useAppDispatch, useAppSelector } from "@store/hook";
 import { media, scalingKeyframes } from "@styles/theme";
+import { postLike } from "@actions/notefolioAction";
 
 interface NotefoiloCardProps {
   item: INotefolio;
@@ -13,19 +14,31 @@ interface NotefoiloCardProps {
 }
 const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
   const dispatch = useAppDispatch();
+  const me = useAppSelector((state) => state.notefolioSlice.me);
+  const likedLengthRef = useRef<HTMLDivElement>(null);
   const onOpenModal = (id: string) => (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     dispatch(onTogglePdfModalState(true));
     dispatch(onFilterCurrentNoteFolio(id));
   };
+  const likedState = useMemo(() => {
+    return item.likedUserList.filter((el) => el.username === me.username).length >= 1;
+  }, [item]);
 
-  const onItemClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const onItemClick = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const node = e.target as Element;
     if (node.className.includes("heart")) {
-      if (node.className.includes("active")) {
-        node.className = "material-symbols-outlined heart not-draggable";
-      } else {
+      const res = await dispatch(postLike(item.id));
+      if (res.payload) {
         node.className += " active";
+        if (likedLengthRef.current) {
+          likedLengthRef.current.innerText = Number(likedLengthRef.current.innerText) + 1 + "";
+        }
+      } else {
+        node.className = "material-symbols-outlined heart not-draggable";
+        if (likedLengthRef.current) {
+          likedLengthRef.current.innerText = Number(likedLengthRef.current.innerText) - 1 + "";
+        }
       }
       return;
     }
@@ -67,7 +80,9 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
       <div className="notefolio-work-item-hover-content" onClick={onItemClick}>
         <div className="notefolio-work-item-hover-title">{item.title}</div>
         <div className="notefolio-work-item-hover-icon">
-          <span className="material-symbols-outlined heart not-draggable">favorite</span>
+          <span className={`material-symbols-outlined heart not-draggable ${likedState && "active"}`}>
+            favorite
+          </span>
           <span className="material-symbols-outlined folder not-draggable">create_new_folder</span>
         </div>
       </div>
@@ -95,7 +110,9 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
           </div>
           <div className="notefolio-work-info-view">
             <span className="material-symbols-outlined">favorite</span>
-            <span className="notefolio-like-count">{item.likecount}</span>
+            <span className="notefolio-like-count" ref={likedLengthRef}>
+              {item.likedUserList.length}
+            </span>
           </div>
         </div>
       </div>

@@ -1,3 +1,5 @@
+import { INotefolio } from "@customTypes/notefolio";
+import { INotefolioSlice } from "./../customTypes/notefolio";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getNotefolioListParams } from "@customTypes/params";
@@ -59,6 +61,29 @@ export const getAcademyList = createAsyncThunk("get/academyList", async () => {
   try {
     const res = await axios.get(`${api}/academyList`);
     return res.data;
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+export const postLike = createAsyncThunk("post/like", async (id: string, thunkAPI) => {
+  const { me } = (thunkAPI.getState() as { notefolioSlice: INotefolioSlice }).notefolioSlice;
+  try {
+    const res = await axios.get(`http://localhost:4000/notefolio/${id}`);
+    const isLiked =
+      res.data.likedUserList.filter((el: INotefolio) => el.username === me.username).length >= 1;
+    if (isLiked) {
+      await axios.patch(`http://localhost:4000/notefolio/${id}`, {
+        likedUserList: res.data.likedUserList.filter((el: INotefolio) => el.username !== me.username),
+      });
+      return false;
+    } else {
+      const likedUserList = [...res.data.likedUserList, { username: me.username }];
+      await axios.patch(`http://localhost:4000/notefolio/${id}`, {
+        likedUserList,
+      });
+      return true;
+    }
   } catch (e) {
     console.error(e);
   }
