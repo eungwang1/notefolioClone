@@ -69,6 +69,7 @@ const NavContainer = styled.nav`
   .nav-left-logo {
     margin-left: 10px;
     margin-right: 24px;
+    cursor: pointer;
   }
   .nav-left-menu-container {
     display: flex;

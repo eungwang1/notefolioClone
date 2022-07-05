@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
@@ -8,19 +8,28 @@ import { onSelectCategory } from "../../slices/notefolioSlice";
 import { useMedia } from "../../lib/useMediaQuery";
 import { responsiveCategorySwiperCount } from "../../lib/responsiveValueList";
 import { useRouter } from "next/router";
+import { ICategory } from "../../customTypes/notefolio";
 
 const CategorySwiper: React.FC = () => {
   const { categories } = useAppSelector((state) => state.notefolioSlice);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { category } = router.query;
   const { isMobile, isMobileSmall, isPcMiddle, isTablet } = useMedia();
   const swiperCount = useMemo(() => {
     if (isMobileSmall) return responsiveCategorySwiperCount.ms;
     if (isMobile) return responsiveCategorySwiperCount.ml;
     if (isTablet) return responsiveCategorySwiperCount.tb;
     if (isPcMiddle) return responsiveCategorySwiperCount.pcs;
-    return 7;
+    return responsiveCategorySwiperCount.tb;
   }, [isMobile, isMobileSmall, isPcMiddle, isTablet]);
+
+  const isActive = useCallback(
+    (el: ICategory) => {
+      return category + "" === el.code || (!category && el.code === "");
+    },
+    [category]
+  );
   const onSelect = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const button: HTMLButtonElement = e.currentTarget;
@@ -47,15 +56,16 @@ const CategorySwiper: React.FC = () => {
         modules={[Navigation]}
         className="category-swiper"
       >
-        {categories.map((category) => (
-          <SwiperSlide key={category.title}>
+        {categories.map((el) => (
+          <SwiperSlide key={el.title}>
             <button
-              className={`category-swiper-name ${router.query.category === category.code && "active"}`}
+              className={`category-swiper-name ${isActive(el) && "active"}`}
+              disabled={isActive(el)}
               type="button"
-              name={category.code}
+              name={el.code}
               onClick={onSelect}
             >
-              {category.title}
+              {el.title}
             </button>
           </SwiperSlide>
         ))}
