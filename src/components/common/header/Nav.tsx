@@ -7,10 +7,13 @@ import { media } from "../../../styles/theme";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
+import { useAppSelector } from "@store/hook";
+import Image from "next/image";
 interface NavProps {
   searchInput?: boolean;
 }
 const Nav: React.FC<NavProps> = ({ searchInput = true }) => {
+  const me = useAppSelector((state) => state.notefolioSlice.me);
   const router = useRouter();
   const navItem = [
     {
@@ -48,14 +51,28 @@ const Nav: React.FC<NavProps> = ({ searchInput = true }) => {
       </div>
       <div className="nav-center-container">{searchInput && <SearchInput />}</div>
       <div className="nav-right-container">
-        <div className="nav-auth-btn-group">
-          <Link href={routes.HOME}>
+        {me ? (
+          <div className="nav-user-profile-wrapper">
+            <div>
+              <Image
+                src={me.profileImg}
+                width={25}
+                height={25}
+                layout="intrinsic"
+                style={{ borderRadius: "50%" }}
+              />{" "}
+            </div>
+            <div>
+              <span className="nav-user-profile-username">{me.username}</span>
+              <span className="nav-user-profile-greeting"> 님 안녕하세요.</span>
+            </div>
+          </div>
+        ) : (
+          <div className="nav-auth-btn-group">
             <span className="nav-auth-btn-login">로그인</span>
-          </Link>
-          <Link href={routes.HOME}>
             <span className="nav-auth-btn-register">회원가입</span>
-          </Link>
-        </div>
+          </div>
+        )}
       </div>
     </NavContainer>
   );
@@ -85,6 +102,19 @@ const NavContainer = styled.nav`
       display: none;
     }
   }
+  .nav-user-profile-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-right: 20px;
+  }
+  .nav-user-profile-username {
+    font-weight: 800;
+  }
+  .nav-user-profile-greeting {
+    font-size: 14px;
+  }
   .nav-left-menu-item {
     display: flex;
     margin: 0 14px;
@@ -109,21 +139,6 @@ const NavContainer = styled.nav`
     background: ${(props) => props.theme.palette.DarkGray01};
     bottom: -19px;
   }
-  /* .active {
-    ::after {
-      content: "";
-      position: absolute;
-      height: 2px;
-      width: 100%;
-      background: ${(props) => props.theme.palette.DarkGray01};
-      bottom: -19px;
-    }
-    ::selection {
-      background: #31bfc2;
-      color: ${(props) => props.theme.palette.White};
-      text-shadow: none;
-    }
-  } */
 
   .nav-left-container {
     display: flex;

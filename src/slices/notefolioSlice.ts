@@ -4,6 +4,7 @@ import {
   getNotefolio,
   getNotefolioList,
   getRecruitList,
+  postLike,
 } from "./../actions/notefolioAction";
 import { IAcademy, ICreator, INotefolio, INotefolioSlice, IRecruit } from "./../customTypes/notefolio";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -16,6 +17,11 @@ export const initialState: INotefolioSlice = {
   recruitList: [],
   creatorList: [],
   academyList: [],
+  me: {
+    username: "은광",
+    id: "4",
+    profileImg: "/images/profile.png",
+  },
   categories: [
     { title: "전체분야", code: "" },
     { title: "그래픽 디자인", code: "a1" },
@@ -42,6 +48,8 @@ export const initialState: INotefolioSlice = {
   getCreatorListError: null,
   getAcademyListLoading: false,
   getAcademyListError: null,
+  postLikeLoading: false,
+  postLikeError: null,
 };
 
 export const notefolioSlice = createSlice({
