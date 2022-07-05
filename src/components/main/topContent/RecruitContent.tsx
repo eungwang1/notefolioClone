@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useAppSelector } from "../../../store/hook";
 import { media } from "../../../styles/theme";
-import MiniCard from "../cardCollection/MiniCard";
+import MiniCard from "../CardCollection/MiniCard";
 
 const RecruitContent = () => {
   const { recruitList } = useAppSelector((state) => state.notefolioSlice);

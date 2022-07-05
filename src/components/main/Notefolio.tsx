@@ -6,7 +6,7 @@ import useInfinityScroll from "../../lib/useInfinityScroll";
 import MiddleBanner from "./MiddleBanner";
 import { useMedia } from "../../lib/useMediaQuery";
 import { responsiveSliceCount } from "../../lib/responsiveValueList";
-import NotefoiloCard from "./cardCollection/NotefoiloCard";
+import NotefoiloCard from "./CardCollection/NotefoiloCard";
 import shortid from "shortid";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { useRouter } from "next/router";

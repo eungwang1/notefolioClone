@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import HotContentSwiper from "./HotContentSwiper";
-import MiniCard from "../cardCollection/MiniCard";
+import MiniCard from "../CardCollection/MiniCard";
 import { media } from "../../../styles/theme";
 import { useAppSelector } from "../../../store/hook";
 import RecruitContent from "./RecruitContent";

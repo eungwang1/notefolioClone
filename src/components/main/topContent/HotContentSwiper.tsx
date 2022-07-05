@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import CreatorCard from "../cardCollection/CreatorCard";
+import CreatorCard from "../CardCollection/CreatorCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import styled from "styled-components";
