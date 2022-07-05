@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { LogoIcon } from "../../../assets";
 import routes from "../../../lib/routes";
@@ -6,6 +6,7 @@ import SearchInput from "./Search";
 import { media } from "../../../styles/theme";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 interface NavProps {
   searchInput?: boolean;
 }
@@ -23,6 +24,9 @@ const Nav: React.FC<NavProps> = ({ searchInput = true }) => {
       isActive: routes.JOB === router.pathname ? "active" : "",
     },
   ];
+  const swiper = useMemo(() => {
+    return <motion.span layoutId="nav-item" className="nav-left-menu-item-swiper"></motion.span>;
+  }, []);
   return (
     <NavContainer>
       <div className="nav-left-container">
@@ -34,7 +38,10 @@ const Nav: React.FC<NavProps> = ({ searchInput = true }) => {
         <div className="nav-left-menu-container">
           {navItem.map((item, idx) => (
             <Link href={item.to} key={idx}>
-              <span className={`nav-left-menu-item ${item.isActive}`}>{item.name}</span>
+              <span className={`nav-left-menu-item ${item.isActive}`}>
+                {item.name}
+                {item.isActive && swiper}
+              </span>
             </Link>
           ))}
         </div>
@@ -92,8 +99,17 @@ const NavContainer = styled.nav`
     line-height: 18px;
     text-align: center;
     cursor: pointer;
+    position: relative;
   }
-  .active {
+  .nav-left-menu-item-swiper {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 100%;
+    background: ${(props) => props.theme.palette.DarkGray01};
+    bottom: -19px;
+  }
+  /* .active {
     ::after {
       content: "";
       position: absolute;
@@ -107,7 +123,7 @@ const NavContainer = styled.nav`
       color: ${(props) => props.theme.palette.White};
       text-shadow: none;
     }
-  }
+  } */
 
   .nav-left-container {
     display: flex;

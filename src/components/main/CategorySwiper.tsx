@@ -9,6 +9,7 @@ import { useMedia } from "../../lib/useMediaQuery";
 import { responsiveCategorySwiperCount } from "../../lib/responsiveValueList";
 import { useRouter } from "next/router";
 import { ICategory } from "../../customTypes/notefolio";
+import { motion } from "framer-motion";
 
 const CategorySwiper: React.FC = () => {
   const { categories } = useAppSelector((state) => state.notefolioSlice);
@@ -65,7 +66,13 @@ const CategorySwiper: React.FC = () => {
               name={el.code}
               onClick={onSelect}
             >
-              {el.title}
+              {isActive(el) && (
+                <motion.span
+                  className="category-swiper-name-swiper"
+                  layoutId="category-swiper-name-swiper"
+                ></motion.span>
+              )}
+              <span className="category-swiper-name-title">{el.title}</span>
             </button>
           </SwiperSlide>
         ))}
@@ -96,13 +103,28 @@ const CategorySwiperContainer = styled.div`
     border-radius: 3px;
     margin: 0 auto;
     cursor: pointer;
+    position: relative;
+    z-index: 3;
+  }
+  .category-swiper-name-swiper {
+    /* background-color: ${(props) => props.theme.palette.Gray05}; */
+    background-color: ${(props) => props.theme.palette.SkyBlue02};
+    position: absolute;
+    border-radius: 3px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  .category-swiper-name-title {
+    position: relative;
   }
   .swiper-slide {
     text-align: center;
   }
   .category-swiper-name.active {
-    background-color: ${(props) => props.theme.palette.Gray05};
     font-weight: 700;
+    color: ${(props) => props.theme.palette.Mint02};
   }
   .category-swiper {
   }
