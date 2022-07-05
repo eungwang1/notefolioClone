@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { hoverStyle01 } from "@styles/theme";
 interface CreatorCardProps {
@@ -9,17 +9,14 @@ interface CreatorCardProps {
   category?: string;
 }
 const CreatorCard: React.FC<CreatorCardProps> = ({ coverImage, profileImage, username, category }) => {
+  const [followState, setFollowState] = useState(false);
   const onFollow = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const node = e.target as Element;
-    if (node.className === "card-follow-btn") {
+    if (!followState) {
       alert("팔로우 하였습니다.");
-      node.className += " active";
-      node.innerHTML = "팔로잉";
-      console.log(node);
+      setFollowState(true);
     } else {
       alert("팔로우를 취소하였습니다.");
-      node.className = "card-follow-btn";
-      node.innerHTML = "팔로우";
+      setFollowState(false);
     }
   };
   return (
@@ -66,8 +63,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ coverImage, profileImage, use
       <div className="card-user-info">
         <div className="card-user-name">{username}</div>
         <div className="card-user-category">{category}</div>
-        <div className="card-follow-btn" onClick={onFollow}>
-          팔로우
+        <div className={`card-follow-btn ${followState && "active"}`} onClick={onFollow}>
+          {followState ? "팔로잉" : "팔로우"}
         </div>
       </div>
     </CreatorCardContainer>

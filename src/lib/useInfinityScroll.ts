@@ -1,3 +1,4 @@
+import { PayloadAction } from "@reduxjs/toolkit";
 import { useRouter } from "next/router";
 import React, { MutableRefObject, useEffect, useRef } from "react";
 import { useAppDispatch } from "./../store/hook";
@@ -5,7 +6,7 @@ import { debounce, throttle } from "lodash";
 import { onClearNotefolioList } from "../slices/notefolioSlice";
 interface useInfinityScrollProps {
   target: MutableRefObject<HTMLDivElement | null>;
-  fetchAction: (...params: any) => Promise<void>;
+  fetchAction: (...params: any) => Promise<any>;
   targetArray: Array<any>;
   threshold?: number;
   rootMargin?: string;

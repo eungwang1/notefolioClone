@@ -103,18 +103,6 @@ export const notefolioSlice = createSlice({
         state.getNotefolioListError = action.error;
       })
 
-      .addCase(getNotefolio.pending, (state) => {
-        state.getNotefolioLoading = true;
-      })
-      .addCase(getNotefolio.fulfilled, (state, action: PayloadAction<INotefolio>) => {
-        state.getNotefolioLoading = false;
-        // state.currentNotefolio = action.payload;
-      })
-      .addCase(getNotefolio.rejected, (state, action: ReturnType<typeof getNotefolio.rejected>) => {
-        state.getNotefolioLoading = false;
-        state.getNotefolioError = action.error;
-      })
-
       .addCase(getRecruitList.pending, (state) => {
         state.getRecruitListLoading = true;
       })

@@ -1,3 +1,5 @@
+import { ICreator, INotefolio, IRecruit } from "./../customTypes/notefolio";
+import { PayloadAction } from "@reduxjs/toolkit";
 import { useCallback } from "react";
 import { getNotefolioListParams } from "../customTypes/params";
 import {
@@ -10,24 +12,25 @@ import {
 import { useAppDispatch } from "./../store/hook";
 const useNotefolio = () => {
   const dispatch = useAppDispatch();
+
   const onLoadNotefolioList = useCallback(
     async ({ page, search, category, sort }: getNotefolioListParams) => {
-      await dispatch(getNotefolioList({ page, search, category, sort }));
+      return await dispatch(getNotefolioList({ page, search, category, sort }));
     },
     [dispatch]
   );
 
   const onLoadRecruitList = useCallback(async () => {
-    await dispatch(getRecruitList());
+    return await dispatch(getRecruitList());
   }, [dispatch]);
 
   const onLoadCreatorList = useCallback(async () => {
-    await dispatch(getCreatorList());
+    return await dispatch(getCreatorList());
   }, [dispatch]);
 
   const onLoadNotefolio = useCallback(
     async (id: string) => {
-      await dispatch(getNotefolio(id));
+      return await dispatch(getNotefolio(id));
     },
     [dispatch]
   );

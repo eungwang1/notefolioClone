@@ -7,6 +7,7 @@ import { onTogglePdfModalState } from "@slices/notefolioSlice";
 import { useAppDispatch, useAppSelector } from "@store/hook";
 import Modal from "@components/common/modal/Modal";
 import PdfDocument from "./PdfDocument";
+import { INotefolio } from "@customTypes/notefolio";
 
 const PdfModal: React.FC = () => {
   const { currentNotefolio } = useAppSelector((state) => state.notefolioSlice);
@@ -21,6 +22,7 @@ const PdfModal: React.FC = () => {
   useEffect(() => {
     setPageNumber(1);
   }, [pdfModalState]);
+
   const onClose = () => {
     dispatch(onTogglePdfModalState(false));
   };
@@ -63,10 +65,7 @@ const PdfModal: React.FC = () => {
     width: resposivePdfWidth * scale,
     modalNav: true,
     title: "테스트PDF",
-    item: currentNotefolio,
     src: currentNotefolio ? currentNotefolio.pdfsrc : "",
-    heartCount: currentNotefolio?.likedUserList.length,
-    id: currentNotefolio?.id,
   };
 
   const pdfDocumentProps = {

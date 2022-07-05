@@ -1,3 +1,4 @@
+import { INotefolio } from "@customTypes/notefolio";
 import { motion } from "framer-motion";
 import React, { useMemo } from "react";
 import styled from "styled-components";
@@ -21,9 +22,7 @@ interface ModalProps {
   goPrevPage?: () => void;
   animation?: "vertical" | "opacity";
   src?: string;
-  heartCount?: number;
   date?: string;
-  id?: string;
 }
 const Modal: React.FC<ModalProps> = ({
   children,
@@ -39,11 +38,9 @@ const Modal: React.FC<ModalProps> = ({
   width,
   modalNav = false,
   src,
-  heartCount,
   modalState = true,
   animation = "opacity",
   date,
-  id,
 }) => {
   const { isMobile } = useMedia();
   const variants = useMemo(() => {
@@ -102,15 +99,7 @@ const Modal: React.FC<ModalProps> = ({
             </div>
             <div className="modal-wrapper">{children}</div>
 
-            {modalNav && (
-              <ModalSideNav
-                downloadLink={src}
-                heartCount={heartCount}
-                onScaleDown={onScaleDown}
-                onScaleUp={onScaleUp}
-                id={id}
-              />
-            )}
+            {modalNav && <ModalSideNav downloadLink={src} onScaleDown={onScaleDown} onScaleUp={onScaleUp} />}
           </motion.div>
         </ModalContainer>
       )}
