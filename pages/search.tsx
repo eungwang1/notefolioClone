@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 import { getAcademyList, getNotefolioList } from "../src/actions/notefolioAction";
@@ -8,10 +9,15 @@ import SearchInput from "../src/components/common/header/Search";
 import Category from "../src/components/main/Category";
 import Notefolio from "../src/components/main/Notefolio";
 import SearchResult from "../src/components/search/SearchResult";
+import useScrollRestoration from "../src/lib/useScrollRestoration";
 import { onClearNotefolioList } from "../src/slices/notefolioSlice";
 import wrapper from "../src/store/configureStore";
 
 const Search = () => {
+  const router = useRouter();
+  const { category, sort } = router.query;
+  useScrollRestoration("main", [category as string, sort as string]);
+
   return (
     <AppLayout>
       <SearchContainer>

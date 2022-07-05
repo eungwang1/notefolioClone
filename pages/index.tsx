@@ -14,8 +14,14 @@ import {
   getRecruitList,
 } from "../src/actions/notefolioAction";
 import { onClearNotefolioList } from "../src/slices/notefolioSlice";
+import useScrollRestoration from "../src/lib/useScrollRestoration";
 import Head from "next/head";
+import { useRouter } from "next/router";
 const Main = () => {
+  const router = useRouter();
+  const { category, sort } = router.query;
+  useScrollRestoration("main", [category as string, sort as string]);
+
   return (
     <>
       <Head>
