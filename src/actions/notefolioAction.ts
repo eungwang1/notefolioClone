@@ -69,17 +69,17 @@ export const getAcademyList = createAsyncThunk("get/academyList", async () => {
 export const postLike = createAsyncThunk("post/like", async (id: string, thunkAPI) => {
   const { me } = (thunkAPI.getState() as { notefolioSlice: INotefolioSlice }).notefolioSlice;
   try {
-    const res = await axios.get(`http://localhost:4000/notefolio/${id}`);
+    const res = await axios.get(`${api}/${id}`);
     const isLiked =
       res.data.likedUserList.filter((el: INotefolio) => el.username === me.username).length >= 1;
     if (isLiked) {
-      await axios.patch(`http://localhost:4000/notefolio/${id}`, {
+      await axios.patch(`${api}/${id}`, {
         likedUserList: res.data.likedUserList.filter((el: INotefolio) => el.username !== me.username),
       });
       return false;
     } else {
       const likedUserList = [...res.data.likedUserList, { username: me.username }];
-      await axios.patch(`http://localhost:4000/notefolio/${id}`, {
+      await axios.patch(`${api}/${id}`, {
         likedUserList,
       });
       return true;
