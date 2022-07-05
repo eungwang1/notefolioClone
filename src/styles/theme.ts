@@ -20,6 +20,7 @@ const palette = {
   SkyBlue01: "#e8f9fa",
   SkyBlue02: "#edfbfb",
   Mint01: "#1bcad3",
+  Mint02: "#11a5ad",
 };
 
 const theme: DefaultTheme = {

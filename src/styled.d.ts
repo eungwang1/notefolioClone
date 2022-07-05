@@ -22,6 +22,7 @@ declare module "styled-components" {
       SkyBlue01: string;
       SkyBlue02: string;
       Mint01: string;
+      Mint02: string;
     };
   }
 }

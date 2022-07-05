@@ -123,6 +123,6 @@ const MiniCardContainer = styled.div`
     display: block;
   }
   .minicard-info-title.primary {
-    color: #11a5ad;
+    color: ${(props) => props.theme.palette.Mint02};
   }
 `;
