@@ -21,8 +21,8 @@ const MiniCard: React.FC<MiniCardProps> = ({ image, title, name, type = "normal"
               alt="logo"
               width={1}
               height={1}
-              blurDataURL="https://via.placeholder.com/480"
-              placeholder="blur"
+              // blurDataURL="https://via.placeholder.com/480"
+              // placeholder="blur"
               layout="responsive"
             />
           )}

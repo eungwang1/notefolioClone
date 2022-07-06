@@ -63,9 +63,8 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
             width={100}
             height={100}
             layout="responsive"
-            blurDataURL="https://via.placeholder.com/480"
-            placeholder="blur"
-            priority={true}
+            // blurDataURL="https://via.placeholder.com/480"
+            // placeholder="blur"
           />
         </div>
         <div className="notefolio-work-item-hover-background"></div>
@@ -96,8 +95,8 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
               width={1}
               height={1}
               layout="responsive"
-              blurDataURL="https://via.placeholder.com/480"
-              placeholder="blur"
+              // blurDataURL="https://via.placeholder.com/480"
+              // placeholder="blur"
             />
           </div>
           <span className="notefolio-user-profile-username">{item.username}</span>

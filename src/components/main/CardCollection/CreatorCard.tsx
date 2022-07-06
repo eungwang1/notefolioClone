@@ -30,8 +30,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ coverImage, profileImage, use
               width={100}
               height={125}
               layout="responsive"
-              blurDataURL="https://via.placeholder.com/480"
-              placeholder="blur"
+              // blurDataURL="https://via.placeholder.com/480"
+              // placeholder="blur"
             />
           )}
         </div>
@@ -43,8 +43,8 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ coverImage, profileImage, use
               width={100}
               height={125}
               layout="responsive"
-              blurDataURL="https://via.placeholder.com/480"
-              placeholder="blur"
+              // blurDataURL="https://via.placeholder.com/480"
+              // placeholder="blur"
             />
           )}
         </div>
