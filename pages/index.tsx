@@ -5,12 +5,17 @@ import { useRouter } from "next/router";
 import AppLayout from "@components/common/AppLayout";
 import Header from "@components/common/header/Header";
 import Nav from "@components/common/header/Nav";
-import TopContent from "@components/main/topContent/TopContent";
 import Category from "@components/main/Category";
 import Notefolio from "@components/main/Notefolio";
 import useScrollRestoration from "@lib/useScrollRestoration";
 import wrapper from "@store/configureStore";
 import { onClearNotefolioList } from "@slices/notefolioSlice";
+import dynamic from "next/dynamic";
+import LoadingSpinner from "@components/common/LoadingSpinner";
+const TopContent = dynamic(() => import("@components/main/topContent/TopContent"), {
+  loading: () => <LoadingSpinner />,
+  ssr: false,
+});
 const Main = () => {
   const router = useRouter();
   const { category, sort } = router.query;
