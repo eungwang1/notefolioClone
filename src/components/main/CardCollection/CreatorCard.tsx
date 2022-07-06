@@ -37,15 +37,7 @@ const CreatorCard: React.FC<CreatorCardProps> = ({ coverImage, profileImage, use
         </div>
         <div className="card-cover">
           {coverImage && coverImage.length >= 2 && (
-            <Image
-              src={coverImage[1]}
-              alt="card"
-              width={100}
-              height={125}
-              layout="responsive"
-              // blurDataURL="https://via.placeholder.com/480"
-              // placeholder="blur"
-            />
+            <Image src={coverImage[1]} alt="card" width={100} height={125} layout="responsive" />
           )}
         </div>
       </div>

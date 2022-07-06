@@ -1,6 +1,7 @@
-import { postLike } from "@actions/notefolioAction";
+import { postLike, postView } from "@actions/notefolioAction";
 import { INotefolio } from "@customTypes/notefolio";
 import useNotefolio from "@lib/useNotefolio";
+import { onChangeNotefolioList } from "@slices/notefolioSlice";
 import { useAppDispatch, useAppSelector } from "@store/hook";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
@@ -13,8 +14,9 @@ interface IModalSideNavProps {
 }
 const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, onScaleDown, onScaleUp }) => {
   const dispatch = useAppDispatch();
+  const notefolioRef = useRef<INotefolio>();
   const { onLoadNotefolio } = useNotefolio();
-  const { me, currentNotefolio } = useAppSelector((state) => state.notefolioSlice);
+  const { me, currentNotefolio, pdfModalState } = useAppSelector((state) => state.notefolioSlice);
   const [notefolio, setNotefolio] = useState<INotefolio>(currentNotefolio as INotefolio);
   const likedState = useMemo(() => {
     if (notefolio) {
@@ -22,12 +24,23 @@ const ModalSideNav: React.FC<IModalSideNavProps> = ({ downloadLink, onScaleDown,
     }
   }, [notefolio]);
   useEffect(() => {
-    onLoadNotefolio(notefolio?.id as string).then((el) => setNotefolio(el.payload));
+    onLoadNotefolio(notefolio?.id as string).then((el) => {
+      notefolioRef.current = el.payload;
+      setNotefolio(el.payload);
+    });
+    return () => {
+      if (notefolioRef.current && pdfModalState) {
+        dispatch(onChangeNotefolioList(notefolioRef.current as INotefolio));
+      }
+    };
   }, []);
 
   const onToggleHeart = async () => {
     await dispatch(postLike(notefolio?.id as string));
-    onLoadNotefolio(notefolio?.id as string).then((el) => setNotefolio(el.payload));
+    onLoadNotefolio(notefolio?.id as string).then((el) => {
+      notefolioRef.current = el.payload;
+      setNotefolio(el.payload);
+    });
   };
   return (
     <ModalSideNavContainer>

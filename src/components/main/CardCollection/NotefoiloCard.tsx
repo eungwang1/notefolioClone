@@ -1,35 +1,32 @@
 import Image from "next/image";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { NpbadgeIcon } from "@assets/index";
 import { INotefolio } from "@customTypes/notefolio";
 import { onFilterCurrentNoteFolio, onTogglePdfModalState } from "@slices/notefolioSlice";
 import { useAppDispatch, useAppSelector } from "@store/hook";
 import { media, scalingKeyframes } from "@styles/theme";
-import { postLike } from "@actions/notefolioAction";
+import { postLike, postView } from "@actions/notefolioAction";
 import useNotefolio from "@lib/useNotefolio";
 
 interface NotefoiloCardProps {
   item: INotefolio;
   idx: number;
 }
-const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
+const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item }) => {
   const dispatch = useAppDispatch();
   const { onLoadNotefolio } = useNotefolio();
+  const viewCountRef = useRef<HTMLSpanElement>(null);
   const { me, currentNotefolio } = useAppSelector((state) => state.notefolioSlice);
   const [notefolio, setNotefolio] = useState<INotefolio>(item);
   const [saveState, setSaveState] = useState(false);
   const onOpenModal = (id: string) => (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
     dispatch(onTogglePdfModalState(true));
     dispatch(onFilterCurrentNoteFolio(id));
+    dispatch(postView(id));
   };
-  useEffect(() => {
-    if (currentNotefolio?.id === item.id)
-      onLoadNotefolio(notefolio?.id as string).then((el) => setNotefolio(el.payload));
-  }, []);
   const likedState = useMemo(() => {
-    return notefolio.likedUserList.filter((el) => el.username === me.username).length >= 1;
+    if (notefolio) return notefolio.likedUserList.filter((el) => el.username === me.username).length >= 1;
   }, [notefolio]);
 
   const onItemClick = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -53,7 +50,7 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
     }
   };
   return (
-    <NotefoiloCardContainer>
+    <NotefoiloCardContainer className="not-draggable">
       <div className="notefolio-work-item-block image-hover" onClick={onOpenModal(item.id)}>
         <div>
           <Image
@@ -63,8 +60,6 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
             width={100}
             height={100}
             layout="responsive"
-            // blurDataURL="https://via.placeholder.com/480"
-            // placeholder="blur"
           />
         </div>
         <div className="notefolio-work-item-hover-background"></div>
@@ -95,20 +90,20 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item, idx }) => {
               width={1}
               height={1}
               layout="responsive"
-              // blurDataURL="https://via.placeholder.com/480"
-              // placeholder="blur"
             />
           </div>
-          <span className="notefolio-user-profile-username">{item.username}</span>
+          <span className="notefolio-user-profile-username">{notefolio?.username}</span>
         </div>
         <div className="notefolio-work-info-group">
           <div className="notefolio-work-info-view">
             <span className="material-symbols-outlined">visibility</span>
-            <span className="notefolio-view-count">{item.viewcount}</span>
+            <span className="notefolio-view-count" ref={viewCountRef}>
+              {notefolio?.viewcount}
+            </span>
           </div>
           <div className="notefolio-work-info-view">
             <span className="material-symbols-outlined">favorite</span>
-            <span className="notefolio-like-count">{notefolio.likedUserList.length}</span>
+            <span className="notefolio-like-count">{notefolio?.likedUserList.length}</span>
           </div>
         </div>
       </div>

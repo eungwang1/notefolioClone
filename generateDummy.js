@@ -15,7 +15,7 @@ const notefolio = Array.from({ length: notefolioLength }, (v, i) => {
   const random5to100 = randomNumber(5, 100);
   const likedUserList = Array.from({ length: random5to100 }, (v, i) => ({
     id: i + "",
-    username: faker.name.middleName(),
+    username: faker.name.lastName(),
   }));
   return {
     createdAt: faker.date.between("2021-01-01T00:00:00.000Z", "2022-07-04T00:00:00.000Z"),

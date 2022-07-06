@@ -1,4 +1,3 @@
-import { INotefolio } from "@customTypes/notefolio";
 import { motion } from "framer-motion";
 import React, { useMemo } from "react";
 import styled from "styled-components";

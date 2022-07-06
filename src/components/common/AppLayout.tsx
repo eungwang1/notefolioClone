@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { onToggleSearchModalState } from "@slices/notefolioSlice";
 import { useAppDispatch, useAppSelector } from "@store/hook";
-import PdfModal from "@components/main/pdfComponent/PdfModal";
 import FooterPc from "./footer/FooterPc";
 import FooterMobile from "./footer/FooterMobile";
 import Modal from "./modal/Modal";

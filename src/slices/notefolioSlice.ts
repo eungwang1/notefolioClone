@@ -1,10 +1,8 @@
 import {
   getAcademyList,
   getCreatorList,
-  getNotefolio,
   getNotefolioList,
   getRecruitList,
-  postLike,
 } from "./../actions/notefolioAction";
 import { IAcademy, ICreator, INotefolio, INotefolioSlice, IRecruit } from "./../customTypes/notefolio";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -87,6 +85,16 @@ export const notefolioSlice = createSlice({
     onFilterCurrentNoteFolio: (state: INotefolioSlice, action: PayloadAction<string>) => {
       state.currentNotefolio = state.notefolioList.filter((item) => item.id === action.payload)[0];
     },
+    onChangeCurrentNoteFolio: (state: INotefolioSlice, action: PayloadAction<INotefolio>) => {
+      state.currentNotefolio = action.payload;
+    },
+    onChangeNotefolioList: (state: INotefolioSlice, action: PayloadAction<INotefolio>) => {
+      state.notefolioList.forEach((item, idx) => {
+        if (item.id === action.payload.id) {
+          state.notefolioList[idx] = action.payload;
+        }
+      });
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -101,7 +109,6 @@ export const notefolioSlice = createSlice({
         state.getNotefolioListLoading = false;
         state.getNotefolioListError = action.error;
       })
-
       .addCase(getRecruitList.pending, (state) => {
         state.getRecruitListLoading = true;
       })
@@ -145,5 +152,7 @@ export const {
   onClearNotefolioList,
   onSelectCategory,
   onFilterCurrentNoteFolio,
+  onChangeCurrentNoteFolio,
+  onChangeNotefolioList,
 } = notefolioSlice.actions;
 export default notefolioSlice.reducer;

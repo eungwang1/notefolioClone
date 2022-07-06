@@ -3,6 +3,7 @@ import { INotefolioSlice } from "./../customTypes/notefolio";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getNotefolioListParams } from "@customTypes/params";
+import { onChangeCurrentNoteFolio } from "@slices/notefolioSlice";
 
 const api =
   process.env.NODE_ENV === "development"
@@ -30,9 +31,13 @@ export const getNotefolioList = createAsyncThunk(
   }
 );
 
-export const getNotefolio = createAsyncThunk("get/notefolio", async (id: string) => {
+export const getNotefolio = createAsyncThunk("get/notefolio", async (id: string, thunkAPI) => {
+  const { currentNotefolio } = (thunkAPI.getState() as { notefolioSlice: INotefolioSlice }).notefolioSlice;
   try {
     const res = await axios.get(`${api}/notefolio/${id}`);
+    if (res.data.id === currentNotefolio?.id) {
+      // thunkAPI.dispatch(onChangeCurrentNoteFolio(res.data));
+    }
     return res.data;
   } catch (e) {
     console.error(e);
@@ -61,6 +66,18 @@ export const getAcademyList = createAsyncThunk("get/academyList", async () => {
   try {
     const res = await axios.get(`${api}/academyList`);
     return res.data;
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+export const postView = createAsyncThunk("post/view", async (id: string, thunkAPI) => {
+  try {
+    const { currentNotefolio } = (thunkAPI.getState() as { notefolioSlice: INotefolioSlice }).notefolioSlice;
+    if (currentNotefolio)
+      await axios.patch(`${api}/notefolio/${id}`, {
+        viewcount: currentNotefolio.viewcount * 1 + 1,
+      });
   } catch (e) {
     console.error(e);
   }

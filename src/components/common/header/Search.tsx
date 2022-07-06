@@ -1,7 +1,5 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-// import { useNavigate } from "react-router";
-// import { createSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 interface ISearch {
   size?: "middle" | "large";

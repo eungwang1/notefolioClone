@@ -7,7 +7,6 @@ import { onTogglePdfModalState } from "@slices/notefolioSlice";
 import { useAppDispatch, useAppSelector } from "@store/hook";
 import Modal from "@components/common/modal/Modal";
 import PdfDocument from "./PdfDocument";
-import { INotefolio } from "@customTypes/notefolio";
 
 const PdfModal: React.FC = () => {
   const { currentNotefolio } = useAppSelector((state) => state.notefolioSlice);
@@ -19,6 +18,7 @@ const PdfModal: React.FC = () => {
   const maxScale = 1.4;
   const minScale = 0.6;
   const dispatch = useAppDispatch();
+  const pdfSrc = useMemo(() => {}, []);
   useEffect(() => {
     setPageNumber(1);
   }, [pdfModalState]);
