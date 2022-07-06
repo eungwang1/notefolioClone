@@ -88,10 +88,7 @@ const CreatorCardContainer = styled.div`
     justify-content: center;
   }
   .card-cover {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 50%;
+    width: 100%;
     padding: 4px;
     img {
       width: 100%;
