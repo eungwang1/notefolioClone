@@ -52,6 +52,7 @@ const SearchContainer = styled.div`
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
   const { search, sort, category } = ctx.query;
+
   await Promise.all([
     store.dispatch(getAcademyList()),
     store.dispatch(onClearNotefolioList()),

@@ -36,20 +36,24 @@ const CategorySwiper: React.FC = () => {
     const button: HTMLButtonElement = e.currentTarget;
     if (button.innerText) {
       dispatch(onSelectCategory(button.innerText));
-      router.push({
-        pathname: router.pathname,
-        query: {
-          ...router.query,
-          category: button.name,
+      router.push(
+        {
+          pathname: router.pathname,
+          query: {
+            ...router.query,
+            category: button.name,
+          },
         },
-      });
+        {},
+        { scroll: false }
+      );
     }
   };
   return (
     <CategorySwiperContainer className="category-swiper-container">
       <Swiper
         slidesPerView={swiperCount}
-        slidesPerGroup={1}
+        slidesPerGroup={3}
         navigation={{
           nextEl: ".category-swiper-next-btn",
           prevEl: ".category-swiper-prev-btn",

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { NpbadgeIcon } from "@assets/index";
 import { INotefolio } from "@customTypes/notefolio";
@@ -17,7 +17,7 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item }) => {
   const dispatch = useAppDispatch();
   const { onLoadNotefolio } = useNotefolio();
   const viewCountRef = useRef<HTMLSpanElement>(null);
-  const { me, currentNotefolio } = useAppSelector((state) => state.notefolioSlice);
+  const { me } = useAppSelector((state) => state.notefolioSlice);
   const [notefolio, setNotefolio] = useState<INotefolio>(item);
   const [saveState, setSaveState] = useState(false);
   const onOpenModal = (id: string) => (e: React.MouseEvent<HTMLDivElement>) => {
@@ -59,6 +59,7 @@ const NotefoiloCard: React.FC<NotefoiloCardProps> = ({ item }) => {
             alt="work"
             width={100}
             height={100}
+            priority={true}
             layout="responsive"
           />
         </div>

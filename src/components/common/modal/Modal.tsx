@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import { opacityVariants, verticalVariants } from "../../../lib/motionVariants";
-import { useMedia } from "../../../lib/useMediaQuery";
-import { hoverStyle01, media } from "../../../styles/theme";
+import { opacityVariants, verticalVariants } from "@lib/motionVariants";
+import { useMedia } from "@lib/useMediaQuery";
+import { hoverStyle01, media } from "@styles/theme";
 import ModalSideNav from "./ModalSideNav";
 interface ModalProps {
   children?: React.ReactNode;

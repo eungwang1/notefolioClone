@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { LogoIcon02, LogoIcon03 } from "../../../assets";
-import { media } from "../../../styles/theme";
+import { LogoIcon02, LogoIcon03 } from "@assets/index";
+import { media } from "@styles/theme";
 
 const Header: React.FC = () => {
   return (

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { onToggleSearchModalState } from "../../../slices/notefolioSlice";
-import { useAppDispatch } from "../../../store/hook";
-import { media } from "../../../styles/theme";
+import { onToggleSearchModalState } from "@slices/notefolioSlice";
+import { useAppDispatch } from "@store/hook";
+import { media } from "@styles/theme";
 
 const FooterMobile: React.FC = () => {
   const dispatch = useAppDispatch();

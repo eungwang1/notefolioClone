@@ -3,7 +3,6 @@ import { INotefolioSlice } from "./../customTypes/notefolio";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getNotefolioListParams } from "@customTypes/params";
-import { onChangeCurrentNoteFolio } from "@slices/notefolioSlice";
 
 const api =
   process.env.NODE_ENV === "development"
@@ -32,12 +31,8 @@ export const getNotefolioList = createAsyncThunk(
 );
 
 export const getNotefolio = createAsyncThunk("get/notefolio", async (id: string, thunkAPI) => {
-  const { currentNotefolio } = (thunkAPI.getState() as { notefolioSlice: INotefolioSlice }).notefolioSlice;
   try {
     const res = await axios.get(`${api}/notefolio/${id}`);
-    if (res.data.id === currentNotefolio?.id) {
-      // thunkAPI.dispatch(onChangeCurrentNoteFolio(res.data));
-    }
     return res.data;
   } catch (e) {
     console.error(e);
@@ -56,6 +51,7 @@ export const getRecruitList = createAsyncThunk("get/recruitList", async () => {
 export const getCreatorList = createAsyncThunk("get/creatorList", async () => {
   try {
     const res = await axios.get(`${api}/creatorList`);
+    console.log("bye");
     return res.data;
   } catch (e) {
     console.error(e);
@@ -93,13 +89,11 @@ export const postLike = createAsyncThunk("post/like", async (id: string, thunkAP
       await axios.patch(`${api}/notefolio/${id}`, {
         likedUserList: res.data.likedUserList.filter((el: INotefolio) => el.username !== me.username),
       });
-      return false;
     } else {
       const likedUserList = [...res.data.likedUserList, { username: me.username }];
       await axios.patch(`${api}/notefolio/${id}`, {
         likedUserList,
       });
-      return true;
     }
   } catch (e) {
     console.error(e);

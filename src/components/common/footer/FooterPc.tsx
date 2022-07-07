@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { hoverStyle02, media } from "../../../styles/theme";
+import { hoverStyle02, media } from "@styles/theme";
 
 const FooterPc: React.FC = () => {
   return (

@@ -1,11 +1,11 @@
-import { postLike, postView } from "@actions/notefolioAction";
+import { postLike } from "@actions/notefolioAction";
 import { INotefolio } from "@customTypes/notefolio";
 import useNotefolio from "@lib/useNotefolio";
 import { onChangeNotefolioList } from "@slices/notefolioSlice";
 import { useAppDispatch, useAppSelector } from "@store/hook";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
-import { hoverStyle01, scalingKeyframes } from "../../../styles/theme";
+import { hoverStyle01, scalingKeyframes } from "@styles/theme";
 interface IModalSideNavProps {
   downloadLink?: string;
   heartCount?: number;

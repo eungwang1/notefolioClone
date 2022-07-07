@@ -21,7 +21,7 @@ const notefolio = Array.from({ length: notefolioLength }, (v, i) => {
     createdAt: faker.date.between("2021-01-01T00:00:00.000Z", "2022-07-04T00:00:00.000Z"),
     likedUserList,
     username: faker.name.middleName(),
-    profile: faker.image.avatar(),
+    profile: faker.image.transport(),
     title: faker.lorem.sentence(),
     contentimg: faker.image.animals(480, 480, true),
     pdfsrc: "/pdf/sample.pdf",

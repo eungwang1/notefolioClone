@@ -60,7 +60,7 @@ const Nav: React.FC<NavProps> = ({ searchInput = true }) => {
                 height={25}
                 layout="intrinsic"
                 style={{ borderRadius: "50%" }}
-              />{" "}
+              />
             </div>
             <div>
               <span className="nav-user-profile-username">{me.username}</span>

@@ -1,17 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { onToggleSearchModalState } from "@slices/notefolioSlice";
-import { useAppDispatch, useAppSelector } from "@store/hook";
+import { useAppSelector } from "@store/hook";
 import FooterPc from "./footer/FooterPc";
 import FooterMobile from "./footer/FooterMobile";
 import Modal from "./modal/Modal";
 import SearchInput from "./header/Search";
+import { useDispatch } from "react-redux";
 
 interface AppLayoutProps {
   children: React.ReactNode;
 }
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const { searchModalState } = useAppSelector((state) => state.notefolioSlice);
   const onClose = () => {
     dispatch(onToggleSearchModalState(false));

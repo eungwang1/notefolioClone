@@ -12,14 +12,13 @@ import wrapper from "@store/configureStore";
 import { onClearNotefolioList } from "@slices/notefolioSlice";
 import dynamic from "next/dynamic";
 import LoadingSpinner from "@components/common/LoadingSpinner";
-const TopContent = dynamic(() => import("@components/main/topContent/TopContent"), {
-  loading: () => <LoadingSpinner />,
-  ssr: false,
-});
-const Main = () => {
-  const router = useRouter();
-  const { category, sort } = router.query;
-  useScrollRestoration("main", [category as string, sort as string]);
+import TopContent from "@components/main/topContent/TopContent";
+
+const Main = ({ isMobileView }: { isMobileView: any }) => {
+  console.log(isMobileView);
+  const {
+    query: { category, sort },
+  } = useRouter();
   return (
     <AppLayout>
       <MainContainer>
@@ -39,6 +38,10 @@ const MainContainer = styled.div``;
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
   const { search, sort, category } = ctx.query;
+  const deviceType = ctx.req ? ctx.req.headers["user-agent"] : navigator.userAgent;
+  let isMobileView = (ctx.req ? ctx.req.headers["user-agent"] : navigator.userAgent)?.match(
+    /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+  );
   await Promise.all([
     store.dispatch(getCreatorList()),
     store.dispatch(getRecruitList()),
@@ -54,5 +57,5 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     ),
   ]);
 
-  return { props: {} };
+  return { props: { isMobileView } };
 });

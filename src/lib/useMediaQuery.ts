@@ -13,20 +13,19 @@ export function useMedia() {
   const [isPcMiddle, setIsPcMiddle] = useState(false);
   const [isPcLarge, setIsPcLarge] = useState(false);
   useEffect(() => {
-    if (mobile || mobile_small || tablet || pc_middle || pc_large) setIsMobile(mobile);
+    setIsMobile(mobile);
   }, [mobile]);
   useEffect(() => {
-    if (mobile || mobile_small || tablet || pc_middle || pc_large) setIsTablet(tablet);
+    setIsTablet(tablet);
   }, [tablet]);
   useEffect(() => {
-    if (mobile || mobile_small || tablet || pc_middle || pc_large) setIsMobileSmall(mobile_small);
+    setIsMobileSmall(mobile_small);
   }, [mobile_small]);
-
   useEffect(() => {
-    if (mobile || mobile_small || tablet || pc_middle || pc_large) setIsPcMiddle(pc_middle);
+    setIsPcMiddle(pc_middle);
   }, [pc_middle]);
   useEffect(() => {
-    if (mobile || mobile_small || tablet || pc_middle || pc_large) setIsPcLarge(pc_large);
+    setIsPcLarge(pc_large);
   }, [pc_large]);
 
   return { isMobile, isTablet, isMobileSmall, isPcMiddle, isPcLarge };

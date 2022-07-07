@@ -19,7 +19,7 @@ const HotContentSwiper: React.FC = () => {
   return (
     <HotContentSwiperContainer>
       <Swiper
-        slidesPerView={slidesPerView}
+        slidesPerView={1}
         slidesPerGroup={1}
         navigation={{
           nextEl: ".hotcontent-swiper-next-btn",
@@ -27,6 +27,17 @@ const HotContentSwiper: React.FC = () => {
         }}
         modules={[Navigation]}
         className="hotcontent-mySwiper"
+        breakpoints={{
+          480: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 4,
+          },
+        }}
       >
         <div className="swiper-title">HOT 크리에이터🔥</div>
         {creatorList.map((card, idx) => (
