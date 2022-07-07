@@ -4,10 +4,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getNotefolioListParams } from "@customTypes/params";
 
-const api =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:4000"
-    : "https://my-cool-project-eungwang.herokuapp.com";
+// const api =
+//   process.env.NODE_ENV === "development"
+//     ? "http://localhost:4000"
+//     : "https://my-cool-project-eungwang.herokuapp.com";
+const api = "https://my-cool-project-eungwang.herokuapp.com";
 export const getNotefolioList = createAsyncThunk(
   "get/notefolioList",
   async ({ page, search, category, sort }: getNotefolioListParams, thunkAPI) => {
