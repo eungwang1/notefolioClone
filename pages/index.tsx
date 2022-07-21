@@ -13,6 +13,7 @@ import dynamic from "next/dynamic";
 import LoadingSpinner from "@components/common/LoadingSpinner";
 const TopContent = dynamic(() => import("@components/main/topContent/TopContent"), {
   loading: () => <LoadingSpinner />,
+  ssr: false,
 });
 const Main = () => {
   const {
